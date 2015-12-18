@@ -60,7 +60,6 @@
               <!-- Video Information -->
               <div class="divider"></div>
               <div class="section">
-                <h5>Title is Title Here</h5>
                 <div class="chip mao-chip">L1</div>
                 <div class="chip mao-chip">5N</div>
                 <blockquote>
@@ -75,15 +74,11 @@
               </div>
             </div>
             <!-- Note -->
-            <div class="col s8">
+            <div class="col s8 center-align">
               <div class="mao-music-sheet-control-panel">
+                <h5>Title is Title Here <div class="chip mao-chip">AUTO</div></h5>
                 <div class="section mao-music-sheet-box">
-                  <img src="img/msheet.png" alt="" class="responsive-img">
-                </div>
-                <div class="section center-align">
-                  <a class="disabled btn"><i class="material-icons left">keyboard_arrow_left</i></a>
-                  <a class="disabled btn">Auto</a>
-                  <a class="disabled btn"><i class="material-icons right">keyboard_arrow_right</i></a>
+                     <canvas id="mao-music-sheet" width="700"></canvas>
                 </div>
               </div>
             </div>
@@ -239,11 +234,63 @@
   <!--====  End of Footer  ====-->
   
   
-  
-
-  <!--Import jQuery before materialize.js-->
+  <!--================================
+  =            JavaScript            =
+  =================================-->
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="js/materialize.min.js"></script>
   <script type="text/javascript" src="js/bower_components/less/dist/less.min.js"></script>
+  <script type="text/javascript" src="js/node_modules/vexflow/releases/vexflow-min.js"></script>
+
+  <script type="text/javascript">
+  /*=============================================
+  =            Music Notation Rendering         =
+  =============================================*/
+  // Init
+  var sheetCanvas = $("#mao-music-sheet")[0];
+  var renderer = new Vex.Flow.Renderer(sheetCanvas,
+    Vex.Flow.Renderer.Backends.CANVAS);
+
+  var ctx = renderer.getContext();
+  var stave = new Vex.Flow.Stave(10, 0, 500);
+  stave.addClef("treble").setContext(ctx).draw();
+
+  // Create a quarter E, a half D, and a quarter C-Major chord.
+  var notes = [
+    new Vex.Flow.StaveNote({ keys: ["e/5"], duration: "q" }),
+    new Vex.Flow.StaveNote({ keys: ["d/5"], duration: "h" }),
+    new Vex.Flow.StaveNote({ keys: ["c/5", "e/5", "g/5"], duration: "q" })
+  ];
+
+  // Create a second voice, with just one whole note
+  var notes2 = [
+    new Vex.Flow.StaveNote({ keys: ["c/4"], duration: "w" })
+  ];
+
+  // Create a voice in 4/4
+  function create_4_4_voice() {
+    return new Vex.Flow.Voice({
+      num_beats: 4,
+      beat_value: 4,
+      resolution: Vex.Flow.RESOLUTION
+    });
+  }
+
+  // Create voices and add notes to each of them.
+  var voice = create_4_4_voice().addTickables(notes);
+  var voice2 = create_4_4_voice().addTickables(notes2);
+
+  // Format and justify the notes to 500 pixels
+  var formatter = new Vex.Flow.Formatter().
+    joinVoices([voice, voice2]).format([voice, voice2], 500);
+
+  // Render voice
+  voice.draw(ctx, stave);
+  voice2.draw(ctx, stave);
+  
+  
+  /*=====  End of Music Notation Rendering  ======*/
+  </script>
+
 </body>
 </html>
