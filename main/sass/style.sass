@@ -1,6 +1,9 @@
 $small-space: 1rem
 $medium-space: 3rem
 $large-space: 5rem
+
+$small-round-border: 2px
+
 $text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6)
 
 .text-shadow
@@ -15,10 +18,10 @@ $text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6)
 
 .search-div
 	padding: 1rem
-	-webkit-border-radius: 2px
-	-moz-border-radius: 2px
-	-ms-border-radius: 2px
-	-o-border-radius: 2px
+	-webkit-border-radius: $small-round-border
+	-moz-border-radius: $small-round-border
+	-ms-border-radius: $small-round-border
+	-o-border-radius: $small-round-border
 	border-radius: 2px
 	-webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12)
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12)
@@ -44,6 +47,25 @@ $text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6)
 
 .sink
 	z-index: -2
+
+a.nav-button
+	border: 2px solid white
+	-webkit-border-radius: $small-round-border
+	-moz-border-radius: $small-round-border
+	-ms-border-radius: $small-round-border
+	-o-border-radius: $small-round-border
+	border-radius: $small-round-border
+	display: inline
+	padding: 5px 15px
+
+a.nav-button:hover
+	transition: background-color 0.5s ease
+	background-color: rgba(255, 255, 255, 0.2)
+
+nav
+	ul
+		li:hover
+			background-color: transparent !important
 
 nav.transparent
 	-webkit-box-shadow: none
