@@ -25,6 +25,25 @@
 .contact-img {
   max-height: 10rem; }
 
+.black-mask {
+  content: "";
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.35); }
+
+.sink {
+  z-index: -2; }
+
+nav.transparent {
+  -webkit-box-shadow: none;
+  box-shadow: none; }
+
 #search-input {
   border-bottom: none;
   margin: 0;
