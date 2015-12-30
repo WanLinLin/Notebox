@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+	<meta charset="UTF-8">
+
+	<!--Import Google Icon Font-->
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
+	<!-- my style -->
+	<link rel="stylesheet" type="text/css" href="css/w-style.css">
+
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+	<!-- Nav Bar -->
+	<nav class="white" role="navigation">
+		<div class="nav-wrapper container">
+			<a id="logo" href="./index.html" class="brand-logo brown-text">Notebox</a>
+
+			<!-- Dropdown Structure -->
+			<ul id="dropdown1" class="dropdown-content">
+				<li><a class="brown-text darken-5" href="#!">經典之作</a></li>
+				<li><a class="brown-text darken-5" href="#!">新潮流行</a></li>
+				<li><a class="brown-text darken-5" href="#!">獨立樂團</a></li>
+				<li class="divider"></li>
+				<li><a class="brown-text darken-5" href="#!">更多</a></li>
+			</ul>
+			<ul id="dropdown2" class="dropdown-content">
+				<li><a class="brown-text darken-5" href="#!">3~5個音</a></li>
+				<li><a class="brown-text darken-5" href="#!">5~10個音</a></li>
+				<li><a class="brown-text darken-5" href="#!">10~20個音</a></li>
+				<li class="divider"></li>
+				<li><a class="brown-text darken-5" href="#!">更多</a></li>
+			</ul>
+			<ul id="dropdown3" class="dropdown-content">
+				<li><a class="brown-text darken-5" href="#!">藍調</a></li>
+				<li><a class="brown-text darken-5" href="#!">爵士</a></li>
+				<li><a class="brown-text darken-5" href="#!">古典</a></li>
+				<li class="divider"></li>
+				<li><a class="brown-text darken-5" href="#!">更多</a></li>
+			</ul>
+
+			<!-- normal nav -->
+			<ul class="right hide-on-med-and-down">
+
+				<li class="no-hvr-effect"><a class="dropdown-button brown-text" href="#!" data-activates="dropdown1">
+					精選曲目<i class="material-icons right nav-drop">arrow_drop_down</i>
+				</a></li>
+				<li class="no-hvr-effect"><a class="dropdown-button brown-text" href="#!" data-activates="dropdown2">
+					程度分級<i class="material-icons right nav-drop">arrow_drop_down</i>
+				</a></li>
+				<li class="no-hvr-effect"><a class="dropdown-button brown-text" href="#!" data-activates="dropdown3">
+					曲目類型<i class="material-icons right nav-drop">arrow_drop_down</i>
+				</a></li>
+
+				<li class="no-hvr-effect">
+					<nav class="no-shadow brown lighten-5">
+						<div class="nav-wrapper">
+							<form>
+								<div class="input-field">
+									<input id="search" type="search" required>
+									<label for="search"><i class="material-icons brown-text">search</i></label>
+									<i class="material-icons brown-text">close</i>
+								</div>
+							</form>
+						</div>
+					</nav>
+				</li>
+			</ul>
+
+			<!-- mobile nav -->
+			<ul id="nav-mobile" class="side-nav">
+				<li><a class="brown-text" href="#">Navbar Link</a></li>
+			</ul>
+
+			<!-- menu icon -->
+			<a href="#" data-activates="nav-mobile" class="button-collapse white-text">
+				<i class="material-icons brown-text">menu</i>
+			</a>
+		</div>
+	</nav><!-- end of Nav Bar -->
+
+	<!-- Header -->
+	<div class="section no-pad-bot" id="index-banner">
+		<div class="container">
+			<br><br>
+			<h1 class="header center brown-text">歌曲總覽</h1>
+			<div class="row center">
+				<h5 class="header col s12 light brown-text text-lighten-1">A classical, indie, modern music framework based on Cat Ear</h5>
+			</div>
+			<br><br>
+		</div>
+	</div><!-- end of Header -->
+
+
+	<div class="container">
+		<div class="section">
+
+			<div class="row">
+				<div class="col s12 m4">
+					<div class="card">
+						<div class="card-image waves-effect waves-block waves-light">
+							<img class="activator" src="images/main-bg1.jpg">
+						</div>
+						<div class="card-content">
+							<a href="player.html" class="card-title activator grey-text text-darken-3">D小調第九號交響曲</a>
+							<p class="grey-text text-darken-1">
+								作曲家: 貝多芬/1770/1827<br />
+								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
+							</p>
+							<!-- <p><a href="#">This is a link</a></p> -->
+						</div>
+						<div class="card-reveal">
+							<span class="card-title activator grey-text text-darken-3">D小調第九號交響曲
+								<i class="material-icons right">close</i>
+							</span>
+							<p class="grey-text text-darken-1">
+								作曲家: 貝多芬/1770/1827<br />
+								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="col s12 m4">
+					<div class="card">
+						<div class="card-image waves-effect waves-block waves-light">
+							<img class="activator" src="images/main-bg1.jpg">
+						</div>
+						<div class="card-content">
+							<a href="player.html" class="card-title activator grey-text text-darken-3">D小調第九號交響曲</a>
+							<p class="grey-text text-darken-1">
+								作曲家: 貝多芬/1770/1827<br />
+								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
+							</p>
+							<!-- <p><a href="#">This is a link</a></p> -->
+						</div>
+						<div class="card-reveal">
+							<span class="card-title activator grey-text text-darken-3">D小調第九號交響曲
+								<i class="material-icons right">close</i>
+							</span>
+							<p class="grey-text text-darken-1">
+								作曲家: 貝多芬/1770/1827<br />
+								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="col s12 m4">
+					<div class="card">
+						<div class="card-image waves-effect waves-block waves-light">
+							<img class="activator" src="images/main-bg1.jpg">
+						</div>
+						<div class="card-content">
+							<a href="player.html" class="card-title activator grey-text text-darken-3">D小調第九號交響曲</a>
+							<p class="grey-text text-darken-1">
+								作曲家: 貝多芬/1770/1827<br />
+								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
+							</p>
+							<!-- <p><a href="#">This is a link</a></p> -->
+						</div>
+						<div class="card-reveal">
+							<span class="card-title activator grey-text text-darken-3">D小調第九號交響曲
+								<i class="material-icons right">close</i>
+							</span>
+							<p class="grey-text text-darken-1">
+								作曲家: 貝多芬/1770/1827<br />
+								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
+							</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="row">
+				<div class="col s12 m4">
+					<div class="card">
+						<div class="card-image waves-effect waves-block waves-light">
+							<img class="activator" src="images/main-bg2.jpg">
+						</div>
+						<div class="card-content">
+							<a href="some" class="card-title activator grey-text text-darken-3">D小調第九號交響曲</a>
+							<p class="grey-text text-darken-1">
+								作曲家: 貝多芬/1770/1827<br />
+								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
+							</p>
+						</div>
+						<div class="card-reveal">
+							<span class="card-title activator grey-text text-darken-3">D小調第九號交響曲
+								<i class="material-icons right">close</i>
+							</span>
+							<p class="grey-text text-darken-1">
+								作曲家: 貝多芬/1770/1827<br />
+								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="col s12 m4">
+					<div class="card">
+						<div class="card-image waves-effect waves-block waves-light">
+							<img class="activator" src="images/main-bg2.jpg">
+						</div>
+						<div class="card-content">
+							<a href="player.html" class="card-title activator grey-text text-darken-3">D小調第九號交響曲</a>
+							<p class="grey-text text-darken-1">
+								作曲家: 貝多芬/1770/1827<br />
+								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
+							</p>
+							<!-- <p><a href="#">This is a link</a></p> -->
+						</div>
+						<div class="card-reveal">
+							<span class="card-title activator grey-text text-darken-3">D小調第九號交響曲
+								<i class="material-icons right">close</i>
+							</span>
+							<p class="grey-text text-darken-1">
+								作曲家: 貝多芬/1770/1827<br />
+								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="col s12 m4">
+					<div class="card">
+						<div class="card-image waves-effect waves-block waves-light">
+							<img class="activator" src="images/main-bg2.jpg">
+						</div>
+						<div class="card-content">
+							<a href="player.html" class="card-title activator grey-text text-darken-3">D小調第九號交響曲</a>
+							<p class="grey-text text-darken-1">
+								作曲家: 貝多芬/1770/1827<br />
+								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
+							</p>
+							<!-- <p><a href="#">This is a link</a></p> -->
+						</div>
+						<div class="card-reveal">
+							<span class="card-title activator grey-text text-darken-3">D小調第九號交響曲
+								<i class="material-icons right">close</i>
+							</span>
+							<p class="grey-text text-darken-1">
+								作曲家: 貝多芬/1770/1827<br />
+								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
+							</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="row">
+				<div class="col s12 m4">
+					<div class="card">
+						<div class="card-image waves-effect waves-block waves-light">
+							<img class="activator" src="images/main-bg4.jpg">
+						</div>
+						<div class="card-content">
+							<a href="player.html" class="card-title activator grey-text text-darken-3">D小調第九號交響曲</a>
+							<p class="grey-text text-darken-1">
+								作曲家: 貝多芬/1770/1827<br />
+								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
+							</p>
+							<!-- <p><a href="#">This is a link</a></p> -->
+						</div>
+						<div class="card-reveal">
+							<span class="card-title activator grey-text text-darken-3">D小調第九號交響曲
+								<i class="material-icons right">close</i>
+							</span>
+							<p class="grey-text text-darken-1">
+								作曲家: 貝多芬/1770/1827<br />
+								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="col s12 m4">
+					<div class="card">
+						<div class="card-image waves-effect waves-block waves-light">
+							<img class="activator" src="images/main-bg4.jpg">
+						</div>
+						<div class="card-content">
+							<a href="player.html" class="card-title activator grey-text text-darken-3">D小調第九號交響曲</a>
+							<p class="grey-text text-darken-1">
+								作曲家: 貝多芬/1770/1827<br />
+								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
+							</p>
+							<!-- <p><a href="#">This is a link</a></p> -->
+						</div>
+						<div class="card-reveal">
+							<span class="card-title activator grey-text text-darken-3">D小調第九號交響曲
+								<i class="material-icons right">close</i>
+							</span>
+							<p class="grey-text text-darken-1">
+								作曲家: 貝多芬/1770/1827<br />
+								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="col s12 m4">
+					<div class="card">
+						<div class="card-image waves-effect waves-block waves-light">
+							<img class="activator" src="images/main-bg4.jpg">
+						</div>
+						<div class="card-content">
+							<a href="player.html" class="card-title activator grey-text text-darken-3">D小調第九號交響曲</a>
+							<p class="grey-text text-darken-1">
+								作曲家: 貝多芬/1770/1827<br />
+								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
+							</p>
+							<!-- <p><a href="#">This is a link</a></p> -->
+						</div>
+						<div class="card-reveal">
+							<span class="card-title activator grey-text text-darken-3">D小調第九號交響曲
+								<i class="material-icons right">close</i>
+							</span>
+							<p class="grey-text text-darken-1">
+								作曲家: 貝多芬/1770/1827<br />
+								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
+							</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+
+
+		</div>
+		<br><br>
+
+		<div class="section">
+
+		</div>
+	</div>
+
+	<footer class="page-footer brown">
+		<div class="container">
+			<div class="row">
+				<div class="col l6 s12">
+					<h5 class="white-text">Company Bio</h5>
+					<p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+
+
+				</div>
+				<div class="col l3 s12">
+					<h5 class="white-text">Settings</h5>
+					<ul>
+						<li><a class="white-text" href="#!">Link 1</a></li>
+						<li><a class="white-text" href="#!">Link 2</a></li>
+						<li><a class="white-text" href="#!">Link 3</a></li>
+						<li><a class="white-text" href="#!">Link 4</a></li>
+					</ul>
+				</div>
+				<div class="col l3 s12">
+					<h5 class="white-text">Connect</h5>
+					<ul>
+						<li><a class="white-text" href="#!">Link 1</a></li>
+						<li><a class="white-text" href="#!">Link 2</a></li>
+						<li><a class="white-text" href="#!">Link 3</a></li>
+						<li><a class="white-text" href="#!">Link 4</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="footer-copyright">
+			<div class="container">
+				Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+			</div>
+		</div>
+	</footer>
+
+
+	<!--  Scripts-->
+	<!--Import jQuery before materialize.js-->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
+
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('.button-collapse').sideNav();
+		$(".dropdown-button").dropdown();
+	})
+	</script>
+
+</body>
+</html>
