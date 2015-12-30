@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VexFlow</title>
+</head>
+<body>
+    <canvas id="music-sheet" width="700" height="100"></canvas> 
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"> </script>
+<script type="text/javascript" src="js/node_modules/vexflow/releases/vexflow-min.js"> </script>
+<script type="text/javascript">
+    var canvas = $("#music-sheet")[0];
+    var renderer = new Vex.Flow.Renderer(canvas,
+    Vex.Flow.Renderer.Backends.CANVAS);
+
+    var ctx = renderer.getContext();
+    var stave = new Vex.Flow.Stave(10, 0, 500);
+    stave.addClef("treble").setContext(ctx).draw();
+</script>
+</body>
+</html>

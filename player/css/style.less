@@ -1,6 +1,11 @@
+@import "palette.less";
+@import "support.less";
+
 @colorPlacehold: #EFF0F1;
 @colorPlaceholdDark: #D6D8D9;
-@colorBlack: #424242;
+
+@baseColor: rgba(0, 0, 0, 0.95);
+@primaryColor: #795548;
 
 body {
     display: flex;
@@ -13,16 +18,17 @@ main {
 }
 
 .mao-navbar {
-    background: @colorPlaceholdDark;
+    background: white;
+    a {
+        color: @primaryColor;
+    }
+    a.btn {
+        color: inherit;   
+    }
 }
 
-.mao-video-note-pane {
-    
-}
-
-.mao-music-sheet-box {
-    height: 32rem;
-    overflow: auto;
+.mao-primary-btn {
+    background: @primaryColor;
 }
 
 .mao-chip {
@@ -31,7 +37,53 @@ main {
     border-radius: 0px;
 }
 
+.mao-comment-list {
+    border: none;
+}
+
+/*==============================
+=            Player            =
+==============================*/
+.mao-player-wrapper {
+    background-color: #EFEFEF;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+
+    .mao-video-info {
+        padding-right: 3rem;
+        p,h5 {
+            color: black;
+        }
+    }
+
+    .mao-video-description {
+        border-left-color: @primaryColor;
+    }
+
+    .mao-video-btn {
+        width: 49%;
+        overflow: hidden;
+    }
+
+    .mao-music-sheet-wrapper {
+        background-image: url("../img/lightpaperfibers/lightpaperfibers_@2X.png");
+        .mao-music-sheet-box {
+            height: 34rem;
+            overflow: auto;
+        }
+
+        #mao-music-sheet {
+            height: 10rem;
+        }
+    }
+}
+/*=====  End of Player  ======*/
+
+/*==============================
+=            Footer            =
+==============================*/
 footer.mao-page-footer {
     margin-top: 0;
-    background-color: @colorPlaceholdDark;
+    background-color: @primaryColor;
 }
+/*=====  End of Footer  ======*/
