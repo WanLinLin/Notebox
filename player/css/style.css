@@ -1,0 +1,73 @@
+/**
+ * google-material-color v1.2.6
+ * https://github.com/danlevan/google-material-color
+ */
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+main {
+  flex: 1 0 auto;
+}
+.mao-navbar {
+  background: white;
+}
+.mao-navbar a {
+  color: #795548;
+}
+.mao-navbar a.btn {
+  color: inherit;
+}
+.mao-primary-btn {
+  background: #795548;
+}
+.mao-chip {
+  line-height: 18px;
+  height: auto;
+  border-radius: 0px;
+}
+.mao-comment-list {
+  border: none;
+}
+/*==============================
+=            Player            =
+==============================*/
+.mao-player-wrapper {
+  background-color: #EFEFEF;
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+}
+.mao-player-wrapper .mao-video-info {
+  padding-right: 3rem;
+}
+.mao-player-wrapper .mao-video-info p,
+.mao-player-wrapper .mao-video-info h5 {
+  color: black;
+}
+.mao-player-wrapper .mao-video-description {
+  border-left-color: #795548;
+}
+.mao-player-wrapper .mao-video-btn {
+  width: 49%;
+  overflow: hidden;
+}
+.mao-player-wrapper .mao-music-sheet-wrapper {
+  background-image: url("../img/lightpaperfibers/lightpaperfibers_@2X.png");
+}
+.mao-player-wrapper .mao-music-sheet-wrapper .mao-music-sheet-box {
+  height: 34rem;
+  overflow: auto;
+}
+.mao-player-wrapper .mao-music-sheet-wrapper #mao-music-sheet {
+  height: 10rem;
+}
+/*=====  End of Player  ======*/
+/*==============================
+=            Footer            =
+==============================*/
+footer.mao-page-footer {
+  margin-top: 0;
+  background-color: #795548;
+}
+/*=====  End of Footer  ======*/
