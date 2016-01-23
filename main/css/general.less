@@ -1,0 +1,83 @@
+@import "palette.less";
+@import "support.less";
+@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+@colorPlacehold: #EFF0F1;
+@colorPlaceholdDark: #D6D8D9;
+
+@baseColor: rgba(0, 0, 0, 0.95);
+@primaryColor: #795548;
+@accentColor: #865E50;
+
+
+/*===============================
+=            General            =
+===============================*/
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    font-family: 'Noto Sans TC', sans-serif;
+
+    i.fa {
+        font-size: inherit;
+    }
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.mao-navbar {
+    background: @primaryColor;
+    a {
+        color: white;
+    }
+    a.btn {
+        color: inherit;   
+    }
+}
+
+.mao-simple-btn {
+    background-color: @colorPlaceholdDark;
+    color: black;
+    box-shadow: none;
+    &:hover {
+        background-color: @colorPlacehold;
+        color: black;
+        box-shadow: none;
+    }
+}
+
+.mao-bg-placehold {
+    background-color: @colorPlacehold;
+}
+
+.mao-bg-primary {
+    background-color: @primaryColor;
+}
+
+.mao-bg-accent {
+    background-color: @accentColor;
+}
+
+.mao-chip {
+    line-height: 18px;
+    height: auto;
+    border-radius: 0px;
+}
+
+.mao-blockquote {
+    border-left-color: @primaryColor;
+}
+
+/*==============================
+=            Footer            =
+==============================*/
+footer.mao-page-footer {
+    margin-top: 0;
+    background-color: @primaryColor;
+}
+/*=====  End of Footer  ======*/
+
