@@ -9,29 +9,39 @@
   <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
   <!-- Less -->
-  <!-- <link rel="stylesheet/less" type="text/css" href="css/style.less"> -->
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet/less" type="text/css" href="css/style.less">
+  <!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
 </head>
 
 <body>
   <!--============================
   =            Navbar            =
   =============================-->
-  <nav>
-    <div class="mao-navbar nav-wrapper">
-      <div class="row">
-        <div class="col s10 push-s1 pull-s1">
-          <a href="#" class="brand-logo">Mao Er Duo</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="#">About</a></li>
-            <li><a href="#">Browse Video</a></li>
-            <li><a href="#">Be a Teacher!</a></li>
-            <li><a href="#" class="mao-primary-btn btn">Login</a></li>
-          </ul>    
+  <div class="navbar-fixed">
+    <nav>
+      <div class="mao-navbar nav-wrapper">
+        <div class="row">
+          <div class="col s10 push-s1 pull-s1">
+            <a href="#" class="brand-logo left">NoteBox</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+              <li><a href="#">關於貓耳朵</a></li>
+              <li><a href="#"><i class="fa fa-music"> 曲目總覽</i></a></li>
+              <li><a href="#"><i class="fa fa-plus"> 新增樂曲</i></a></li>
+              <li><a class="dropdown-button" href="#" data-activates="user-login-info"><i class="fa fa-user"> 小埋</i></a></li>
+              <ul id="user-login-info" class="dropdown-content">
+                <li><a href="#">個人資料</a></li>
+                <li><a href="#">我的收藏</a></li>
+                <li><a href="#">樂曲管理</a></li>
+                <li class="divider"></li>  
+                <li><a href="#">登出</a></li>
+              </ul>
+              <!-- <li><a href="#" class="btn mao-simple-btn">登入</a></li> -->
+            </ul>    
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </div>
   <!--====  End of Navbar  ====-->
   
   <!--===============================
@@ -43,36 +53,58 @@
     ===================================-->
     <div class="row mao-player-wrapper">
       <div class="col s10 push-s1 pull-s1">
-        <div class="section row">
+        <div class="section row" style="margin-bottom: 0;">
           <!-- Video -->
-          <div class="col s4 white-text mao-video-info">
+          <div class="col s7 white-text mao-video-info">
             <div class="section">
               <div class="video-container">
                 <iframe width="420" height="315" src="https://www.youtube.com/embed/q6EoRBvdVPQ" frameborder="0" allowfullscreen></iframe>
               </div>
-              <!-- <div class="section">
-                <a class="disabled btn mao-video-btn"><i class="fa fa-repeat"></i></a>
-                <a class="disabled btn mao-video-btn"><i class="fa fa-expand"></i></a>
-              </div> -->
             </div>
-            <!-- Video Information -->
+            <a class="btn mao-simple-btn">AB 段重複</a>
+            <a class="btn mao-simple-btn">影片速度</a>
+            <!-- Video Short Info -->
             <div class="divider"></div>
             <div class="section">
-              <div class="chip mao-chip">L1</div>
-              <div class="chip mao-chip">5N</div>
-              <h5>Title is Title Here</h5>
-              <blockquote class="mao-video-description">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem aliquid, fuga natus maiores, quos iusto, omnis est corporis possimus, animi earum dicta. Voluptate et, delectus totam facere odit, obcaecati fugit?</p>
+              <!-- Info below -->
+              <h5 style="display: inline;">影片標題</h5> 
+              <blockquote class="mao-blockquote">
+                <h6>歌曲難度</h6>
+                <p>
+                  <div class="chip mao-chip">C</div>
+                  <div class="chip mao-chip">D</div>
+                  <div class="chip mao-chip">E</div>
+                  <div class="chip mao-chip">F</div>
+                  <div class="chip mao-chip">G</div>
+                  <div class="chip mao-chip">A</div>
+                  <div class="chip mao-chip">B</div>
+                </p>
               </blockquote>
-              <p>
-                <a class="btn modal-trigger mao-primary-btn" href="#modal1">Tips</a>
-              </p>
+              <!-- Buttons -->
+              <a class="btn modal-trigger mao-simple-btn"  href="#modal1"><i class="fa fa-check"></i> 演奏訣竅</a>
+              <a class="btn mao-simple-btn"><i class="fa fa-heart-o"></i></a>
+              <a class="btn mao-simple-btn"><i class="fa fa-facebook"></i></a>
+              <a class="btn mao-simple-btn"><i class="fa fa-bug"></i></a>  
             </div>
           </div>
           <!-- Note -->
-          <div class="col s8 center-align card mao-music-sheet-wrapper">
-            <div class="section mao-music-sheet-box">
-              <canvas id="mao-music-sheet" width="600" height="200"></canvas>
+          <div class="col s5 center-align card mao-music-sheet-wrapper">
+            <!-- Note box -->
+            <div class="row mao-music-sheet-box">
+              <!-- Tabs -->
+              <div class="col s12">
+                <ul class="tabs">
+                  <li class="tab col s3"><a href="#type1_note">鋼琴譜</a></li>
+                  <li class="tab col s3"><a href="#type2_note">吉他譜</a></li>
+                </ul>
+              </div>
+              <!-- Tab content -->
+              <div id="type1_note" class="col s12 mao-tab-content">
+                <canvas id="mao-music-sheet" width="600" height="200"></canvas>
+              </div>
+              <div id="type2_note" class="col s12 mao-tab-content">
+                Type2_note
+              </div>
             </div>
           </div>
         </div>
@@ -84,25 +116,10 @@
     =            Video more info            =
     ======================================-->
     <div class="row">
+      <!-- Description -->
       <div class="col s10 push-s1 pull-s1">
-        <div class="section">
-          <div class="row">
-            <div class="col s4">
-              <a class="btn-floating"><i class="fa fa-heart-o"></i></a>
-              <a class="btn-floating"><i class="fa fa-facebook"></i></a>
-              <a class="btn-floating"><i class="fa fa-twitter"></i></a>
-              <a class="btn-floating"><i class="fa fa-share"></i></a>
-              <a class="btn-floating"><i class="fa fa-bug"></i></a>
-            </div>
-            <div class="col">
-              <div class="chip ">#hashtag1</div>
-              <div class="chip ">#hashtag2</div>
-              <div class="chip ">#hashtag3</div>
-              <div class="chip ">#hashtag4</div>
-            </div>
-          </div>
-        </div>
-        <div class="divider"></div>
+        <h4>樂曲故事</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem aliquid, fuga natus maiores, quos iusto, omnis est corporis possimus, animi earum dicta. Voluptate et, delectus totam facere odit, obcaecati fugit?</p>
       </div>
     </div>
     <!--====  End of Video more info  ====-->
@@ -112,7 +129,7 @@
     ==================================-->
     <div id="modal1" class="modal modal-fixed-footer">
       <div class="modal-content">
-        <h4>Tutorial and Playing Tips</h4>
+        <h4>教學及演奏訣竅</h4>
           <div class="divider"></div>
           <p>
             <div class="row valign-wrapper">
@@ -158,7 +175,7 @@
     <div class="row">
       <div class="col s8 push-s1 pull-s1">
         <div class="section">
-          <h4>Comment And Feedback</h4>
+          <h4>留言與回饋</h4>
           <div class="divider"></div>
           <p>
             <ul class="collection mao-comment-list">
@@ -190,7 +207,7 @@
     <div class="row">
       <div class="col s10 push-s1 pull-s1">
         <div class="section">
-          <h4>Recommanded Songs</h4>
+          <h4>我們也推薦</h4>
           <div class="row">
             <div class="col l4 s12">
               <div class="card">
@@ -260,14 +277,31 @@
 
   <script type="text/javascript">
 
+  $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    initModal();
+    initNotebox();
+  });
+
   /*=====================================
   =            Modal Handler            =
   =====================================*/
-  $(document).ready(function(){
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+  function initModal() {
     $('.modal-trigger').leanModal();
-  });
+  }
   /*=====  End of Modal Handler  ======*/
+
+
+  /*=======================================
+  =            note box height            =
+  =======================================*/
+  function initNotebox() {
+    // Get height
+    var height = $("div.mao-video-info").height();
+    $("div.mao-music-sheet-box").height(height);
+  }
+  /*=====  End of note box height  ======*/
+  
   
 
   /*=============================================
