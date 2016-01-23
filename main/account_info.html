@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>帳戶總覽</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+  <!-- Less -->
+  <link rel="stylesheet/less" type="text/css" href="css/account_info.less">
+</head>
+<body>
+  <!--============================
+  =            Navbar            =
+  =============================-->
+  <div class="navbar-fixed">
+    <nav>
+      <div class="mao-navbar nav-wrapper">
+        <div class="row">
+          <div class="col s10 push-s1 pull-s1">
+            <a href="#" class="brand-logo left">NoteBox</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+              <li><a href="#">關於貓耳朵</a></li>
+              <li><a href="#"><i class="fa fa-music"> 曲目總覽</i></a></li>
+              <li><a href="#"><i class="fa fa-plus"> 新增樂曲</i></a></li>
+              <li><a class="dropdown-button" href="#" data-activates="user-login-info"><i class="fa fa-user"> 小埋</i></a></li>
+              <ul id="user-login-info" class="dropdown-content">
+                <li><a href="#">個人資料</a></li>
+                <li><a href="#">我的收藏</a></li>
+                <li><a href="#">樂曲管理</a></li>
+                <li class="divider"></li>  
+                <li><a href="#">登出</a></li>
+              </ul>
+              <!-- <li><a href="#" class="btn mao-simple-btn">登入</a></li> -->
+            </ul>    
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <!--====  End of Navbar  ====-->
+
+  <!--==================================
+  =            Main Content            =
+  ===================================-->
+  
+  <div class="mao-content-wrapper">
+    <div class="row">
+      <!-- Menu -->
+      <div class="col s3">
+        <div class="collection">
+          <a href="#" class="collection-item active">帳戶總覽</a>
+          <a href="account_info_favorite.html" class="collection-item">我的收藏</a>
+          <a href="#" class="collection-item">上傳管理</a>
+        </div>
+      </div>
+      <!-- Content -->
+      <div class="col s9">
+        <div class="card-panel mao-content">
+          <!-- Info -->
+          <div class="section">
+            <h5>帳戶總覽</h5>
+            <div class="divider"></div>
+          </div>
+
+          <!-- One row data -->
+          <div class="section row">
+            <div class="col s4">名稱</div>
+            <div class="col s8">干物妹小埋</div>
+          </div>
+
+          <div class="section row">
+            <div class="col s4">連絡信箱</div>
+            <div class="col s8">abcd@abcd.com</div>
+          </div>
+
+          <div class="section row">
+            <div class="col s4">帳戶類型</div>
+            <div class="col s8">一般用戶</div>
+          </div>
+
+          <div class="section row">
+            <div class="col s4">密碼</div>
+            <div class="col s8">按下此處以變更密碼</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!--====  End of Main Content  ====-->
+  
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script type="text/javascript" src="js/bower_components/less/dist/less.min.js"></script>
+  <script type="text/javascript" src="js/node_modules/vexflow/releases/vexflow-min.js"></script>
+</body>
+</html>
