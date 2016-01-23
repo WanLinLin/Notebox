@@ -1,323 +1,227 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta charset="UTF-8">
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  <!--Import materialize.css-->
-  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+	<!--Import Google Icon Font-->
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
+	<!-- my style -->
+	<link rel="stylesheet" type="text/css" href="css/w-style.css">
 
-  <!-- Less -->
-  <!-- <link rel="stylesheet/less" type="text/css" href="css/style.less"> -->
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 
 <body>
-  <!--============================
-  =            Navbar            =
-  =============================-->
-  <nav>
-    <div class="mao-navbar nav-wrapper">
-      <div class="row">
-        <div class="col s10 push-s1 pull-s1">
-          <a href="#" class="brand-logo">Mao Er Duo</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="#">About</a></li>
-            <li><a href="#">Browse Video</a></li>
-            <li><a href="#">Be a Teacher!</a></li>
-            <li><a href="#" class="mao-primary-btn btn">Login</a></li>
-          </ul>    
-        </div>
-      </div>
-    </div>
-  </nav>
-  <!--====  End of Navbar  ====-->
-  
-  <!--===============================
-  =            Container            =
-  ================================-->
-  <div class="mao-main-wrapper">
-    <!--==================================
-    =            Video & Note            =
-    ===================================-->
-    <div class="row mao-player-wrapper">
-      <div class="col s10 push-s1 pull-s1">
-        <div class="section row">
-          <!-- Video -->
-          <div class="col s4 white-text mao-video-info">
-            <div class="section">
-              <div class="video-container">
-                <iframe width="420" height="315" src="https://www.youtube.com/embed/q6EoRBvdVPQ" frameborder="0" allowfullscreen></iframe>
-              </div>
-              <!-- <div class="section">
-                <a class="disabled btn mao-video-btn"><i class="fa fa-repeat"></i></a>
-                <a class="disabled btn mao-video-btn"><i class="fa fa-expand"></i></a>
-              </div> -->
-            </div>
-            <!-- Video Information -->
-            <div class="divider"></div>
-            <div class="section">
-              <div class="chip mao-chip">L1</div>
-              <div class="chip mao-chip">5N</div>
-              <h5>Title is Title Here</h5>
-              <blockquote class="mao-video-description">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem aliquid, fuga natus maiores, quos iusto, omnis est corporis possimus, animi earum dicta. Voluptate et, delectus totam facere odit, obcaecati fugit?</p>
-              </blockquote>
-              <p>
-                <a class="btn modal-trigger mao-primary-btn" href="#modal1">Tips</a>
-              </p>
-            </div>
-          </div>
-          <!-- Note -->
-          <div class="col s8 center-align card mao-music-sheet-wrapper">
-            <div class="section mao-music-sheet-box">
-              <canvas id="mao-music-sheet" width="600" height="200"></canvas>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--====  End of Video & Note  ====-->
+	<!-- Header Div -->
+	<div class="parallax-container">
+		<div class="black-mask"></div>
 
-    <!--=====================================
-    =            Video more info            =
-    ======================================-->
-    <div class="row">
-      <div class="col s10 push-s1 pull-s1">
-        <div class="section">
-          <div class="row">
-            <div class="col s4">
-              <a class="btn-floating"><i class="fa fa-heart-o"></i></a>
-              <a class="btn-floating"><i class="fa fa-facebook"></i></a>
-              <a class="btn-floating"><i class="fa fa-twitter"></i></a>
-              <a class="btn-floating"><i class="fa fa-share"></i></a>
-              <a class="btn-floating"><i class="fa fa-bug"></i></a>
-            </div>
-            <div class="col">
-              <div class="chip ">#hashtag1</div>
-              <div class="chip ">#hashtag2</div>
-              <div class="chip ">#hashtag3</div>
-              <div class="chip ">#hashtag4</div>
-            </div>
-          </div>
-        </div>
-        <div class="divider"></div>
-      </div>
-    </div>
-    <!--====  End of Video more info  ====-->
+		<!-- Nav Bar -->
+		<nav class="transparent" role="navigation">
+			<div class="nav-wrapper container">
+				<!-- logo -->
+				<a id="logo" href="./index.html" class="brand-logo white-text hide-on-med-and-down text-shadow">Notebox</a>
+				
+				<!-- menu icon -->
+				<a href="#" data-activates="nav-mobile" class="button-collapse white-text">
+					<i class="material-icons">menu</i>
+				</a>
 
-    <!--=================================
-    =            Playing Tips           =
-    ==================================-->
-    <div id="modal1" class="modal modal-fixed-footer">
-      <div class="modal-content">
-        <h4>Tutorial and Playing Tips</h4>
-          <div class="divider"></div>
-          <p>
-            <div class="row valign-wrapper">
-              <div class="col l7">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ratione rem, sunt possimus eius cupiditate vel numquam reprehenderit voluptas! Voluptatem similique quidem repellat repudiandae ullam minima enim iure assumenda placeat!
-              </div>
-              <div class="col l5">
-                <img class="responsive-img" src="http://placehold.it/350x150" alt="">
-              </div>
-            </div>
-          </p>
-          <p>
-            <blockquote>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, itaque ab! Eveniet corporis temporibus suscipit veniam, quibusdam repellendus fugiat facere, magni nostrum minima, sit assumenda, distinctio! Itaque consectetur sapiente voluptates.
-            </blockquote>
-          </p>
-          <div class="section">
-            <p>
-              <i class="fa fa-check"></i>
-              <span>Totam accusantium velit optio impedit, aliquam.</span>
-            </p>
-            <p>
-              <i class="fa fa-times"></i>
-              <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
-            </p>
-            <p>
-              <i class="fa fa-ban"></i>
-              <span>Aspernatur optio molestiae cupiditate?</span>
-            </p>
-          </div>
-          
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, excepturi ullam alias, perspiciatis necessitatibus illo animi repudiandae laborum eveniet numquam esse voluptas incidunt ut id, iure veniam error earum. Qui.</p>
-      </div>
-      <div class="modal-footer">
-        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">OK!</a>
-      </div>
-    </div>
-    <!--====  End of Playing Tips ====-->
-  
-    <!--==========================================
-    =            Comment and Feedback            =
-    ===========================================-->
-    <div class="row">
-      <div class="col s8 push-s1 pull-s1">
-        <div class="section">
-          <h4>Comment And Feedback</h4>
-          <div class="divider"></div>
-          <p>
-            <ul class="collection mao-comment-list">
-              <li class="collection-item avatar">
-                <img src="images/ph.png" alt="" class="circle">
-                <span class="title">Bowan Kuo</span>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis numquam eaque mollitia quos eveniet molestiae ex possimus iusto recusandae commodi, dolores aliquam vero officia temporibus, eligendi, id laudantium quibusdam distinctio?</p>
-              </li>
-              <li class="collection-item avatar">
-                <img src="images/ph.png" alt="" class="circle">
-                <span class="title">Yu Shan Zay</span>
-                <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate quisquam expedita dolores ducimus, cum assumenda eaque dolor at, magni odio inventore.</span></p>
-              </li>
-              <li class="collection-item avatar">
-                <img src="images/ph.png" alt="" class="circle">
-                <span class="title">Wu Wang Wu</span>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis numquam eaque mollitia quos eveniet molestiae ex possimus iusto recusandae commodi, dolores aliquam vero officia temporibus, eligendi, id laudantium quibusdam distinctio?</p>
-              </li>
-            </ul>
-          </p>
-        </div>
-      </div>
-    </div>
-    <!--====  End of Comment and Feedback  ====-->
+				<!-- Dropdown Structure -->
+				<ul id="dropdown1" class="dropdown-content">
+					<li><a class="brown-text darken-5" href="#!">經典之作</a></li>
+					<li><a class="brown-text darken-5" href="#!">新潮流行</a></li>
+					<li><a class="brown-text darken-5" href="#!">獨立樂團</a></li>
+					<li class="divider"></li>
+					<li><a class="brown-text darken-5" href="#!">更多</a></li>
+				</ul>
+				<ul id="dropdown2" class="dropdown-content">
+					<li><a class="brown-text darken-5" href="#!">3~5個音</a></li>
+					<li><a class="brown-text darken-5" href="#!">5~10個音</a></li>
+					<li><a class="brown-text darken-5" href="#!">10~20個音</a></li>
+					<li class="divider"></li>
+					<li><a class="brown-text darken-5" href="#!">更多</a></li>
+				</ul>
+				<ul id="dropdown3" class="dropdown-content">
+					<li><a class="brown-text darken-5" href="#!">藍調</a></li>
+					<li><a class="brown-text darken-5" href="#!">爵士</a></li>
+					<li><a class="brown-text darken-5" href="#!">古典</a></li>
+					<li class="divider"></li>
+					<li><a class="brown-text darken-5" href="#!">更多</a></li>
+				</ul>
 
-    <!--====================================
-    =            Recommanded Songs         =
-    =====================================-->
-    <div class="row">
-      <div class="col s10 push-s1 pull-s1">
-        <div class="section">
-          <h4>Recommanded Songs</h4>
-          <div class="row">
-            <div class="col l4 s12">
-              <div class="card">
-                <div class="card-image"><img src="http://placehold.it/350x150" alt=""></div>
-                <div class="card-content">Quis unde illum accusamus</div>
-              </div>
-            </div>
-            <div class="col l4 s12">
-              <div class="card">
-                <div class="card-image"><img src="http://placehold.it/350x150" alt=""></div>
-                <div class="card-content">voluptatum alias aperiam</div>
-              </div>
-            </div>
-            <div class="col l4 s12">
-              <div class="card">
-                <div class="card-image"><img src="http://placehold.it/350x150" alt=""></div>
-                <div class="card-content">perferendis harum blanditiis</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--====  End of Recommanded Songs  ====-->
+				<!-- normal nav-->
+				<ul class="right hide-on-med-and-down">
+					<li><a class="white-text text-shadow" href="./overview.html">曲目總覽</a></li>
+					<li class="no-hvr-effect"><a class="dropdown-button text-shadow" href="#!" data-activates="dropdown1">
+						精選曲目<i class="material-icons right nav-drop">arrow_drop_down</i>
+					</a></li>
+					<li class="no-hvr-effect"><a class="dropdown-button text-shadow" href="#!" data-activates="dropdown2">
+						程度分級<i class="material-icons right nav-drop">arrow_drop_down</i>
+					</a></li>
+					<li class="no-hvr-effect"><a class="dropdown-button text-shadow" href="#!" data-activates="dropdown3">
+						曲目類型<i class="material-icons right nav-drop">arrow_drop_down</i>
+					</a></li>
+					<li class="no-hvr-effect"><a class="white-text text-shadow nav-button" href="login.html">登入</a></li>
+					<li class="no-hvr-effect"><a class="white-text text-shadow nav-button" href="register.html">註冊</a></li>
+				</ul>
 
-  </div>
-  <!--====  End of Container  ====-->
+				<!-- mobile nav -->
+				<ul id="nav-mobile" class="side-nav">
+					<li><a class="grey-text text-darken-2" href="login.html">登入</a></li>
+					<li><a class="grey-text text-darken-2" href="register.html">註冊</a></li>
+				</ul>
+
+			</div>
+		</nav><!-- end of Nav Bar -->
+
+		<div class="section container">
+			<div class="row center">
+				<div class="col s12">
+					<h1 class="header white-text text-shadow">Notebox</h1>
+					<h5 class="header light white-text text-shadow">A classical, indie, modern music framework based on Cat Ear</h5>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col s12 m12 push-l2 l8">
+					<!-- search bar -->
+					<nav class="bg-twhite-8 search-div">
+						<div class="nav-wrapper">
+							<form>
+								<div class="input-field">
+									<input id="search" type="search" required class="brown-text text-darken-1">
+									<label for="search"><i class="material-icons brown-text text-darken-1">search</i></label>
+									<i class="material-icons brown-text text-darken-1">close</i>
+								</div>
+							</form>
+						</div>
+					</nav>
+					<!-- <div class="input-field white search-div">
+						<input placeholder="Four Seasons, Autumn Mvt 3 Allegro..." type="text" id="search-input">
+					</div> -->
+				</div>
+			</div>
+
+		</div>
+		<div class="parallax sink"><img src="images/main-bg2.jpg" alt="background"></div>
+	</div><!-- end of Header Div -->
+
+	<!-- Introduce Div -->
+	<div class="container">
+		<div class="section">
+
+			<!--   Icon Section   -->
+			<div class="row contact-div">
+				<div class="col s12 m4">
+					<div class="icon-block">
+						<h2 class="center brown-text"><i class="medium material-icons">compare_arrows</i></h2>
+						<h5 class="center">音樂零距離</h5>
+
+						<p class="light">建構音樂學習生態圈, We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+					</div>
+				</div>
+
+				<div class="col s12 m4">
+					<div class="icon-block">
+						<h2 class="center brown-text"><i class="medium material-icons">gavel</i></h2>
+						<h5 class="center">打破音樂學習框架</h5>
+
+						<p class="light">時間.空間限制, y utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+					</div>
+				</div>
+
+				<div class="col s12 m4">
+					<div class="icon-block">
+						<h2 class="center brown-text"><i class="medium material-icons">music_video</i></h2>
+						<h5 class="center">獨立、古典樂</h5>
+
+						<p class="light">提高音樂素質, 支持獨立音樂.作曲者自主有夢想, We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div><!-- end of Introduce Div -->
+
+	<div class="parallax-container valign-wrapper">
+		<div class="container valign">
+			<div class="row center">
+				<h5 class="header col s12 light white-text text-shadow">A classical, indie, modern music framework based on Cat Ear</h5>
+			</div>
+		</div>
+		<div class="parallax"><img src="images/main-bg5.jpg"></div>
+	</div>
+
+	<!-- Contact Div -->
+	<div class="container contact-div">
+		<div class="section">
+
+			<div class="row">
+				<div class="col s12 center">
+					<img src="images/chin-dai.jpg" alt="余青黛" class="circle contact-img">
+					<h5>余青黛</h5>
+				</div>
+				<div class="col s10 center push-s1">
+					<p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie.</p>
+				</div>
+			</div>
+
+		</div>
+	</div><!-- end of Contact Div -->
 
 
-  <!--============================
-  =            Footer            =
-  =============================-->
-  <footer class="mao-page-footer page-footer">
-    <div class="container">
-      <div class="row">
-        <div class="col l6 s12">
-          <h5 class="white-text">Mao Er Duo</h5>
-          <p class="grey-text text-lighten-4">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis accusamus consequatur labore, facilis corporis consequuntur praesentium debitis veniam enim, iure aperiam ut perferendis natus itaque, eos ipsa odio numquam sed.
-          </p>
-        </div>
-        <div class="col l6 s12">
-          <h5 class="white-text">Connection</h5>
-          <span><a class="btn-floating btn-large waves-effect waves-light"><i class="fa fa-google-plus"></i></a></span>
-          <span><a class="btn-floating btn-large waves-effect waves-light"><i class="fa fa-facebook"></i></a></span>
-          <span><a class="btn-floating btn-large waves-effect waves-light"><i class="fa fa-twitter"></i></a></span>
-          <span><a class="btn-floating btn-large waves-effect waves-light"><i class="fa fa-comments"></i></a></span>
-        </div>
-      </div>
-    </div>
-    <div class="mao-page-footer-copyright footer-copyright">
-      <div class="container">
-        © Mao Er Duo 2014 Copyright Text
-      </div>
-    </div>
-  </footer>
-  <!--====  End of Footer  ====-->
-  
-  
-  <!--================================
-  =            JavaScript            =
-  =================================-->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script type="text/javascript" src="js/materialize.min.js"></script>
-  <script type="text/javascript" src="js/bower_components/less/dist/less.min.js"></script>
-  <script type="text/javascript" src="js/node_modules/vexflow/releases/vexflow-min.js"></script>
+	<!-- Footer -->
+	<footer class="page-footer brown">
+		<div class="container">
+			<div class="row">
+				<div class="col l6 s12">
+					<h5 class="white-text">Company Bio</h5>
+					<p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
 
-  <script type="text/javascript">
 
-  /*=====================================
-  =            Modal Handler            =
-  =====================================*/
-  $(document).ready(function(){
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-    $('.modal-trigger').leanModal();
-  });
-  /*=====  End of Modal Handler  ======*/
-  
+				</div>
+				<div class="col l3 s12">
+					<h5 class="white-text">Settings</h5>
+					<ul>
+						<li><a class="white-text" href="#!">Link 1</a></li>
+						<li><a class="white-text" href="#!">Link 2</a></li>
+						<li><a class="white-text" href="#!">Link 3</a></li>
+						<li><a class="white-text" href="#!">Link 4</a></li>
+					</ul>
+				</div>
+				<div class="col l3 s12">
+					<h5 class="white-text">Connect</h5>
+					<ul>
+						<li><a class="white-text" href="#!">Link 1</a></li>
+						<li><a class="white-text" href="#!">Link 2</a></li>
+						<li><a class="white-text" href="#!">Link 3</a></li>
+						<li><a class="white-text" href="#!">Link 4</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="footer-copyright">
+			<div class="container">
+				Made by <a class="brown-text text-lighten-4" href="http://materializecss.com">Materialize</a>
+			</div>
+		</div>
+	</footer><!-- end of Footer -->
 
-  /*=============================================
-  =            Music Notation Rendering         =
-  =============================================*/
-  // Init
-  var sheetCanvas = $("#mao-music-sheet")[0];
-  var renderer = new Vex.Flow.Renderer(sheetCanvas,
-    Vex.Flow.Renderer.Backends.CANVAS);
 
-  var ctx = renderer.getContext();
-  var stave = new Vex.Flow.Stave(10, 0, 580);
-  stave.addClef("treble").setContext(ctx).draw();
+	<!--Import jQuery before materialize.js-->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
 
-  // Create the notes
-  var notes = [
-    // A quarter-note C.
-    new Vex.Flow.StaveNote({ keys: ["c/4"], duration: "q" }),
-
-    // A quarter-note D.
-    new Vex.Flow.StaveNote({ keys: ["d/4"], duration: "q" }),
-
-    // A quarter-note rest. Note that the key (b/4) specifies the vertical
-    // position of the rest.
-    new Vex.Flow.StaveNote({ keys: ["b/4"], duration: "qr" }),
-
-    // A C-Major chord.
-    new Vex.Flow.StaveNote({ keys: ["c/4", "e/4", "g/4"], duration: "q" })
-  ];
-
-  // Create a voice in 4/4
-  var voice = new Vex.Flow.Voice({
-    num_beats: 4,
-    beat_value: 4,
-    resolution: Vex.Flow.RESOLUTION
-  });
-
-  // Add notes to voice
-  voice.addTickables(notes);
-
-  // Format and justify the notes to 500 pixels
-  var formatter = new Vex.Flow.Formatter().
-    joinVoices([voice]).format([voice], 500);
-
-  // Render voice
-  voice.draw(ctx, stave);
-  
-  
-  /*=====  End of Music Notation Rendering  ======*/
-  </script>
-
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('.button-collapse').sideNav();
+		$('.parallax').parallax();
+		$(".dropdown-button").dropdown();
+	})
+	</script>
 </body>
 </html>
