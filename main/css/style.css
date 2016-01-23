@@ -2,65 +2,95 @@
  * google-material-color v1.2.6
  * https://github.com/danlevan/google-material-color
  */
+@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+/*===============================
+=            General            =
+===============================*/
 body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+body i.fa {
+  font-size: inherit;
 }
 main {
   flex: 1 0 auto;
 }
-.mao-navbar {
-  background: white;
+.mao-simple-btn {
+  background-color: #D6D8D9;
+  color: black;
+  box-shadow: none;
 }
-.mao-navbar a {
-  color: #795548;
+.mao-simple-btn:hover {
+  background-color: #EFF0F1;
+  color: black;
+  box-shadow: none;
 }
-.mao-navbar a.btn {
-  color: inherit;
+.mao-bg-placehold {
+  background-color: #EFF0F1;
 }
-.mao-primary-btn {
-  background: #795548;
+.mao-bg-primary {
+  background-color: #795548;
+}
+.mao-bg-accent {
+  background-color: #865E50;
 }
 .mao-chip {
   line-height: 18px;
   height: auto;
   border-radius: 0px;
 }
+/*============================
+=            Body            =
+============================*/
+.mao-navbar {
+  background: #795548;
+}
+.mao-navbar a {
+  color: white;
+}
+.mao-navbar a.btn {
+  color: inherit;
+}
 .mao-comment-list {
   border: none;
+}
+.mao-blockquote {
+  border-left-color: #795548;
 }
 /*==============================
 =            Player            =
 ==============================*/
 .mao-player-wrapper {
   background-color: #EFEFEF;
-  padding-top: 2rem;
-  padding-bottom: 3rem;
 }
 .mao-player-wrapper .mao-video-info {
   padding-right: 3rem;
 }
 .mao-player-wrapper .mao-video-info p,
-.mao-player-wrapper .mao-video-info h5 {
+.mao-player-wrapper .mao-video-info h5,
+.mao-player-wrapper .mao-video-info h4,
+.mao-player-wrapper .mao-video-info h6 {
   color: black;
-}
-.mao-player-wrapper .mao-video-description {
-  border-left-color: #795548;
 }
 .mao-player-wrapper .mao-video-btn {
   width: 49%;
   overflow: hidden;
 }
 .mao-player-wrapper .mao-music-sheet-wrapper {
-  background-image: url("../images/lightpaperfibers/lightpaperfibers_@2X.png");
+  background-image: url("../img/lightpaperfibers/lightpaperfibers_@2X.png");
 }
 .mao-player-wrapper .mao-music-sheet-wrapper .mao-music-sheet-box {
-  height: 34rem;
+  height: 30rem;
   overflow: auto;
 }
 .mao-player-wrapper .mao-music-sheet-wrapper #mao-music-sheet {
   height: 10rem;
+}
+.mao-player-wrapper .mao-music-sheet-wrapper .mao-tab-content {
+  padding-top: 1rem;
 }
 /*=====  End of Player  ======*/
 /*==============================
