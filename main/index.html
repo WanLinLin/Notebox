@@ -5,6 +5,8 @@
 
 	<!--Import Google Icon Font-->
 	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<!--Import materialize.css-->
 	<link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
 	<!-- my style -->
@@ -20,11 +22,11 @@
 		<div class="black-mask"></div>
 
 		<!-- Nav Bar -->
-		<div class="navbar-fixed">
+		<div class="navbar-fixed row">
 			<nav id="navbar-fixed" class="no-shadow" role="navigation">
-				<div class="nav-wrapper container">
+				<div class="nav-wrapper col s10 push-s1">
 					<!-- logo -->
-					<a id="logo" href="./index.html" class="brand-logo white-text hide-on-med-and-down text-shadow">Notebox</a>
+					<a href="./index.html" class="brand-logo white-text hide-on-med-and-down text-shadow">NoteBox</a>
 					
 					<!-- menu icon -->
 					<a href="#" data-activates="nav-mobile" class="button-collapse white-text">
@@ -57,15 +59,21 @@
 					<!-- normal nav-->
 					<ul class="right hide-on-med-and-down">
 						<li><a class="white-text text-shadow" href="./overview.html">曲目總覽</a></li>
-						<li class="no-hvr-effect"><a class="dropdown-button text-shadow" href="#!" data-activates="dropdown1">
-							精選曲目<i class="material-icons right nav-drop">arrow_drop_down</i>
-						</a></li>
-						<li class="no-hvr-effect"><a class="dropdown-button text-shadow" href="#!" data-activates="dropdown2">
-							程度分級<i class="material-icons right nav-drop">arrow_drop_down</i>
-						</a></li>
-						<li class="no-hvr-effect"><a class="dropdown-button text-shadow" href="#!" data-activates="dropdown3">
-							曲目類型<i class="material-icons right nav-drop">arrow_drop_down</i>
-						</a></li>
+						<li class="no-hvr-effect">
+							<a class="dropdown-button white-text" href="#!" data-activates="dropdown1">
+								<i class="fa fa-caret-down right nav-drop"></i>精選曲目
+							</a>
+						</li>
+						<li class="no-hvr-effect">
+							<a class="dropdown-button white-text" href="#!" data-activates="dropdown2">
+								<i class="fa fa-caret-down right nav-drop"></i>程度分級
+							</a>
+						</li>
+						<li class="no-hvr-effect">
+							<a class="dropdown-button white-text" href="#!" data-activates="dropdown3">
+								<i class="fa fa-caret-down right nav-drop"></i>曲目類型
+							</a>
+						</li>
 						<li class="no-hvr-effect"><a class="white-text text-shadow nav-button" href="login.html">登入</a></li>
 						<li class="no-hvr-effect"><a class="white-text text-shadow nav-button" href="register.html">註冊</a></li>
 					</ul>
@@ -80,24 +88,23 @@
 			</nav>
 		</div><!-- end of Nav Bar -->
 
-		<div class="section container">
+		<div class="section col s10 push-s1 pull-s1">
 			<div class="row center">
 				<div class="col s12">
-					<h1 class="header white-text text-shadow">Notebox</h1>
+					<h1 class="header white-text text-shadow">NoteBox</h1>
 					<h5 class="header light white-text text-shadow">A classical, indie, modern music framework based on Cat Ear</h5>
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="col s12 m12 push-l2 l8">
+				<div class="col s12 m12 push-l3 l6">
 					<!-- search bar -->
 					<nav class="bg-twhite-8 search-div">
 						<div class="nav-wrapper">
 							<form>
 								<div class="input-field">
 									<input id="search" type="search" required class="brown-text text-darken-1">
-									<label for="search"><i class="material-icons brown-text text-darken-1">search</i></label>
-									<i class="material-icons brown-text text-darken-1">close</i>
+									<label for="search"><i class="fa fa-search brown-text"></i></label>
 								</div>
 							</form>
 						</div>
@@ -113,9 +120,8 @@
 	</div><!-- end of Header Div -->
 
 	<!-- Introduce Div -->
-	<div class="container">
-		<div class="section">
-
+	<div class="row">
+		<div class="section col s10 push-s1 pull-s1">
 			<!--   Icon Section   -->
 			<div class="row contact-div">
 				<div class="col s12 m4">
@@ -149,18 +155,15 @@
 		</div>
 	</div><!-- end of Introduce Div -->
 
-	<div class="parallax-container valign-wrapper">
-		<div class="container valign">
-			<div class="row center">
-				<h5 class="header col s12 light white-text text-shadow">A classical, indie, modern music framework based on Cat Ear</h5>
-			</div>
+	<div class="row">
+		<div class="col s10 push-s1 pull-s1">
+			<div class="divider"></div>
 		</div>
-		<div class="parallax"><img src="images/main-bg5.jpg"></div>
 	</div>
 
 	<!-- Contact Div -->
-	<div class="container contact-div">
-		<div class="section">
+	<div class="row contact-div">
+		<div class="section s10 push-s1 pull-s1">
 
 			<div class="row">
 				<div class="col s12 center">
@@ -177,41 +180,30 @@
 
 
 	<!-- Footer -->
-	<footer class="page-footer brown">
-		<div class="container">
-			<div class="row">
-				<div class="col l6 s12">
-					<h5 class="white-text">Company Bio</h5>
-					<p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
-
-
-				</div>
-				<div class="col l3 s12">
-					<h5 class="white-text">Settings</h5>
-					<ul>
-						<li><a class="white-text" href="#!">Link 1</a></li>
-						<li><a class="white-text" href="#!">Link 2</a></li>
-						<li><a class="white-text" href="#!">Link 3</a></li>
-						<li><a class="white-text" href="#!">Link 4</a></li>
-					</ul>
-				</div>
-				<div class="col l3 s12">
-					<h5 class="white-text">Connect</h5>
-					<ul>
-						<li><a class="white-text" href="#!">Link 1</a></li>
-						<li><a class="white-text" href="#!">Link 2</a></li>
-						<li><a class="white-text" href="#!">Link 3</a></li>
-						<li><a class="white-text" href="#!">Link 4</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="footer-copyright">
-			<div class="container">
-				Made by <a class="brown-text text-lighten-4" href="http://materializecss.com">Materialize</a>
-			</div>
-		</div>
-	</footer><!-- end of Footer -->
+  <footer class="brown page-footer">
+    <div class="row">
+      <div class="col l6 s10 push-s1 pull-s1">
+        <h5 class="white-text">Mao Er Duo</h5>
+        <p class="grey-text text-lighten-4">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis accusamus consequatur labore, facilis corporis consequuntur praesentium debitis veniam enim, iure aperiam ut perferendis natus itaque, eos ipsa odio numquam sed.
+        </p>
+      </div>
+      <div class="col l6 s10 push-s1 pull-s1">
+        <h5 class="white-text">Connection</h5>
+        <span><a class="btn-floating btn-large waves-effect waves-light"><i class="fa fa-google-plus"></i></a></span>
+        <span><a class="btn-floating btn-large waves-effect waves-light"><i class="fa fa-facebook"></i></a></span>
+        <span><a class="btn-floating btn-large waves-effect waves-light"><i class="fa fa-twitter"></i></a></span>
+        <span><a class="btn-floating btn-large waves-effect waves-light"><i class="fa fa-comments"></i></a></span>
+      </div>
+    </div>
+    <div class="mao-page-footer-copyright footer-copyright">
+      <div class="row">
+        <div class="col l6 s10 push-s1 pull-s1">
+        	© Mao Er Duo 2014 Copyright Text
+      	</div>
+      </div>
+    </div>
+  </footer><!-- end of Footer -->
 
 
 	<!--Import jQuery before materialize.js-->

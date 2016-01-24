@@ -1,104 +1,111 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
+<!doctype html>
+<html lang="zh-tw">
 <head>
-	<meta charset="UTF-8">
+	<meta charset="utf-8">
 
-	<!--Import Google Icon Font-->
-	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<!--Import materialize.css-->
+	<!--import google icon font-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<!--import materialize.css-->
 	<link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
 	<!-- my style -->
 	<link rel="stylesheet" type="text/css" href="css/w-style.css">
 
-	<!--Let browser know website is optimized for mobile-->
+	<!--let browser know website is optimized for mobile-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 
 <body>
-	<!-- Nav Bar -->
-	<nav class="white" role="navigation">
-		<div class="nav-wrapper container">
-			<a id="logo" href="./index.html" class="brand-logo brown-text">Notebox</a>
+	<!-- nav bar -->
+	<div class="navbar-fixed row">
+		<nav class="brown" role="navigation">
+			<div class="nav-wrapper col s10 push-s1">
+				<a id="logo" href="./index.html" class="brand-logo white-text">NoteBox</a>
 
-			<!-- Dropdown Structure -->
-			<ul id="dropdown1" class="dropdown-content">
-				<li><a class="brown-text darken-5" href="#!">經典之作</a></li>
-				<li><a class="brown-text darken-5" href="#!">新潮流行</a></li>
-				<li><a class="brown-text darken-5" href="#!">獨立樂團</a></li>
-				<li class="divider"></li>
-				<li><a class="brown-text darken-5" href="#!">更多</a></li>
-			</ul>
-			<ul id="dropdown2" class="dropdown-content">
-				<li><a class="brown-text darken-5" href="#!">3~5個音</a></li>
-				<li><a class="brown-text darken-5" href="#!">5~10個音</a></li>
-				<li><a class="brown-text darken-5" href="#!">10~20個音</a></li>
-				<li class="divider"></li>
-				<li><a class="brown-text darken-5" href="#!">更多</a></li>
-			</ul>
-			<ul id="dropdown3" class="dropdown-content">
-				<li><a class="brown-text darken-5" href="#!">藍調</a></li>
-				<li><a class="brown-text darken-5" href="#!">爵士</a></li>
-				<li><a class="brown-text darken-5" href="#!">古典</a></li>
-				<li class="divider"></li>
-				<li><a class="brown-text darken-5" href="#!">更多</a></li>
-			</ul>
+				<!-- dropdown structure -->
+				<ul id="dropdown1" class="dropdown-content">
+					<li><a class="brown-text darken-5" href="#!">經典之作</a></li>
+					<li><a class="brown-text darken-5" href="#!">新潮流行</a></li>
+					<li><a class="brown-text darken-5" href="#!">獨立樂團</a></li>
+					<li class="divider"></li>
+					<li><a class="brown-text darken-5" href="#!">更多</a></li>
+				</ul>
+				<ul id="dropdown2" class="dropdown-content">
+					<li><a class="brown-text darken-5" href="#!">3~5個音</a></li>
+					<li><a class="brown-text darken-5" href="#!">5~10個音</a></li>
+					<li><a class="brown-text darken-5" href="#!">10~20個音</a></li>
+					<li class="divider"></li>
+					<li><a class="brown-text darken-5" href="#!">更多</a></li>
+				</ul>
+				<ul id="dropdown3" class="dropdown-content">
+					<li><a class="brown-text darken-5" href="#!">藍調</a></li>
+					<li><a class="brown-text darken-5" href="#!">爵士</a></li>
+					<li><a class="brown-text darken-5" href="#!">古典</a></li>
+					<li class="divider"></li>
+					<li><a class="brown-text darken-5" href="#!">更多</a></li>
+				</ul>
 
-			<!-- normal nav -->
-			<ul class="right hide-on-med-and-down">
+				<!-- normal nav -->
+				<ul class="right hide-on-med-and-down">
+					<li class="no-hvr-effect">
+						<a class="dropdown-button white-text" href="#!" data-activates="dropdown1">
+							<i class="fa fa-caret-down right nav-drop"></i>精選曲目
+						</a>
+					</li>
+					<li class="no-hvr-effect">
+						<a class="dropdown-button white-text" href="#!" data-activates="dropdown2">
+							<i class="fa fa-caret-down right nav-drop"></i>程度分級
+						</a>
+					</li>
+					<li class="no-hvr-effect">
+						<a class="dropdown-button white-text" href="#!" data-activates="dropdown3">
+							<i class="fa fa-caret-down right nav-drop"></i>曲目類型
+						</a>
+					</li>
+					<li class="no-hvr-effect"><a class="white-text text-shadow nav-button" href="login.html">登入</a></li>
+					<li class="no-hvr-effect"><a class="white-text text-shadow nav-button" href="register.html">註冊</a></li>
+				</ul>
 
-				<li class="no-hvr-effect"><a class="dropdown-button brown-text" href="#!" data-activates="dropdown1">
-					精選曲目<i class="material-icons right nav-drop">arrow_drop_down</i>
-				</a></li>
-				<li class="no-hvr-effect"><a class="dropdown-button brown-text" href="#!" data-activates="dropdown2">
-					程度分級<i class="material-icons right nav-drop">arrow_drop_down</i>
-				</a></li>
-				<li class="no-hvr-effect"><a class="dropdown-button brown-text" href="#!" data-activates="dropdown3">
-					曲目類型<i class="material-icons right nav-drop">arrow_drop_down</i>
-				</a></li>
+				<!-- mobile nav -->
+				<ul id="nav-mobile" class="side-nav">
+					<li><a class="brown-text" href="#">navbar link</a></li>
+				</ul>
 
-				<li class="no-hvr-effect">
-					<nav class="no-shadow brown lighten-5">
-						<div class="nav-wrapper">
-							<form>
-								<div class="input-field">
-									<input id="search" type="search" required>
-									<label for="search"><i class="material-icons brown-text">search</i></label>
-									<i class="material-icons brown-text">close</i>
-								</div>
-							</form>
-						</div>
-					</nav>
-				</li>
-			</ul>
+				<!-- menu icon -->
+				<a href="#" data-activates="nav-mobile" class="button-collapse brown-text">
+					<i class="material-icons brown-text">menu</i>
+				</a>
+			</div>
+		</nav>
+	</div><!-- end of nav bar -->
 
-			<!-- mobile nav -->
-			<ul id="nav-mobile" class="side-nav">
-				<li><a class="brown-text" href="#">Navbar Link</a></li>
-			</ul>
-
-			<!-- menu icon -->
-			<a href="#" data-activates="nav-mobile" class="button-collapse white-text">
-				<i class="material-icons brown-text">menu</i>
-			</a>
-		</div>
-	</nav><!-- end of Nav Bar -->
-
-	<!-- Header -->
-	<div class="section no-pad-bot" id="index-banner">
-		<div class="container">
+	<!-- header -->
+	<div class="section no-pad-bot row" id="index-banner">
+		<div class="col s10 push-s1">
 			<br><br>
 			<h1 class="header center brown-text">歌曲總覽</h1>
 			<div class="row center">
-				<h5 class="header col s12 light brown-text text-lighten-1">A classical, indie, modern music framework based on Cat Ear</h5>
+				<h5 class="header col s12 light brown-text text-lighten-1">a classical, indie, modern music framework based on cat ear</h5>
 			</div>
+		</div>
+
+		<div class="col s12 m12 push-l3 l6">
+			<!-- search bar -->
+			<nav class="bg-twhite-8 search-div">
+				<div class="nav-wrapper">
+					<form>
+						<div class="input-field">
+							<input id="search" type="search" required class="brown-text text-darken-1">
+							<label for="search"><i class="fa fa-search brown-text"></i></label>
+						</div>
+					</form>
+				</div>
+			</nav>
 			<br><br>
 		</div>
-	</div><!-- end of Header -->
+	</div><!-- end of header -->
 
-
-	<div class="container">
-		<div class="section">
-
+	<div class="section row">
+		<div class="col s10 push-s1">
 			<div class="row">
 				<div class="col s12 m4">
 					<div class="card">
@@ -111,7 +118,7 @@
 								作曲家: 貝多芬/1770/1827<br />
 								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
 							</p>
-							<!-- <p><a href="#">This is a link</a></p> -->
+							<!-- <p><a href="#">this is a link</a></p> -->
 						</div>
 						<div class="card-reveal">
 							<span class="card-title activator grey-text text-darken-3">D小調第九號交響曲
@@ -136,7 +143,7 @@
 								作曲家: 貝多芬/1770/1827<br />
 								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
 							</p>
-							<!-- <p><a href="#">This is a link</a></p> -->
+							<!-- <p><a href="#">this is a link</a></p> -->
 						</div>
 						<div class="card-reveal">
 							<span class="card-title activator grey-text text-darken-3">D小調第九號交響曲
@@ -161,7 +168,7 @@
 								作曲家: 貝多芬/1770/1827<br />
 								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
 							</p>
-							<!-- <p><a href="#">This is a link</a></p> -->
+							<!-- <p><a href="#">this is a link</a></p> -->
 						</div>
 						<div class="card-reveal">
 							<span class="card-title activator grey-text text-darken-3">D小調第九號交響曲
@@ -213,7 +220,7 @@
 								作曲家: 貝多芬/1770/1827<br />
 								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
 							</p>
-							<!-- <p><a href="#">This is a link</a></p> -->
+							<!-- <p><a href="#">this is a link</a></p> -->
 						</div>
 						<div class="card-reveal">
 							<span class="card-title activator grey-text text-darken-3">D小調第九號交響曲
@@ -238,7 +245,7 @@
 								作曲家: 貝多芬/1770/1827<br />
 								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
 							</p>
-							<!-- <p><a href="#">This is a link</a></p> -->
+							<!-- <p><a href="#">this is a link</a></p> -->
 						</div>
 						<div class="card-reveal">
 							<span class="card-title activator grey-text text-darken-3">D小調第九號交響曲
@@ -251,7 +258,6 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
 
 			<div class="row">
@@ -266,7 +272,7 @@
 								作曲家: 貝多芬/1770/1827<br />
 								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
 							</p>
-							<!-- <p><a href="#">This is a link</a></p> -->
+							<!-- <p><a href="#">this is a link</a></p> -->
 						</div>
 						<div class="card-reveal">
 							<span class="card-title activator grey-text text-darken-3">D小調第九號交響曲
@@ -291,7 +297,7 @@
 								作曲家: 貝多芬/1770/1827<br />
 								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
 							</p>
-							<!-- <p><a href="#">This is a link</a></p> -->
+							<!-- <p><a href="#">this is a link</a></p> -->
 						</div>
 						<div class="card-reveal">
 							<span class="card-title activator grey-text text-darken-3">D小調第九號交響曲
@@ -316,7 +322,7 @@
 								作曲家: 貝多芬/1770/1827<br />
 								演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響
 							</p>
-							<!-- <p><a href="#">This is a link</a></p> -->
+							<!-- <p><a href="#">this is a link</a></p> -->
 						</div>
 						<div class="card-reveal">
 							<span class="card-title activator grey-text text-darken-3">D小調第九號交響曲
@@ -331,62 +337,44 @@
 				</div>
 
 			</div>
-
-
-
-		</div>
-		<br><br>
-
-		<div class="section">
-
 		</div>
 	</div>
+	<br><br>
 
-	<footer class="page-footer brown">
-		<div class="container">
-			<div class="row">
-				<div class="col l6 s12">
-					<h5 class="white-text">Company Bio</h5>
-					<p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
-
-
-				</div>
-				<div class="col l3 s12">
-					<h5 class="white-text">Settings</h5>
-					<ul>
-						<li><a class="white-text" href="#!">Link 1</a></li>
-						<li><a class="white-text" href="#!">Link 2</a></li>
-						<li><a class="white-text" href="#!">Link 3</a></li>
-						<li><a class="white-text" href="#!">Link 4</a></li>
-					</ul>
-				</div>
-				<div class="col l3 s12">
-					<h5 class="white-text">Connect</h5>
-					<ul>
-						<li><a class="white-text" href="#!">Link 1</a></li>
-						<li><a class="white-text" href="#!">Link 2</a></li>
-						<li><a class="white-text" href="#!">Link 3</a></li>
-						<li><a class="white-text" href="#!">Link 4</a></li>
-					</ul>
-				</div>
+	<footer class="brown page-footer">
+		<div class="row">
+			<div class="col l6 s10 push-s1 pull-s1">
+				<h5 class="white-text">Mao Er Duo</h5>
+				<p class="grey-text text-lighten-4">
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis accusamus consequatur labore, facilis corporis consequuntur praesentium debitis veniam enim, iure aperiam ut perferendis natus itaque, eos ipsa odio numquam sed.
+				</p>
+			</div>
+			<div class="col l6 s10 push-s1 pull-s1">
+				<h5 class="white-text">Connection</h5>
+				<span><a class="btn-floating btn-large waves-effect waves-light"><i class="fa fa-google-plus"></i></a></span>
+				<span><a class="btn-floating btn-large waves-effect waves-light"><i class="fa fa-facebook"></i></a></span>
+				<span><a class="btn-floating btn-large waves-effect waves-light"><i class="fa fa-twitter"></i></a></span>
+				<span><a class="btn-floating btn-large waves-effect waves-light"><i class="fa fa-comments"></i></a></span>
 			</div>
 		</div>
-		<div class="footer-copyright">
-			<div class="container">
-				Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+		<div class="mao-page-footer-copyright footer-copyright">
+			<div class="row">
+				<div class="col l6 s10 push-s1 pull-s1">
+					© Mao Er Duo 2014 Copyright Text
+				</div>
 			</div>
 		</div>
 	</footer>
 
 
-	<!--  Scripts-->
-	<!--Import jQuery before materialize.js-->
+	<!--  scripts-->
+	<!--import jquery before materialize.js-->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 
 	<script type="text/javascript">
 	$(document).ready(function() {
-		$('.button-collapse').sideNav();
+		$('.button-collapse').sidenav();
 		$(".dropdown-button").dropdown();
 	})
 	</script>
