@@ -6,46 +6,27 @@ $small-round-border: 2px
 
 $text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6)
 
+@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css)
+// @import url(http://fonts.googleapis.com/earlyaccess/cwtexfangsong.css)
+// @import url(http://fonts.googleapis.com/earlyaccess/cwtexhei.css)
+// @import url(http://fonts.googleapis.com/earlyaccess/cwtexkai.css)
+// @import url(http://fonts.googleapis.com/earlyaccess/cwtexming.css)
+// @import url(http://fonts.googleapis.com/earlyaccess/cwtexyen.css)
+
+body
+	// font-family: 'cwtexyen', sans-serif
+	// font-family: 'cwtexming', serif
+	// font-family: 'cwtexkai', serif
+	// font-family: 'cwtexhei', sans-serif
+	// font-family: 'cwtexfangsong', serif
+	font-family: 'noto sans tc', sans-serif
+
 .text-shadow
 	-webkit-text-shadow: $text-shadow
 	-moz-text-shadow: $text-shadow
 	-ms-text-shadow: $text-shadow
 	-o-text-shadow: $text-shadow
 	text-shadow: $text-shadow
-
-.center-div
-	margin: 0 auto
-
-.search-div
-	// padding: 1rem
-	-webkit-border-radius: $small-round-border
-	-moz-border-radius: $small-round-border
-	-ms-border-radius: $small-round-border
-	-o-border-radius: $small-round-border
-	border-radius: $small-round-border
-	-webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12)
-	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12)
-
-input[type=search]
-	-webkit-border-radius: $small-round-border
-	-moz-border-radius: $small-round-border
-	-ms-border-radius: $small-round-border
-	-o-border-radius: $small-round-border
-	border-radius: $small-round-border
-
-input[type=search]:focus
-	-webkit-border-radius: $small-round-border
-	-moz-border-radius: $small-round-border
-	-ms-border-radius: $small-round-border
-	-o-border-radius: $small-round-border
-	border-radius: $small-round-border
-
-.contact-div
-	padding-top: $large-space
-	padding-bottom: $large-space
-
-.contact-img
-	max-height: 10rem
 
 .black-mask
 	content: ""
@@ -56,7 +37,6 @@ input[type=search]:focus
 	top: 0
 	z-index: -1
 	width: 100%
-	height: 100%
 	background-color: rgba(0, 0, 0, 0.35)
 
 .sink
@@ -64,6 +44,11 @@ input[type=search]:focus
 
 .bg-twhite-8
 	background-color: rgba(255, 255, 255, 0.8)
+
+#logo
+	padding-left: 1rem
+
+// ===== navbar =====
 
 a.nav-button
 	border: 2px solid white
@@ -96,10 +81,43 @@ nav.transparent
 i.nav-drop
 	margin-left: 5px
 
+// ===== end of navbar =====
+// ===== index.html =====
+
+.search-div
+	// padding: 1rem
+	-webkit-border-radius: $small-round-border
+	-moz-border-radius: $small-round-border
+	-ms-border-radius: $small-round-border
+	-o-border-radius: $small-round-border
+	border-radius: $small-round-border
+	-webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12)
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12)
+
+input[type=search]
+	-webkit-border-radius: $small-round-border
+	-moz-border-radius: $small-round-border
+	-ms-border-radius: $small-round-border
+	-o-border-radius: $small-round-border
+	border-radius: $small-round-border
+
+input[type=search]:focus
+	-webkit-border-radius: $small-round-border
+	-moz-border-radius: $small-round-border
+	-ms-border-radius: $small-round-border
+	-o-border-radius: $small-round-border
+	border-radius: $small-round-border
+
+.contact-div
+	padding-top: $large-space
+	padding-bottom: $large-space
+
+.contact-img
+	max-height: 10rem
+
 #search-input
 	border-bottom: none
 	margin: 0
 	outline: none
 
-#logo
-	padding-left: 1rem
+// ===== end of index.html =====
