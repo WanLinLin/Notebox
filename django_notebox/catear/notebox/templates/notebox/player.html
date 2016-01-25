@@ -233,28 +233,25 @@
 	=            JavaScript            =
 	=================================-->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-
 	<script type="text/javascript" src="{% static 'notebox/js/materialize.min.js' %}"></script>
+	
+	<script>
+		/*=====================================
+		=            Modal Handler            =
+		=====================================*/
+		$('.modal-trigger').leanModal();
+		/*=====  End of Modal Handler  ======*/
+	</script>
+
 	<script type="text/javascript" src="{% static 'notebox/js/node_modules/vexflow/releases/vexflow-min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'notebox/js/vextab/releases/vextab-div.js' %}"></script>
 
 	<script type="text/javascript">
 
 	$(document).ready(function(){
-		// the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-		initModal();
 		initNotebox();
 	});
-
-	/*=====================================
-	=            Modal Handler            =
-	=====================================*/
-	function initModal() {
-		$('.modal-trigger').leanModal();
-	}
-	/*=====  End of Modal Handler  ======*/
-
-
+	
 	/*=======================================
 	=            note box height            =
 	=======================================*/
