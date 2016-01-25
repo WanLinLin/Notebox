@@ -7,13 +7,10 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<!--Import materialize.css-->
 	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-
 	<!-- css -->
 	<link rel="stylesheet" type="text/css" href="css/general.css">
-
 	<!-- Less -->
-	<link rel="stylesheet/css" type="text/css" href="css/player.css">
-	<!-- <link rel="stylesheet" type="text/css" href="css/player.css"> -->
+	<link rel="stylesheet" type="text/css" href="css/player.css">
 </head>
 
 <body>
@@ -83,6 +80,74 @@
 			</div>
 		</nav>
 	</div><!-- end of Nav Bar -->
+
+	<!--==========================================
+	=            Login/Register Modal            =
+	===========================================-->
+	
+	<div id="login_modal" class="account_modal modal">
+		<!--==========================
+		=            Form            =
+		===========================-->
+		<form action="" class="mao-form">
+			<div class="modal-content">
+				<div class="row">
+					<div class="col s12 input-field">
+						<input type="email" id="email" class="validate">
+						<label for="email">E-mail</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s12 input-field">
+						<input type="password" id="password" class="validate">
+						<label for="password">Password</label>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-flat" id="submit" type="submit" name="action">登入</button>
+				<button class="btn btn-flat">Google+ 登入</button>
+				<button class="btn btn-flat">Facebook 登入</button>
+			</div>
+		</form>
+		<!--====  End of Form  ====-->
+	</div>
+
+	<div id="register_modal" class="account_modal modal">
+		<!--==========================
+		=            Form            =
+		===========================-->
+		<form action="" class="mao-form">
+			<div class="modal-content">
+				<div class="row">
+					<div class="col s12 input-field">
+						<input type="text" id="username" class="validate">
+						<label for="username">Username</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s12 input-field">
+						<input type="email" id="email" class="validate">
+						<label for="email">E-mail</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s12 input-field">
+						<input type="password" id="password" class="validate">
+						<label for="password">Password</label>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-flat" id="submit" type="submit" name="action">註冊</button>
+			</div>
+			
+		</form>
+		<!--====  End of Form  ====-->
+	</div>
+
+	
+	<!--====  End of Login/Register Modal  ====-->
 	
 	<!--===============================
 	=            Container            =
