@@ -22,7 +22,7 @@ def form_checker(request):
         if 'register' in request.POST:
             form = RegistrationForm(request.POST)
             if form.is_valid():
-                form.save()
+                form.save(request)
                 return HttpResponseRedirect(request.path)
             
         # User wants to login
