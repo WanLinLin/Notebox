@@ -31,7 +31,7 @@ def overview(request):
     return render(request, 'notebox/overview.html', context)
 
 def account(request):
-    return render(request, 'notebox/account.html', {})
+    return render(request, 'notebox/account_info.html', {})
 
 def player(request):
     return render(request, 'notebox/player.html', {})
