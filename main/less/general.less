@@ -73,6 +73,67 @@ main {
 }
 
 /*==============================
+=            Navbar            =
+==============================*/
+nav {
+    a.nav-button {
+        .border-radius(2px);
+        border: 2px solid white;
+        display: inline;
+        padding: 5px 15px;
+        margin-left: 10px; 
+
+        &:hover {
+            .transition(background-color 0.5s ease);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+    }
+
+    ul li.no-hvr-effect {
+        &:hover {
+            background-color: transparent !important;
+        }
+    }
+
+    i.nav-drop {
+        margin-left: 5px;
+    }
+
+    &.no-shadow {
+        .box-shadow(none);
+    }
+
+    &.transparent {
+        .box-shadow(none);
+    }
+    
+}
+
+.account_modal {
+    form.mao-form {
+        .modal-content {
+        }
+        .modal-footer {
+            button {
+                &:hover {
+                    background-color: @colorPlacehold;
+                }
+            }    
+            button#submit {
+                color:white;
+                background-color: @primaryColor;
+                &:hover {
+                    color: black;
+                    background-color: white;
+                }
+            }
+        }
+    }
+}
+/*=====  End of Navbar  ======*/
+
+
+/*==============================
 =            Footer            =
 ==============================*/
 footer.mao-page-footer {
