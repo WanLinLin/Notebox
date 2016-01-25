@@ -6,7 +6,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index),
     url(r'^overview/', views.overview),
-    url(r'^player/', views.player),
+    url(r'^player/(?P<song_id>\d+)', views.player),
     url(r'^account/$', views.account),
     url(r'^account/favorite/$', views.favorite),
     url(r'^account/logout/$', views.logout),

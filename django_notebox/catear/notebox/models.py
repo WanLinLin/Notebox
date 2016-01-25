@@ -2,17 +2,29 @@ from django.db import models
 
 # Create your models here.
 
+class Style(models.Model):
+    name = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.name
+
 class Song(models.Model):
     upload_user  = models.ForeignKey('auth.User', related_name='song_upload_user')
 
     title = models.CharField(max_length=200)
     desc = models.TextField(default=None)
-    note = models.TextField()
+    artist = models.CharField(max_length=128)
+    note = models.TextField(default=None)
+    tab_url = models.URLField(default=None)
 
-    time_length = models.IntegerField()
+    song_style = models.ForeignKey(Style, related_name='song_style')
+    level = models.CharField(max_length=16)
+
+    time_length = models.IntegerField(default=None)
     # song_img = ImageField(default=None)
-    song_img_url = models.URLField()
-    url = models.URLField()
+    song_img_url = models.URLField(default=None)
+    url = models.URLField(default=None)
+    song_yt_id = models.CharField(max_length=256)
 
     modify_time = models.DateTimeField(auto_now=True)
     upload_time = models.DateTimeField(auto_now_add=True)
@@ -23,7 +35,9 @@ class Song(models.Model):
     class Meta:
         ordering = ('title',)
 
-class Member(models.Model):
+class UserInfo(models.Model):
+    info_user = models.ForeignKey('auth.User', related_name='info_user')
+
     name = models.CharField(max_length=128)
     email = models.EmailField()
     phone = models.CharField(max_length=32, default=None)

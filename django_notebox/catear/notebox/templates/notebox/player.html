@@ -35,7 +35,7 @@
 					<div class="col s7 white-text mao-video-info">
 						<div class="section">
 							<div class="video-container">
-								<iframe width="420" height="315" src="https://www.youtube.com/embed/q6EoRBvdVPQ" frameborder="0" allowfullscreen></iframe>
+								<iframe width="420" height="315" src="https://www.youtube.com/embed/{{ song_yt_id }}" frameborder="0" allowfullscreen></iframe>
 							</div>
 						</div>
 						<a class="btn mao-simple-btn">AB 段重複</a>
@@ -44,10 +44,11 @@
 						<div class="divider"></div>
 						<div class="section">
 							<!-- Info below -->
-							<h5 style="display: inline;">影片標題</h5> 
+							<h5 style="display: inline;">{{ title }} - {{ artist }}</h5> 
 							<blockquote class="mao-blockquote">
 								<h6>歌曲難度</h6>
 								<p>
+									<div class="chip mao-chip">{{ level }}</div>
 									<div class="chip mao-chip">C</div>
 									<div class="chip mao-chip">D</div>
 									<div class="chip mao-chip">E</div>
@@ -77,6 +78,10 @@
 							</div>
 							<!-- Tab content -->
 							<div id="type1_note" class="col s12 mao-tab-content">
+								{% comment %}
+								Insert note here
+								{% endcomment %}
+								{{ note }}
 								<canvas id="mao-music-sheet" width="600" height="200"></canvas>
 							</div>
 							<div id="type2_note" class="col s12 mao-tab-content">
@@ -109,7 +114,7 @@
 		<div class="container">
 			<!-- Description -->
 			<h4>樂曲故事</h4>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem aliquid, fuga natus maiores, quos iusto, omnis est corporis possimus, animi earum dicta. Voluptate et, delectus totam facere odit, obcaecati fugit?</p>
+			<p>{{ desc }}</p>
 		</div>
 		<!--====  End of Video more info  ====-->
 
