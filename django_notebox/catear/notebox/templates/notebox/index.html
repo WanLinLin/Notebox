@@ -161,18 +161,19 @@
 
 		// initial brown color
 		target.css('background-color', 'rgba(121,85,72,0)');
+		target.addClass('no-shadow');
 
 		$(document).scroll(function(e){
 			var scrollPercent = 1 - (targetHeight - window.scrollY) / targetHeight;
 			if(scrollPercent <= 1){
 				target.css('background-color', 'rgba(121,85,72,' + scrollPercent + ')');
-				target.css('box-shadow', 'none');
+				target.addClass('no-shadow');
 				logo.addClass('text-shadow');
 				navs.addClass('text-shadow');
 			}
 			else{
 				target.css('background-color', 'rgba(121,85,72,1)');
-				target.css('box-shadow', '0px 2px 5px 0px rgba(0, 0, 0, 0.16)');
+				target.removeClass('no-shadow');
 				logo.removeClass('text-shadow');
 				navs.removeClass('text-shadow');
 			}
