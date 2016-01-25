@@ -58,6 +58,6 @@ input[type=search]:focus {
 #header-div {
   position: relative;
   top: 100px;
-  z-index: 1000; }
+  z-index: 5; }
 
 /*# sourceMappingURL=w-style.css.map */
