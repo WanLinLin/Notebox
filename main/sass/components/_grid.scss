@@ -1,6 +1,7 @@
 .container {
   margin: 0 auto;
-  max-width: 1280px;
+  max-width: 1820px;
+  // max-width: 1280px;
   width: 90%;
 }
 @media #{$medium-and-up} {
@@ -10,7 +11,8 @@
 }
 @media #{$large-and-up} {
   .container {
-    width: 70%;
+    // width: 70%;
+    width: 80%;
   }
 }
 .container .row {

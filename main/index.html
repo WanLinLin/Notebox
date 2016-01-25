@@ -22,15 +22,15 @@
 		<div class="black-mask"></div>
 
 		<!-- Nav Bar -->
-		<div class="navbar-fixed row">
+		<div class="navbar-fixed">
 			<nav id="navbar-fixed" class="no-shadow" role="navigation">
-				<div class="nav-wrapper col s10 push-s1">
+				<div class="nav-wrapper container">
 					<!-- logo -->
-					<a href="./index.html" class="brand-logo white-text hide-on-med-and-down text-shadow">NoteBox</a>
+					<a id="logo" href="./index.html" class="brand-logo white-text hide-on-med-and-down text-shadow">NoteBox</a>
 					
 					<!-- menu icon -->
 					<a href="#" data-activates="nav-mobile" class="button-collapse white-text">
-						<i class="material-icons">menu</i>
+						<i class="fa fa-bars"></i>
 					</a>
 
 					<!-- Dropdown Structure -->
@@ -57,8 +57,8 @@
 					</ul>
 
 					<!-- normal nav-->
-					<ul class="right hide-on-med-and-down">
-						<li><a class="white-text text-shadow" href="./overview.html">曲目總覽</a></li>
+					<ul id="navs-ul" class="right hide-on-med-and-down text-shadow">
+						<li><a class="white-text" href="./overview.html">曲目總覽</a></li>
 						<li class="no-hvr-effect">
 							<a class="dropdown-button white-text" href="#!" data-activates="dropdown1">
 								<i class="fa fa-caret-down right nav-drop"></i>精選曲目
@@ -74,8 +74,8 @@
 								<i class="fa fa-caret-down right nav-drop"></i>曲目類型
 							</a>
 						</li>
-						<li class="no-hvr-effect"><a class="white-text text-shadow nav-button" href="login.html">登入</a></li>
-						<li class="no-hvr-effect"><a class="white-text text-shadow nav-button" href="register.html">註冊</a></li>
+						<li class="no-hvr-effect"><a class="white-text nav-button" href="login.html">登入</a></li>
+						<li class="no-hvr-effect"><a class="white-text nav-button" href="register.html">註冊</a></li>
 					</ul>
 
 					<!-- mobile nav -->
@@ -88,7 +88,7 @@
 			</nav>
 		</div><!-- end of Nav Bar -->
 
-		<div class="section col s10 push-s1 pull-s1">
+		<div class="section container">
 			<div class="row center">
 				<div class="col s12">
 					<h1 class="header white-text text-shadow">NoteBox</h1>
@@ -97,7 +97,7 @@
 			</div>
 
 			<div class="row">
-				<div class="col s12 m12 push-l3 l6">
+				<div class="col s12 m12 push-l2 l8">
 					<!-- search bar -->
 					<nav class="bg-twhite-8 search-div">
 						<div class="nav-wrapper">
@@ -114,62 +114,59 @@
 					</div> -->
 				</div>
 			</div>
-
 		</div>
+
+		<!-- parallax image -->
 		<div class="parallax sink"><img src="images/main-bg2.jpg" alt="background"></div>
 	</div><!-- end of Header Div -->
 
 	<!-- Introduce Div -->
-	<div class="row">
-		<div class="section col s10 push-s1 pull-s1">
-			<!--   Icon Section   -->
-			<div class="row contact-div">
-				<div class="col s12 m4">
-					<div class="icon-block">
-						<h2 class="center brown-text"><i class="medium material-icons">compare_arrows</i></h2>
-						<h5 class="center">音樂零距離</h5>
+	<div class="section container">
+		<!--   Icon Section   -->
+		<div class="row contact-div">
+			<div class="col s12 m4">
+				<div class="icon-block">
+					<h2 class="center brown-text"><i class="medium material-icons">compare_arrows</i></h2>
+					<h5 class="center">音樂零距離</h5>
 
-						<p class="light">建構音樂學習生態圈, We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
-					</div>
-				</div>
-
-				<div class="col s12 m4">
-					<div class="icon-block">
-						<h2 class="center brown-text"><i class="medium material-icons">gavel</i></h2>
-						<h5 class="center">打破音樂學習框架</h5>
-
-						<p class="light">時間.空間限制, y utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
-					</div>
-				</div>
-
-				<div class="col s12 m4">
-					<div class="icon-block">
-						<h2 class="center brown-text"><i class="medium material-icons">music_video</i></h2>
-						<h5 class="center">獨立、古典樂</h5>
-
-						<p class="light">提高音樂素質, 支持獨立音樂.作曲者自主有夢想, We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
-					</div>
+					<p class="light">建構音樂學習生態圈, We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
 				</div>
 			</div>
 
+			<div class="col s12 m4">
+				<div class="icon-block">
+					<h2 class="center brown-text"><i class="medium material-icons">gavel</i></h2>
+					<h5 class="center">打破音樂學習框架</h5>
+
+					<p class="light">時間.空間限制, y utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+				</div>
+			</div>
+
+			<div class="col s12 m4">
+				<div class="icon-block">
+					<h2 class="center brown-text"><i class="medium material-icons">music_video</i></h2>
+					<h5 class="center">獨立、古典樂</h5>
+
+					<p class="light">提高音樂素質, 支持獨立音樂.作曲者自主有夢想, We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
+				</div>
+			</div>
 		</div>
 	</div><!-- end of Introduce Div -->
 
-	<div class="row">
-		<div class="col s10 push-s1 pull-s1">
-			<div class="divider"></div>
-		</div>
+	<div class="container">
+		<div class="divider"></div>
 	</div>
 
 	<!-- Contact Div -->
-	<div class="row contact-div">
-		<div class="section s10 push-s1 pull-s1">
+	<div class="container contact-div">
+		<div class="section">
 
 			<div class="row">
 				<div class="col s12 center">
 					<img src="images/chin-dai.jpg" alt="余青黛" class="circle contact-img">
 					<h5>余青黛</h5>
 				</div>
+
 				<div class="col s10 center push-s1">
 					<p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie.</p>
 				</div>
@@ -181,26 +178,26 @@
 
 	<!-- Footer -->
   <footer class="brown page-footer">
-    <div class="row">
-      <div class="col l6 s10 push-s1 pull-s1">
-        <h5 class="white-text">Mao Er Duo</h5>
-        <p class="grey-text text-lighten-4">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis accusamus consequatur labore, facilis corporis consequuntur praesentium debitis veniam enim, iure aperiam ut perferendis natus itaque, eos ipsa odio numquam sed.
-        </p>
-      </div>
-      <div class="col l6 s10 push-s1 pull-s1">
-        <h5 class="white-text">Connection</h5>
-        <span><a class="btn-floating btn-large waves-effect waves-light"><i class="fa fa-google-plus"></i></a></span>
-        <span><a class="btn-floating btn-large waves-effect waves-light"><i class="fa fa-facebook"></i></a></span>
-        <span><a class="btn-floating btn-large waves-effect waves-light"><i class="fa fa-twitter"></i></a></span>
-        <span><a class="btn-floating btn-large waves-effect waves-light"><i class="fa fa-comments"></i></a></span>
-      </div>
+  	<div class="container">
+	    <div class="row">
+	      <div class="col l6 s12">
+	        <h5 class="white-text">Mao Er Duo</h5>
+	        <p class="grey-text text-lighten-4">
+	          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis accusamus consequatur labore, facilis corporis consequuntur praesentium debitis veniam enim, iure aperiam ut perferendis natus itaque, eos ipsa odio numquam sed.
+	        </p>
+	      </div>
+	      <div class="col l6 s12">
+	        <h5 class="white-text">Connection</h5>
+	        <span><a class="btn-floating btn-large waves-effect waves-light"><i class="fa fa-google-plus"></i></a></span>
+	        <span><a class="btn-floating btn-large waves-effect waves-light"><i class="fa fa-facebook"></i></a></span>
+	        <span><a class="btn-floating btn-large waves-effect waves-light"><i class="fa fa-twitter"></i></a></span>
+	        <span><a class="btn-floating btn-large waves-effect waves-light"><i class="fa fa-comments"></i></a></span>
+	      </div>
+	    </div>
     </div>
-    <div class="mao-page-footer-copyright footer-copyright">
-      <div class="row">
-        <div class="col l6 s10 push-s1 pull-s1">
+  	<div class="mao-page-footer-copyright footer-copyright">
+      <div class="container">
         	© Mao Er Duo 2014 Copyright Text
-      	</div>
       </div>
     </div>
   </footer><!-- end of Footer -->
@@ -229,10 +226,14 @@
 			if(scrollPercent <= 1){
 				target.css('background-color', 'rgba(121,85,72,' + scrollPercent + ')');
 				target.css('box-shadow', 'none');
+				$('#logo').addClass('text-shadow');
+				$('#navs-ul').addClass('text-shadow');
 			}
 			else{
 				target.css('background-color', 'rgba(121,85,72,1)');
 				target.css('box-shadow', '0px 2px 5px 0px rgba(0, 0, 0, 0.16)');
+				$('#logo').removeClass('text-shadow');
+				$('#navs-ul').removeClass('text-shadow');
 			}
 		});// ===== end of scroll changing opacity =====
 	})
