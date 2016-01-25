@@ -1,20 +1,60 @@
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render
+from django.contrib.auth import logout as django_logout
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from .forms import RegistrationForm, LoginForm
 
-# Create your views here.
-
+"""
+/*===========================================
+=            User authentication            =
+===========================================*/
+"""
 def createLoginSignForms():
     sign_form = RegistrationForm()
     login_form = LoginForm()
-
     return {'login_form': login_form, 'sign_form': sign_form}
 
-def index(request):
-    context = createLoginSignForms()
+def formChecker(request):
+    # Check POST request
+    if request.method == 'POST':
+        # User wants to register
+        if 'register' in request.POST:
+            form = RegistrationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/notebox/')
+            
+        # User wants to login
+        elif 'login' in request.POST:
+            form = LoginForm(request.POST)
+            if form.is_valid():
+                if form.login(request):
+                    # Login successful
+                    return HttpResponseRedirect('/notebox/')
+                else:
+                    # Show error message
+                    return HttpResponseRedirect('/notebox/')
 
-    return render(request, 'notebox/index.html', context)
+    return False
+
+def logout(request):
+    django_logout(request)
+    return HttpResponseRedirect('/notebox/')
+"""
+/*=====  End of User authentication  ======*/
+"""
+
+def index(request):
+    if not request.user.is_authenticated():
+        # Check form
+        form_result = formChecker(request)
+        if form_result: return form_result
+
+        context = createLoginSignForms()
+        return render(request, 'notebox/index.html', context)
+    else:
+        context = {}
+        return render(request, 'notebox/index.html', context)
 
 def overview(request):
     # Generate data
@@ -44,6 +84,9 @@ def overview(request):
 
 def account(request):
     return render(request, 'notebox/account_info.html', {})
+
+def favorite(request):
+    return render(request, 'notebox/account_info_favorite.html', {})    
 
 def player(request):
     context = createLoginSignForms()

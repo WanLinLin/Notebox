@@ -51,24 +51,39 @@
                         <i class="fa fa-caret-down right nav-drop"></i>曲目類型
                     </a>
                 </li>
-                <li class="no-hvr-effect"><a class="white-text nav-button modal-trigger navs" href="#login_modal">登入</a></li>
-                <li class="no-hvr-effect"><a class="white-text nav-button modal-trigger navs" href="#register_modal">註冊</a></li>
+                
+                {% if not user.is_authenticated %}
+                <li class="no-hvr-effect">
+                    <a class="white-text nav-button modal-trigger navs" href="#login_modal">登入</a>
+                </li>
+                <li class="no-hvr-effect">
+                    <a class="white-text nav-button modal-trigger navs" href="#register_modal">註冊</a>
+                </li>
+                {% else %}
+                <li class="no-hvr-effect">
+                    <a class="white-text nav-button navs dropdown-button" data-activates='account_tools' href="#">{{ user.username }}</a>
+                </li>
+                {% endif %}
+
             </ul>
 
+            {% comment "Not to do mobile now" %}
             <!-- mobile nav -->
-            <ul id="nav-mobile" class="side-nav">
+            <!-- <ul id="nav-mobile" class="side-nav">
                 <li><a class="grey-text text-darken-2 modal-trigger" href="#login_modal">登入</a></li>
                 <li><a class="grey-text text-darken-2 modal-trigger" href="#register_modal">註冊</a></li>
-            </ul>
+            </ul> -->    
+            {% endcomment %}
 
         </div>
     </nav>
 </div><!-- ===== end of Nav Bar ===== -->
 
+{% if not user.is_authenticated %}
+
 <!--==========================================
 =            Login/Register Modal            =
 ===========================================-->
-
 <div id="login_modal" class="account_modal modal">
     <!--==========================
     =            Form            =
@@ -87,7 +102,7 @@
             {% endfor %}
         </div>
         <div class="modal-footer">
-            <button class="btn btn-flat" id="submit" type="submit" name="action">登入</button>
+            <button class="btn btn-flat" id="submit" type="submit" name="login">登入</button>
             <button class="btn btn-flat">Google+ 登入</button>
             <button class="btn btn-flat">Facebook 登入</button>
         </div>
@@ -113,11 +128,25 @@
             {% endfor %}
         </div>
         <div class="modal-footer">
-            <button class="btn btn-flat" id="submit" type="submit" name="action">註冊</button>
+            <button class="btn btn-flat" id="submit" type="submit" name="register">註冊</button>
         </div>
         
     </form>
     <!--====  End of Form  ====-->
 </div>
-
 <!--====  End of Login/Register Modal  ====-->
+
+{% else %}
+
+{% comment %}
+    Add account dropdown tools here
+{% endcomment %}
+
+<ul id='account_tools' class='dropdown-content'>
+    <li><a href="/notebox/account/">帳戶總覽</a></li>
+    <li><a href="/notebox/account/favorite/">我的收藏</a></li>
+    <li class="divider"></li>
+    <li><a href="/notebox/account/logout/">登出</a></li>
+</ul>
+
+{% endif %}
