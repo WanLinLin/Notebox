@@ -9,7 +9,7 @@ class Song(models.Model):
     desc = models.TextField(default=None)
     note = models.TextField()    
     time_length = models.IntegerField()
-    song_img = ImageField(default=None)
+    # song_img = ImageField(default=None)
     song_img_url = models.URLField()
     url = models.URLField()
 
@@ -22,6 +22,6 @@ class Member(models.Model):
     phone = models.CharField(max_length=32, default=None)
     address = models.CharField(max_length=128, default=None)
     member_type = models.CharField(max_length=32, default=None)
-    profile_photo = ImageField(default=None)
+    # profile_photo = ImageField(default=None)
     modify_time = models.DateTimeField(auto_now=True)
     register_time = models.DateTimeField(auto_now_add=True)
