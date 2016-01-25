@@ -1,0 +1,161 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="zh-tw">
+<head>
+	<meta charset="utf-8">
+
+	<!--import google icon font-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="{% static 'notebox/css/materialize.min.css' %}" media="screen,projection"/>
+	<!-- my style -->
+	<link rel="stylesheet" type="text/css" href="{% static 'notebox/css/w-style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'notebox/css/general.css' %}">
+
+	<!--let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>歌曲總覽</title>
+</head>
+
+<body>
+	<!--====================================
+	=            Include navbar            =
+	=====================================-->
+	{% include 'notebox/navbar.html' %}
+	<!--====  End of Include navbar  ====-->
+
+	<!--==================================
+	=            Main Content            =
+	===================================-->
+	<!-- ===== header ===== -->
+	<div class="container">
+		<div class="section no-pad-bot row" id="index-banner">
+			<div class="col s10 push-s1">
+				<br><br>
+				<h1 class="header center brown-text">歌曲總覽</h1>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col s12 m12 push-l2 l8">
+				<!-- search bar -->
+				<nav class="bg-twhite-8 search-div">
+					<div class="nav-wrapper">
+						<form>
+							<div class="input-field">
+								<input id="search" type="search" class="brown-text text-darken-1" placeholder="依曲名..." required>
+								<label for="search"><i class="fa fa-search brown-text"></i></label>
+							</div>
+						</form>
+					</div>
+				</nav>
+				<br><br>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col s12">
+				<ul class="tabs">
+					<li class="tab col s3"><a class="active" href="#latest">最新音樂</a></li>
+					<li class="tab col s3"><a href="#popular">熱門音樂</a></li>
+				</ul>
+			</div>
+		</div>
+
+	</div><!-- ===== end of header ===== -->
+
+	<!-- ===== latest section ===== -->
+	<div id="latest" class="section container">
+		<div class="row">
+			<!-- Generate latest music boxes -->
+			{% for music in latest %}
+			<div class="col s12 m3">
+				<div class="card">
+					<div class="card-image waves-effect waves-block waves-light">
+						<img class="activator" src="{{ music.img }}">
+					</div>
+					<div class="card-content">
+						<a href="/notebox/player/{{ music.playerid }}" class="card-title activator grey-text text-darken-3">
+							{{ music.title }}
+						</a>
+						<p class="grey-text text-darken-1">
+							{{ music.desc|linebreaks }}
+						</p>
+					</div>
+					<div class="card-reveal">
+						<span class="card-title activator grey-text text-darken-3">
+							{{ music.title }}
+							<i class="fa fa-times right"></i>
+						</span>
+						<p class="grey-text text-darken-1">
+							{{ music.desc|linebreaks }}
+						</p>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+	<!-- ===== end of latest section ===== -->
+
+	<!-- ===== popular section ===== -->
+	<div id="popular" class="section container">
+		<div class="row">
+			<!-- Generate popular music boxes -->
+			{% for music in popular %}
+			<div class="col s12 m3">
+				<div class="card">
+					<div class="card-image waves-effect waves-block waves-light">
+						<img class="activator" src="{{ music.img }}">
+					</div>
+					<div class="card-content">
+						<a href="/notebox/player/{{ music.playerid }}" class="card-title activator grey-text text-darken-3">
+							{{ music.title }}
+						</a>
+						<p class="grey-text text-darken-1">
+							{{ music.desc|linebreaks }}
+						</p>
+					</div>
+					<div class="card-reveal">
+						<span class="card-title activator grey-text text-darken-3">
+							{{ music.title }}
+							<i class="fa fa-times right"></i>
+						</span>
+						<p class="grey-text text-darken-1">
+							{{ music.desc|linebreaks }}
+						</p>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+	<!-- ===== end of popular section ===== -->
+
+	<br><br>
+	<!--====  End of Main Content  ====-->
+
+
+	<!--============================
+	=            Footer            =
+	=============================-->
+	{% include 'notebox/footer.html' %}
+	<!--====  End of Footer  ====-->
+
+
+	<!--  scripts-->
+	<!--import jquery before materialize.js-->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="{% static 'notebox/js/materialize.min.js' %}"></script>
+
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('.button-collapse').sideNav();
+		$(".dropdown-button").dropdown();
+		$('.modal-trigger').leanModal();
+	})
+	</script>
+
+</body>
+</html>
