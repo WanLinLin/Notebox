@@ -15,6 +15,8 @@
 
 	<!--Let browser know website is optimized for mobile-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+	<title>NoteBox</title>
 </head>
 
 <body>
@@ -58,25 +60,25 @@
 					</ul>
 
 					<!-- normal nav-->
-					<ul id="navs-ul" class="right hide-on-med-and-down text-shadow">
-						<li><a class="white-text" href="./overview.html">曲目總覽</a></li>
+					<ul class="right hide-on-med-and-down">
+						<li><a class="white-text navs" href="./overview.html">曲目總覽</a></li>
 						<li class="no-hvr-effect">
-							<a class="dropdown-button white-text" href="#!" data-activates="dropdown1">
+							<a class="dropdown-button white-text navs" href="#!" data-activates="dropdown1">
 								<i class="fa fa-caret-down right nav-drop"></i>精選曲目
 							</a>
 						</li>
 						<li class="no-hvr-effect">
-							<a class="dropdown-button white-text" href="#!" data-activates="dropdown2">
+							<a class="dropdown-button white-text navs" href="#!" data-activates="dropdown2">
 								<i class="fa fa-caret-down right nav-drop"></i>程度分級
 							</a>
 						</li>
 						<li class="no-hvr-effect">
-							<a class="dropdown-button white-text" href="#!" data-activates="dropdown3">
+							<a class="dropdown-button white-text navs" href="#!" data-activates="dropdown3">
 								<i class="fa fa-caret-down right nav-drop"></i>曲目類型
 							</a>
 						</li>
-						<li class="no-hvr-effect"><a class="white-text nav-button modal-trigger" href="#login_modal">登入</a></li>
-						<li class="no-hvr-effect"><a class="white-text nav-button modal-trigger" href="#register_modal">註冊</a></li>
+						<li class="no-hvr-effect"><a class="white-text nav-button modal-trigger navs" href="#login_modal">登入</a></li>
+						<li class="no-hvr-effect"><a class="white-text nav-button modal-trigger navs" href="#register_modal">註冊</a></li>
 					</ul>
 
 					<!-- mobile nav -->
@@ -297,13 +299,13 @@
 				target.css('background-color', 'rgba(121,85,72,' + scrollPercent + ')');
 				target.css('box-shadow', 'none');
 				$('#logo').addClass('text-shadow');
-				$('#navs-ul').addClass('text-shadow');
+				$('.navs').addClass('text-shadow');
 			}
 			else{
 				target.css('background-color', 'rgba(121,85,72,1)');
 				target.css('box-shadow', '0px 2px 5px 0px rgba(0, 0, 0, 0.16)');
 				$('#logo').removeClass('text-shadow');
-				$('#navs-ul').removeClass('text-shadow');
+				$('ul li a.navs').removeClass('text-shadow');
 			}
 		});// ===== end of scroll changing opacity =====
 
