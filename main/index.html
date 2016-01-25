@@ -20,17 +20,16 @@
 </head>
 
 <body>
-	<!-- Header Div -->
-	<div class="parallax-container">
+	<!-- ===== Header Div ===== -->
+	<div class="slider">
 		<div class="black-mask"></div>
-
-		<!-- Nav Bar -->
+		<!-- ===== Nav Bar ===== -->
 		<div class="navbar-fixed">
 			<nav id="navbar-fixed" class="no-shadow" role="navigation">
 				<div class="nav-wrapper container">
 					<!-- logo -->
 					<a id="logo" href="./index.html" class="brand-logo white-text hide-on-med-and-down text-shadow">NoteBox</a>
-					
+
 					<!-- menu icon -->
 					<a href="#" data-activates="nav-mobile" class="button-collapse white-text">
 						<i class="fa fa-bars"></i>
@@ -89,7 +88,7 @@
 
 				</div>
 			</nav>
-		</div><!-- end of Nav Bar -->
+		</div><!-- ===== end of Nav Bar ===== -->
 
 		<!--==========================================
 		=            Login/Register Modal            =
@@ -156,41 +155,50 @@
 			<!--====  End of Form  ====-->
 		</div>
 
-		
 		<!--====  End of Login/Register Modal  ====-->
-		
 
-		<div class="section container">
-			<div class="row center">
-				<div class="col s12">
+		<!-- ===== search bar ===== -->
+		<div class="container">
+			<div id="header-div" class="row">
+				<div class="col s12 caption center-align">
 					<h1 class="header white-text text-shadow">NoteBox</h1>
 					<h5 class="header light white-text text-shadow">A classical, indie, modern music framework based on Cat Ear</h5>
 				</div>
-			</div>
 
-			<div class="row">
 				<div class="col s12 m12 push-l2 l8">
 					<!-- search bar -->
-					<nav class="bg-twhite-8 search-div">
+					<nav class="bg-twhite-8 search-input">
 						<div class="nav-wrapper">
 							<form>
 								<div class="input-field">
-									<input id="search" type="search" required class="brown-text text-darken-1">
+									<input id="search" type="search" class="brown-text text-darken-1" placeholder="依曲名..." required>
 									<label for="search"><i class="fa fa-search brown-text"></i></label>
 								</div>
 							</form>
 						</div>
 					</nav>
-					<!-- <div class="input-field white search-div">
-						<input placeholder="Four Seasons, Autumn Mvt 3 Allegro..." type="text" id="search-input">
-					</div> -->
 				</div>
 			</div>
-		</div>
+		</div><!-- ===== end of search bar ===== -->
 
-		<!-- parallax image -->
-		<div class="parallax sink"><img src="images/main-bg2.jpg" alt="background"></div>
+		<!-- ===== slide images ===== -->
+		<ul id="slides" class="slides">
+			<li>
+				<img src="images/main-bg1.jpg"> <!-- random image -->
+			</li>
+			<li>
+				<img src="images/main-bg2.jpg"> <!-- random image -->
+			</li>
+			<li>
+				<img src="images/main-bg4.jpg"> <!-- random image -->
+			</li>
+			<li>
+				<img src="images/main-bg5.jpg"> <!-- random image -->
+			</li>
+		</ul><!-- ===== end of slide images ===== -->
+
 	</div><!-- end of Header Div -->
+
 
 	<!-- Introduce Div -->
 	<div class="section container">
@@ -285,6 +293,7 @@
 		$('.button-collapse').sideNav();
 		$('.parallax').parallax();
 		$(".dropdown-button").dropdown();
+		$('.slider').slider({'indicators': false, 'height': 600});
 
 		// ===== scroll changing opacity =====
 		var target = $('#navbar-fixed');

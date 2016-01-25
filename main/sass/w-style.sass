@@ -35,57 +35,56 @@ $text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6)
 	left: 0
 	position: absolute
 	top: 0
-	z-index: -1
+	z-index: 3
 	width: 100%
 	background-color: rgba(0, 0, 0, 0.35)
 
 .sink
-	z-index: -2
+	z-index: -100
 
 .bg-twhite-8
 	background-color: rgba(255, 255, 255, 0.8)
 
-.fa
-	font-size: inherit
-
 // ===== navbar =====
 
-a.nav-button
-	border: 2px solid white
-	-webkit-border-radius: $small-round-border
-	-moz-border-radius: $small-round-border
-	-ms-border-radius: $small-round-border
-	-o-border-radius: $small-round-border
-	border-radius: $small-round-border
-	display: inline
-	padding: 5px 15px
-	margin-left: 10px
+// a.nav-button
+// 	border: 2px solid white
+// 	-webkit-border-radius: $small-round-border
+// 	-moz-border-radius: $small-round-border
+// 	-ms-border-radius: $small-round-border
+// 	-o-border-radius: $small-round-border
+// 	border-radius: $small-round-border
+// 	display: inline
+// 	padding: 5px 15px
+// 	margin-left: 10px
 
-a.nav-button:hover
-	transition: background-color 0.5s ease
-	background-color: rgba(255, 255, 255, 0.2)
+// a.nav-button:hover
+// 	transition: background-color 0.5s ease
+// 	background-color: rgba(255, 255, 255, 0.2)
 
-nav
-	ul
-		li.no-hvr-effect:hover
-			background-color: transparent !important
+// nav
+// 	ul
+// 		li.no-hvr-effect:hover
+// 			background-color: transparent !important
 
-nav.no-shadow
-	-webkit-box-shadow: none
-	box-shadow: none
+// nav.no-shadow
+// 	-webkit-box-shadow: none
+// 	box-shadow: none
 
-nav.transparent
-	-webkit-box-shadow: none
-	box-shadow: none
+// nav.transparent
+// 	-webkit-box-shadow: none
+// 	box-shadow: none
 
-i.nav-drop
-	margin-left: 5px
+// i.nav-drop
+// 	margin-left: 5px
 
 // ===== end of navbar =====
 
 // ===== index.html =====
 
-.search-div
+
+
+.search-input
 	// padding: 1rem
 	-webkit-border-radius: $small-round-border
 	-moz-border-radius: $small-round-border
@@ -116,9 +115,12 @@ input[type=search]:focus
 .contact-img
 	max-height: 10rem
 
-#search-input
-	border-bottom: none
-	margin: 0
-	outline: none
+#slides
+	background-color: transparent
+
+#header-div
+	position: relative
+	top: 100px
+	z-index: 1000
 
 // ===== end of index.html =====

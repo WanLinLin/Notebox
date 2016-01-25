@@ -12,20 +12,17 @@
   left: 0;
   position: absolute;
   top: 0;
-  z-index: -1;
+  z-index: 3;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.35); }
 
 .sink {
-  z-index: -2; }
+  z-index: -100; }
 
 .bg-twhite-8 {
   background-color: rgba(255, 255, 255, 0.8); }
 
-.fa {
-  font-size: inherit; }
-
-.search-div {
+.search-input {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   -ms-border-radius: 2px;
@@ -55,9 +52,12 @@ input[type=search]:focus {
 .contact-img {
   max-height: 10rem; }
 
-#search-input {
-  border-bottom: none;
-  margin: 0;
-  outline: none; }
+#slides {
+  background-color: transparent; }
+
+#header-div {
+  position: relative;
+  top: 100px;
+  z-index: 1000; }
 
 /*# sourceMappingURL=w-style.css.map */
