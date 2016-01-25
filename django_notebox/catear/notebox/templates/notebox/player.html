@@ -80,7 +80,20 @@
 								<canvas id="mao-music-sheet" width="600" height="200"></canvas>
 							</div>
 							<div id="type2_note" class="col s12 mao-tab-content">
-								Type2_note
+								<div class="vex-tabdiv" width=600 scale=1.0>
+									options space=0
+									tabstave
+									notation=true
+									key=C time=4/4
+
+									notes :q =|: (5/2.5/3.7/4) :8 7-5h6/3 ^3^ 5h6-7/5 ^3^ :q 7V/4 |
+									notes :8 t12p7/4 s5s3/4 :8 3s:16:5-7/5 :h p5/4
+
+									tabstave
+									notation=true
+									notes :q (5/2.5/3.7/4) :8 7-5h6/3 ^3^ 5h6-7/5 ^3^ :q 7V/4 |
+									notes :8 t12p7/4 s5s3/4 :8 3s:16:5-7/5 :h p5/4 =:|
+								</div>
 							</div>
 						</div>
 					</div>
@@ -223,6 +236,7 @@
 
 	<script type="text/javascript" src="{% static 'notebox/js/materialize.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'notebox/js/node_modules/vexflow/releases/vexflow-min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'notebox/js/vextab/releases/vextab-div.js' %}"></script>
 
 	<script type="text/javascript">
 
