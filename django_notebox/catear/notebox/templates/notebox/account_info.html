@@ -29,8 +29,8 @@
 			<!-- Menu -->
 			<div class="col s3">
 				<div class="collection">
-					<a href="#" class="collection-item active">帳戶總覽</a>
-					<a href="account_info_favorite.html" class="collection-item">我的收藏</a>
+					<a href="/notebox/account/" class="collection-item active">帳戶總覽</a>
+					<a href="/notebox/account/favorite/" class="collection-item">我的收藏</a>
 					<a href="#" class="collection-item">上傳管理</a>
 				</div>
 			</div>
@@ -46,12 +46,12 @@
 					<!-- One row data -->
 					<div class="section row">
 						<div class="col s4">名稱</div>
-						<div class="col s8">干物妹小埋</div>
+						<div class="col s8">{{ user.username }}</div>
 					</div>
 
 					<div class="section row">
 						<div class="col s4">連絡信箱</div>
-						<div class="col s8">abcd@abcd.com</div>
+						<div class="col s8">{{ user.email }}</div>
 					</div>
 
 					<div class="section row">
