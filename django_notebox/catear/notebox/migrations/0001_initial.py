@@ -13,47 +13,60 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Member',
-            fields=[
-                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
-                ('name', models.CharField(max_length=128)),
-                ('email', models.EmailField(max_length=254)),
-                ('phone', models.CharField(max_length=32, default=None)),
-                ('address', models.CharField(max_length=128, default=None)),
-                ('member_type', models.CharField(max_length=32, default=None)),
-                ('modify_time', models.DateTimeField(auto_now=True)),
-                ('register_time', models.DateTimeField(auto_now_add=True)),
-            ],
-            options={
-                'ordering': ('name',),
-            },
-        ),
-        migrations.CreateModel(
             name='Song',
             fields=[
-                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
+                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
                 ('title', models.CharField(max_length=200)),
                 ('desc', models.TextField(default=None)),
-                ('note', models.TextField()),
-                ('time_length', models.IntegerField()),
-                ('song_img_url', models.URLField()),
-                ('url', models.URLField()),
+                ('artist', models.CharField(max_length=128)),
+                ('note', models.TextField(default=None)),
+                ('tab_url', models.URLField(default=None)),
+                ('level', models.CharField(max_length=16)),
+                ('time_length', models.IntegerField(default=None)),
+                ('song_img_url', models.URLField(default=None)),
+                ('url', models.URLField(default=None)),
+                ('song_yt_id', models.CharField(max_length=256)),
                 ('modify_time', models.DateTimeField(auto_now=True)),
                 ('upload_time', models.DateTimeField(auto_now_add=True)),
-                ('upload_user', models.ForeignKey(to=settings.AUTH_USER_MODEL, related_name='song_upload_user')),
             ],
             options={
                 'ordering': ('title',),
             },
         ),
-        migrations.AddField(
-            model_name='member',
-            name='liked_songs',
-            field=models.ManyToManyField(to='notebox.Song', related_name='liked_songs'),
+        migrations.CreateModel(
+            name='Style',
+            fields=[
+                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
+                ('name', models.CharField(max_length=128)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='UserInfo',
+            fields=[
+                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
+                ('name', models.CharField(max_length=128)),
+                ('email', models.EmailField(max_length=254)),
+                ('phone', models.CharField(default=None, max_length=32)),
+                ('address', models.CharField(default=None, max_length=128)),
+                ('member_type', models.CharField(default=None, max_length=32)),
+                ('modify_time', models.DateTimeField(auto_now=True)),
+                ('register_time', models.DateTimeField(auto_now_add=True)),
+                ('info_user', models.ForeignKey(related_name='info_user', to=settings.AUTH_USER_MODEL)),
+                ('liked_songs', models.ManyToManyField(related_name='liked_songs', to='notebox.Song')),
+                ('upload_songs', models.ManyToManyField(related_name='upload_songs', to='notebox.Song')),
+            ],
+            options={
+                'ordering': ('name',),
+            },
         ),
         migrations.AddField(
-            model_name='member',
-            name='upload_songs',
-            field=models.ManyToManyField(to='notebox.Song', related_name='upload_songs'),
+            model_name='song',
+            name='song_style',
+            field=models.ForeignKey(related_name='song_style', to='notebox.Style'),
+        ),
+        migrations.AddField(
+            model_name='song',
+            name='upload_user',
+            field=models.ForeignKey(related_name='song_upload_user', to=settings.AUTH_USER_MODEL),
         ),
     ]
