@@ -78,12 +78,12 @@
 		<!-- latest video row -->
 		<h4 class="brown-text">最新歌曲</h4>
 		<div class="row">
-			{% for music in latest %}
+			{% for music in latest|slice:":4" %}
 			<div class="col s12 m6 l3">
 				<div class="card">
 					<div class="card-image waves-effect waves-light">
 						<a href="/notebox/player/{{ music.song_id }}">
-							<img src="{{ music.img }}" alt="{{ music.title }}">
+							<img class="song-img-limit-height" src="{{ music.img }}" alt="{{ music.title }}">
 						</a>
 						<span class="card-title black-bg-text">{{ music.title }}</span>
 					</div>
@@ -95,12 +95,12 @@
 		<!-- popular video row -->
 		<h4 class="brown-text">人氣歌曲</h4>
 		<div class="row">
-			{% for music in popular %}
+			{% for music in popular|slice:":4" %}
 			<div class="col s12 m6 l3">
 				<div class="card">
-					<div class="card-image waves-effect waves-block waves-light">
-						<a href="#">
-							<img src="{{ music.img }}" alt="{{ music.title }}">
+					<div class="card-image waves-effect waves-light">
+						<a href="#!">
+							<img class="song-img-limit-height" src="{{ music.img }}" alt="{{ music.title }}">
 						</a>
 						<span class="card-title black-bg-text">{{ music.title }}</span>
 					</div>

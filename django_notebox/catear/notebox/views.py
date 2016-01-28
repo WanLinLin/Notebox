@@ -48,7 +48,7 @@ def logout(request):
 
 def index(request):
     songs = Song.objects.all()
-    songs_list = [{'title':i.title, 'desc':i.desc, 'img':i.song_img_url, 'song_id':i.id} for i in songs]
+    songs_list = [{'title':i.title, 'desc':i.desc, 'img':i.song_img_url, 'song_id':i.id} for i in songs[0:9]]
     print(songs_list)
 
     if not request.user.is_authenticated():
