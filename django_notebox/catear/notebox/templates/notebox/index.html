@@ -21,7 +21,7 @@
 </head>
 
 <body>
-	<!-- ===== Header Div ===== -->
+	<!-- ===== Header Block ===== -->
 	<div class="slider">
 		<div class="black-mask"></div>
 		
@@ -31,9 +31,9 @@
 		{% include 'notebox/navbar.html' %}
 		<!--====  End of Include navbar  ====-->
 
-		<!-- ===== search bar ===== -->
+		<!-- search bar -->
 		<div class="container">
-			<div id="header-div" class="row">
+			<div class="row header-content">
 				<div class="col s12 caption center-align">
 					<h1 class="header white-text text-shadow">NoteBox</h1>
 					<h5 class="header light white-text text-shadow">A classical, indie, modern music framework based on Cat Ear</h5>
@@ -45,7 +45,7 @@
 						<div class="nav-wrapper">
 							<form>
 								<div class="input-field">
-									<input id="search" type="search" class="brown-text text-darken-1" placeholder="依曲名..." required>
+									<input type="search" class="brown-text text-darken-1" placeholder="依曲名、作曲家、歌手..." required>
 									<label for="search"><i class="fa fa-search brown-text"></i></label>
 								</div>
 							</form>
@@ -53,10 +53,10 @@
 					</nav>
 				</div>
 			</div>
-		</div><!-- ===== end of search bar ===== -->
+		</div><!-- end of search bar -->
 
-		<!-- ===== slide images ===== -->
-		<ul id="slides" class="slides">
+		<!-- slide images -->
+		<ul class="slides slides-bg-transparent">
 			<li>
 				<img src="{% static 'notebox/images/main-bg1.jpg' %}"> <!-- random image -->
 			</li>
@@ -69,15 +69,56 @@
 			<li>
 				<img src="{% static 'notebox/images/main-bg5.jpg' %}"> <!-- random image -->
 			</li>
-		</ul><!-- ===== end of slide images ===== -->
+		</ul><!-- end of slide images -->
 
-	</div><!-- end of Header Div -->
+	</div><!-- end of Header Block -->
+
+	<!-- ===== Vedio Block ===== -->
+	<div class="section container big-pad-block">
+		<!-- latest video row -->
+		<h4 class="brown-text">最新歌曲</h4>
+		<div class="row">
+			{% for music in latest %}
+			<div class="col s12 m6 l3">
+				<div class="card">
+					<div class="card-image waves-effect waves-light">
+						<a href="/notebox/player/{{ music.song_id }}">
+							<img src="{{ music.img }}" alt="{{ music.title }}">
+						</a>
+						<span class="card-title black-bg-text">{{ music.title }}</span>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div><!-- end of latest video row -->
+
+		<!-- popular video row -->
+		<h4 class="brown-text">人氣歌曲</h4>
+		<div class="row">
+			{% for music in popular %}
+			<div class="col s12 m6 l3">
+				<div class="card">
+					<div class="card-image waves-effect waves-block waves-light">
+						<a href="#">
+							<img src="{{ music.img }}" alt="{{ music.title }}">
+						</a>
+						<span class="card-title black-bg-text">{{ music.title }}</span>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div><!-- end of popular video row -->
+	</div><!-- ===== end of Vedio Block ===== -->
+
+	<div class="container">
+		<div class="divider"></div>
+	</div>
 
 
 	<!-- Introduce Div -->
 	<div class="section container">
 		<!--   Icon Section   -->
-		<div class="row contact-div">
+		<div class="row big-pad-block">
 			<div class="col s12 m4">
 				<div class="icon-block">
 					<h2 class="center brown-text"><i class="medium material-icons">compare_arrows</i></h2>
@@ -112,7 +153,7 @@
 	</div>
 
 	<!-- Contact Div -->
-	<div class="container contact-div">
+	<div class="container big-pad-block">
 		<div class="section">
 
 			<div class="row">

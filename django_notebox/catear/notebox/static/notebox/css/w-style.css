@@ -31,33 +31,29 @@
   -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
 
-input[type=search] {
+input[type=search], input[type=search]:focus {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   -ms-border-radius: 2px;
   -o-border-radius: 2px;
   border-radius: 2px; }
 
-input[type=search]:focus {
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
-  border-radius: 2px; }
-
-.contact-div {
+.big-pad-block {
   padding-top: 5rem;
   padding-bottom: 5rem; }
 
 .contact-img {
   max-height: 10rem; }
 
-#slides {
-  background-color: transparent; }
+.slides-bg-transparent {
+  background-color: transparent !important; }
 
-#header-div {
+.header-content {
   position: relative;
   top: 100px;
   z-index: 5; }
+
+.black-bg-text {
+  background-color: rgba(0, 0, 0, 0.5); }
 
 /*# sourceMappingURL=w-style.css.map */

@@ -1,3 +1,5 @@
+// brwown rgb (121,85,72)
+$extrem-small-space: 0.5rem
 $small-space: 1rem
 $medium-space: 3rem
 $large-space: 5rem
@@ -45,44 +47,7 @@ $text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6)
 .bg-twhite-8
 	background-color: rgba(255, 255, 255, 0.8)
 
-// ===== navbar =====
-
-// a.nav-button
-// 	border: 2px solid white
-// 	-webkit-border-radius: $small-round-border
-// 	-moz-border-radius: $small-round-border
-// 	-ms-border-radius: $small-round-border
-// 	-o-border-radius: $small-round-border
-// 	border-radius: $small-round-border
-// 	display: inline
-// 	padding: 5px 15px
-// 	margin-left: 10px
-
-// a.nav-button:hover
-// 	transition: background-color 0.5s ease
-// 	background-color: rgba(255, 255, 255, 0.2)
-
-// nav
-// 	ul
-// 		li.no-hvr-effect:hover
-// 			background-color: transparent !important
-
-// nav.no-shadow
-// 	-webkit-box-shadow: none
-// 	box-shadow: none
-
-// nav.transparent
-// 	-webkit-box-shadow: none
-// 	box-shadow: none
-
-// i.nav-drop
-// 	margin-left: 5px
-
-// ===== end of navbar =====
-
 // ===== index.html =====
-
-
 
 .search-input
 	// padding: 1rem
@@ -94,33 +59,29 @@ $text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6)
 	-webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12)
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12)
 
-input[type=search]
+input[type=search], input[type=search]:focus
 	-webkit-border-radius: $small-round-border
 	-moz-border-radius: $small-round-border
 	-ms-border-radius: $small-round-border
 	-o-border-radius: $small-round-border
 	border-radius: $small-round-border
 
-input[type=search]:focus
-	-webkit-border-radius: $small-round-border
-	-moz-border-radius: $small-round-border
-	-ms-border-radius: $small-round-border
-	-o-border-radius: $small-round-border
-	border-radius: $small-round-border
-
-.contact-div
+.big-pad-block
 	padding-top: $large-space
 	padding-bottom: $large-space
 
 .contact-img
 	max-height: 10rem
 
-#slides
-	background-color: transparent
+.slides-bg-transparent
+	background-color: transparent !important
 
-#header-div
+.header-content
 	position: relative
 	top: 100px
 	z-index: 5
+
+.black-bg-text
+	background-color: rgba(0, 0, 0, 0.5)
 
 // ===== end of index.html =====
