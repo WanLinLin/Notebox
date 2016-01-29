@@ -12,45 +12,26 @@
 
             <!-- Dropdown Structure -->
             <ul id="dropdown1" class="dropdown-content">
-                <li><a class="brown-text darken-5" href="#!">經典之作</a></li>
-                <li><a class="brown-text darken-5" href="#!">新潮流行</a></li>
-                <li><a class="brown-text darken-5" href="#!">獨立樂團</a></li>
-                <li class="divider"></li>
-                <li><a class="brown-text darken-5" href="#!">更多</a></li>
+                <li><a class="brown-text darken-5" href="/notebox/overview/">和弦搜尋</a></li>
+                <li><a class="brown-text darken-5" href="/notebox/overview/">類別搜尋</a></li>
+                <li><a class="brown-text darken-5" href="/notebox/overview/">難易搜尋</a></li>
             </ul>
             <ul id="dropdown2" class="dropdown-content">
-                <li><a class="brown-text darken-5" href="#!">3~5個音</a></li>
-                <li><a class="brown-text darken-5" href="#!">5~10個音</a></li>
-                <li><a class="brown-text darken-5" href="#!">10~20個音</a></li>
-                <li class="divider"></li>
-                <li><a class="brown-text darken-5" href="#!">更多</a></li>
-            </ul>
-            <ul id="dropdown3" class="dropdown-content">
-                <li><a class="brown-text darken-5" href="#!">藍調</a></li>
-                <li><a class="brown-text darken-5" href="#!">爵士</a></li>
-                <li><a class="brown-text darken-5" href="#!">古典</a></li>
-                <li class="divider"></li>
-                <li><a class="brown-text darken-5" href="#!">更多</a></li>
+                <li><a class="brown-text darken-5" href="/notebox/overview/">和弦搜尋</a></li>
+                <li><a class="brown-text darken-5" href="/notebox/overview/">類別搜尋</a></li>
+                <li><a class="brown-text darken-5" href="/notebox/overview/">難易搜尋</a></li>
             </ul>
 
             <!-- normal nav-->
             <ul class="right hide-on-med-and-down">
-                <li><a class="white-text navs" href="/notebox/overview/">曲目總覽</a></li>
+                <li><a class="white-text navs" href="#!">關於我們</a></li>
                 <li class="no-hvr-effect">
                     <a class="dropdown-button white-text navs" href="#!" data-activates="dropdown1">
-                        <i class="fa fa-caret-down right nav-drop"></i>精選曲目
+                        <i class="fa fa-caret-down right nav-drop"></i>分類搜尋
                     </a>
                 </li>
-                <li class="no-hvr-effect">
-                    <a class="dropdown-button white-text navs" href="#!" data-activates="dropdown2">
-                        <i class="fa fa-caret-down right nav-drop"></i>程度分級
-                    </a>
-                </li>
-                <li class="no-hvr-effect">
-                    <a class="dropdown-button white-text navs" href="#!" data-activates="dropdown3">
-                        <i class="fa fa-caret-down right nav-drop"></i>曲目類型
-                    </a>
-                </li>
+                <li><a class="white-text navs" href="#!">和弦巧拼</a></li>
+                <li><a class="white-text navs" href="#!">補給站</a></li>
                 
                 {% if not user.is_authenticated %}
                 <li class="no-hvr-effect">
@@ -60,9 +41,9 @@
                     <a class="white-text nav-button modal-trigger navs" href="#register_modal">註冊</a>
                 </li>
                 {% else %}
-                <li class="no-hvr-effect">
-                    <a class="white-text navs" href="#!" data-activates="dropdown3">
-                        <i class="fa fa-plus right"></i>新增歌曲
+                <li>
+                    <a class="white-text navs" href="#!">
+                        <i class="fa fa-plus right"></i>匯入影片
                     </a>
                 </li>
                 <li class="no-hvr-effect">
@@ -148,10 +129,10 @@
 {% endcomment %}
 
 <ul id='account_tools' class='dropdown-content'>
-    <li><a href="/notebox/account/">帳戶總覽</a></li>
-    <li><a href="/notebox/account/favorite/">我的收藏</a></li>
+    <li><a class="brown-text" href="/notebox/account/">帳戶總覽</a></li>
+    <li><a class="brown-text" href="/notebox/account/favorite/">我的收藏</a></li>
     <li class="divider"></li>
-    <li><a href="/notebox/account/logout/">登出</a></li>
+    <li><a class="brown-text" href="/notebox/account/logout/">登出</a></li>
 </ul>
 
 {% endif %}

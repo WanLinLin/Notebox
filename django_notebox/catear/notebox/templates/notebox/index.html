@@ -74,7 +74,7 @@
 	</div><!-- end of Header Block -->
 
 	<!-- ===== Vedio Block ===== -->
-	<div class="section container big-pad-block">
+	<div class="container med-pad-block">
 		<!-- latest video row -->
 		<h4 class="brown-text">最新歌曲</h4>
 		<div class="row">
@@ -83,7 +83,9 @@
 				<div class="card">
 					<div class="card-image waves-effect waves-light">
 						<a href="/notebox/player/{{ music.song_id }}">
-							<img class="song-img-limit-height" src="{{ music.img }}" alt="{{ music.title }}">
+							<div class="song-img-container">
+								<img class="song-img-cropped" src="{{ music.img }}" alt="{{ music.title }}">
+							</div>
 						</a>
 						<span class="card-title black-bg-text">{{ music.title }}</span>
 					</div>
@@ -110,19 +112,19 @@
 		</div><!-- end of popular video row -->
 	</div><!-- ===== end of Vedio Block ===== -->
 
-	<div class="container">
+	<!-- <div class="container">
 		<div class="divider"></div>
-	</div>
+	</div> -->
 
 
 	<!-- Introduce Div -->
-	<div class="section container">
+	<div class="container">
 		<!--   Icon Section   -->
 		<div class="row big-pad-block">
 			<div class="col s12 m4">
 				<div class="icon-block">
 					<h2 class="center brown-text"><i class="medium material-icons">compare_arrows</i></h2>
-					<h5 class="center">音樂零距離</h5>
+					<h5 class="center">和弦搜尋</h5>
 
 					<p class="light">建構音樂學習生態圈, We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
 				</div>
@@ -131,7 +133,7 @@
 			<div class="col s12 m4">
 				<div class="icon-block">
 					<h2 class="center brown-text"><i class="medium material-icons">gavel</i></h2>
-					<h5 class="center">打破音樂學習框架</h5>
+					<h5 class="center">類別搜尋</h5>
 
 					<p class="light">時間.空間限制, y utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
 				</div>
@@ -140,7 +142,7 @@
 			<div class="col s12 m4">
 				<div class="icon-block">
 					<h2 class="center brown-text"><i class="medium material-icons">music_video</i></h2>
-					<h5 class="center">獨立、古典樂</h5>
+					<h5 class="center">難易度搜尋</h5>
 
 					<p class="light">提高音樂素質, 支持獨立音樂.作曲者自主有夢想, We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
 				</div>
@@ -154,20 +156,17 @@
 
 	<!-- Contact Div -->
 	<div class="container big-pad-block">
-		<div class="section">
-
 			<div class="row">
 				<div class="col s12 center">
-					<img src="{% static 'notebox/images/chin-dai.jpg' %}" alt="余青黛" class="circle contact-img">
-					<h5>余青黛</h5>
+					<img src="http://kemall.tw.rakuten-static.com/house/E006DM-20110.jpg" alt="巧拼" class="circle contact-img">
 				</div>
-
-				<div class="col s10 center push-s1">
+			</div>
+			<div class="row">
+				<div class="col s6 center push-s3">
+					<h5>和弦巧拼</h5>
 					<p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie.</p>
 				</div>
 			</div>
-
-		</div>
 	</div><!-- end of Contact Div -->
 
 
@@ -185,11 +184,12 @@
 	<script type="text/javascript" src="{% static 'notebox/js/materialize.min.js' %}"></script>
 
 	<script type="text/javascript">
+
 	$(document).ready(function() {
 		$('.button-collapse').sideNav();
 		$('.parallax').parallax();
 		$(".dropdown-button").dropdown();
-		$('.slider').slider({'indicators': false, 'height': 600});
+		$('.slider').slider({'indicators': false, 'height': 600, 'interval': 4000, 'transition': 1000});
 
 		// ===== scroll changing opacity =====
 		var logo = $('#logo');
