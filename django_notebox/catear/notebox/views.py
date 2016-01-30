@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth import logout as django_logout
