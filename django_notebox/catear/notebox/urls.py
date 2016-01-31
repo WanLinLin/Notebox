@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^account/$', views.account),
     url(r'^account/favorite/$', views.favorite),
     url(r'^account/logout/$', views.logout),
+    url(r'^upload/$', views.upload),
     url(r'^.*$', RedirectView.as_view(url='/notebox/', permanent=False), name='index'),
 ]

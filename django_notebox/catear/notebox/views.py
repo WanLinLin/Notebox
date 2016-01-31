@@ -185,6 +185,8 @@ def player(request, song_id):
         context.update(song_info)
 
         return render(request, 'notebox/player.html', context)
-    
+
+def upload(request):
+    return render(request, 'notebox/upload_music.html')
 
 

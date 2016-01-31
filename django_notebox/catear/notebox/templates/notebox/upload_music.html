@@ -1,0 +1,144 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>上傳歌曲</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="{% static 'notebox/css/materialize.min.css' %}" media="screen,projection"/>
+  <!-- my style -->
+  <link rel="stylesheet" type="text/css" href="{% static 'notebox/css/general.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'notebox/css/w-style.css' %}">
+</head>
+<body>
+  <!--====================================
+  =            Include navbar            =
+  =====================================-->
+  {% include 'notebox/navbar.html' %}
+  <!--====  End of Include navbar  ====-->
+
+
+  <!--==================================
+  =            Main Content            =
+  ===================================-->
+  
+  <div class="container med-pad-block">
+    <h3 class="brown-text">上傳歌曲</h3>
+
+    <div class="row med-pad-block">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s12 l6">
+            <input id="title" type="text" class="validate">
+            <label for="title">歌名</label>
+          </div>
+          <div class="input-field col s12 l6">
+            <input id="artist" type="text" class="validate">
+            <label for="artist">歌手</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 l6">
+            <input id="youtube_url" class="validate" type="text">
+            <label for="youtube_url">Youtube連結</label>
+          </div>
+          <div class="input-field col s12 l6">
+            <input id="time_length" class="validate" type="text">
+            <label for="time_length">歌曲長度</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 l6">
+            <input id="song_img_url" class="validate" type="text">
+            <label for="song_img_url">歌曲圖片連結</label>
+          </div>
+          <div class="input-field col s12 l6">
+            <input id="tab_url" class="validate" type="text">
+            <label for="tab_url">簡譜連結</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12 l6">
+            <select>
+              <option value="" disabled selected>請選擇</option>
+              <option value="1">華語流行</option>
+              <option value="2">西洋流行</option>
+            </select>
+            <label>歌曲類別</label>
+          </div>
+          <div class="input-field col s12 l6">
+            <select>
+              <option value="" disabled selected>請選擇</option>
+              <option value="1">簡易</option>
+              <option value="2">適中</option>
+              <option value="3">困難</option>
+            </select>
+            <label>歌曲難度</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea id="desc" class="materialize-textarea"></textarea>
+            <label for="desc">歌曲描述</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea id="note" class="materialize-textarea"></textarea>
+            <label for="note">歌曲中的和弦</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 center-align">
+            <button class="btn-large waves-effect waves-light" type="submit" name="action">
+              送出
+            </button>
+            <button class="white grey-text text-darken-2 btn-large waves-effect" type="reset" name="action">
+              清除
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+  
+  <!--====  End of Main Content  ====-->
+
+  <!--============================
+  =            Footer            =
+  =============================-->
+  {% include 'notebox/footer.html' %}
+  <!--====  End of Footer  ====-->
+  
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="{% static 'notebox/js/materialize.min.js' %}"></script>
+
+  <script>
+    $(document).ready(function() {
+      $('select').material_select();
+      $('.button-collapse').sideNav();
+      $('.modal-trigger').leanModal();
+      // Navbar dropdown setting
+      $('.dropdown-button:contains("分類搜尋")').dropdown({
+        inDuration: 300,
+        constrain_width: false,
+        outDuration: 225,
+        hover: true, // Activate on hover
+        belowOrigin: true,
+        alignment: 'left'
+        });
+    })
+  </script>
+</body>
+</html>
