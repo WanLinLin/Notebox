@@ -4,9 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 
-	<!--Import Google Icon Font-->
-	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+	<!-- font awesome icon -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<!--Import materialize.css-->
 	<link type="text/css" rel="stylesheet" href="{% static 'notebox/css/materialize.min.css' %}" media="screen,projection"/>
@@ -128,21 +126,21 @@
 		<!--   Icon Section   -->
 		<div class="row big-pad-block">
 			<div class="col s12 m4">
-				<h2 class="center brown-text"><i class="medium material-icons">music_video</i></h2>
+				<h2 class="center brown-text"><i class="fa fa-music"></i></h2>
 				<h5 class="center">和弦搜尋</h5>
 
 				<p class="light">建構音樂學習生態圈, We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
 			</div>
 
 			<div class="col s12 m4">
-				<h2 class="center brown-text"><i class="medium material-icons">toc</i></h2>
+				<h2 class="center brown-text"><i class="fa fa-th-list"></i></h2>
 				<h5 class="center">類別搜尋</h5>
 
 				<p class="light">時間.空間限制, y utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
 			</div>
 
 			<div class="col s12 m4">
-				<h2 class="center brown-text"><i class="medium material-icons">assessment</i></h2>
+				<h2 class="center brown-text"><i class="fa fa-sliders"></i></h2>
 				<h5 class="center">難易度搜尋</h5>
 
 				<p class="light">提高音樂素質, 支持獨立音樂.作曲者自主有夢想, We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
@@ -188,7 +186,7 @@
 			<div class="row big-pad-block">
 				<a href="#!" class="block-link">
 					<div class="col s12 m3">
-						<h2 class="center brown-text"><i class="medium material-icons">music_video</i></h2>
+						<h2 class="center brown-text"><i class="fa fa-user-md"></i></h2>
 						<h5 class="center">音樂診療室</h5>
 
 						<p class="light">建構音樂學習生態圈, We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
@@ -197,7 +195,7 @@
 
 				<div class="col s12 m3">
 					<a href="#!" class="block-link">
-						<h2 class="center brown-text"><i class="medium material-icons">toc</i></h2>
+						<h2 class="center brown-text"><i class="fa fa-paw"></i></h2>
 						<h5 class="center">樂遊闖關</h5>
 
 						<p class="light">時間.空間限制, y utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
@@ -206,7 +204,7 @@
 
 				<div class="col s12 m3">
 					<a href="#!" class="block-link">
-						<h2 class="center brown-text"><i class="medium material-icons">assessment</i></h2>
+						<h2 class="center brown-text"><i class="fa fa-compress"></i></h2>
 						<h5 class="center">藝術與人文交流版</h5>
 
 						<p class="light">提高音樂素質, 支持獨立音樂.作曲者自主有夢想, We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
@@ -215,7 +213,7 @@
 
 				<div class="col s12 m3">
 					<a href="#!" class="block-link">
-						<h2 class="center brown-text"><i class="medium material-icons">mic_none</i></h2>
+						<h2 class="center brown-text"><i class="fa fa-users"></i></h2>
 						<h5 class="center">音樂活動</h5>
 
 						<p class="light">多樣化的音樂活動, 讓您的生活更有樂趣, We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
@@ -243,13 +241,16 @@
 
 	$(document).ready(function() {
 		$('.button-collapse').sideNav();
-		$('.parallax').parallax();
+
+		// slider setting
 		$('.slider').slider({
 			'indicators': false,
 			'height': 600,
 			'interval': 4000,
 			'transition': 1000
 		});
+
+		// Navbar dropdown setting
 		$('.dropdown-button:contains("分類搜尋")').dropdown({
 			inDuration: 300,
 			constrain_width: false,

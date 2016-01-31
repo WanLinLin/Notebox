@@ -236,6 +236,15 @@
     $('.modal-trigger').leanModal();
     $('.button-collapse').sideNav();
     /*=====  End of Modal Handler  ======*/
+    // Navbar dropdown setting
+    $('.dropdown-button:contains("分類搜尋")').dropdown({
+      inDuration: 300,
+      constrain_width: false,
+      outDuration: 225,
+      hover: true, // Activate on hover
+      belowOrigin: true,
+      alignment: 'left'
+    });
   </script>
 
   <script type="text/javascript" src="{% static 'notebox/js/vextab/music_string_parser.js' %}"></script>

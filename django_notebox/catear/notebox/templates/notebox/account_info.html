@@ -84,8 +84,16 @@
 	<script>
 		$(document).ready(function() {
 			$('.button-collapse').sideNav();
-			$(".dropdown-button").dropdown();
 			$('.modal-trigger').leanModal();
+			// Navbar dropdown setting
+			$('.dropdown-button:contains("分類搜尋")').dropdown({
+				inDuration: 300,
+				constrain_width: false,
+				outDuration: 225,
+				hover: true, // Activate on hover
+				belowOrigin: true,
+				alignment: 'left'
+			});
 		})
 	</script>
 </body>
