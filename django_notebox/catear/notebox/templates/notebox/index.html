@@ -90,6 +90,9 @@
 				</div>
 			</div>
 			{% endfor %}
+			<div class="col s12 right-align">
+				<a href="/notebox/overview/" class="white grey-text text-darken-2 btn waves-effect waves-brown">更多最新歌曲</a>
+			</div>
 		</div><!-- end of latest video row -->
 
 		<!-- popular video row -->
@@ -109,9 +112,13 @@
 				</div>
 			</div>
 			{% endfor %}
+			<div class="col s12 right-align">
+				<a href="/notebox/overview/" class="white grey-text text-darken-2 btn waves-effect waves-brown">更多人氣歌曲</a>
+			</div>
 		</div><!-- end of popular video row -->
 	</div><!-- ===== end of Vedio Block ===== -->
 
+	<!-- divider -->
 	<div class="container">
 		<div class="row">
 			<div class="col s10 push-s1">
@@ -170,14 +177,6 @@
 				</div>
 			</div>
 	</div><!-- end of Chord Div -->
-
-	<!-- <div class="container">
-		<div class="row">
-			<div class="col s10 push-s1">
-				<div class="divider"></div>
-			</div>
-		</div>
-	</div> -->
 
 	<!-- Introduce Div -->
 	<div class="grey lighten-4">
@@ -262,36 +261,6 @@
 
     $('footer').addClass('no-top-margin');
 
-		// ===== scroll changing opacity =====
-		var logo = $('#logo');
-		var navs = $('.navs');
-		var target = $('#navbar-fixed');
-		var targetHeight = 500;
-
-		logo.addClass('text-shadow');
-		logo.addClass('hide-on-med-and-down');
-		navs.addClass('text-shadow');
-
-		// initial brown color
-		target.css('background-color', 'rgba(121,85,72,0)');
-		target.addClass('no-shadow');
-
-		$(document).scroll(function(e){
-			var scrollPercent = 1 - (targetHeight - window.scrollY) / targetHeight;
-			if(scrollPercent <= 1){
-				target.css('background-color', 'rgba(121,85,72,' + scrollPercent + ')');
-				target.addClass('no-shadow');
-				logo.addClass('text-shadow');
-				navs.addClass('text-shadow');
-			}
-			else{
-				target.css('background-color', 'rgba(121,85,72,1)');
-				target.removeClass('no-shadow');
-				logo.removeClass('text-shadow');
-				navs.removeClass('text-shadow');
-			}
-		});// end of scroll changing opacity
-
 		/*=============================
 		=            Modal            =
 		=============================*/
@@ -299,7 +268,40 @@
 		$('.modal-trigger').leanModal();
 		
 		/*=====  End of Modal  ======*/
-		
+
+		changeOpacityOnScroll();
+
+		function changeOpacityOnScroll() {
+			// ===== scroll changing opacity =====
+			var logo = $('#logo');
+			var navs = $('.navs');
+			var target = $('#navbar-fixed');
+			var targetHeight = 500;
+
+			logo.addClass('text-shadow');
+			logo.addClass('hide-on-med-and-down');
+			navs.addClass('text-shadow');
+
+			// initial brown color
+			target.css('background-color', 'rgba(121,85,72,0)');
+			target.addClass('no-shadow');
+
+			$(document).scroll(function(e){
+				var scrollPercent = 1 - (targetHeight - window.scrollY) / targetHeight;
+				if(scrollPercent <= 1){
+					target.css('background-color', 'rgba(121,85,72,' + scrollPercent + ')');
+					target.addClass('no-shadow');
+					logo.addClass('text-shadow');
+					navs.addClass('text-shadow');
+				}
+				else{
+					target.css('background-color', 'rgba(121,85,72,1)');
+					target.removeClass('no-shadow');
+					logo.removeClass('text-shadow');
+					navs.removeClass('text-shadow');
+				}
+			});// end of scroll changing opacity
+		}
 	});
 	</script>
 </body>
