@@ -33,6 +33,16 @@ main {
     background-color: @colorPlaceholdDark;
     color: black;
     box-shadow: none;
+
+    &.selected {
+        background-color: @primaryColor;
+        color: white;
+        &:hover {
+            background-color: @primaryColor;
+            color: white;
+        }
+    }
+
     &:hover {
         background-color: @colorPlacehold;
         color: black;
