@@ -41,19 +41,31 @@
 		{% verbatim %}
 		<div class="row">
 			<div class="col s12 m12 push-l2 l8">
+				<div class="row">
 				<!-- search bar -->
 				<nav class="bg-twhite-8 search-input">
 					<div class="nav-wrapper">
 						<form>
 							<div class="input-field">
 								<input type="search" class="brown-text text-darken-1 drop-target" placeholder="依曲名、作曲家、歌手..." required
-								 value="{{ s_opts }}">
+								 value="">
 								<label for="search"><i class="fa fa-search brown-text"></i></label>
 							</div>
 						</form>
 					</div>
 				</nav>
-				<br><br>
+				</div>
+				<div class="row">
+					<div class="col s4">
+						和弦：<div class="chip mao-chip query-opt" ng-repeat="(k,v) in s_opts.chord" ng-if="v.value==true">{{ v.text }}</div>
+					</div>
+					<div class="col s4">
+						類別：<div class="chip mao-chip query-opt" ng-repeat="(k,v) in s_opts.class" ng-if="v.value==true">{{ v.text }}</div>
+					</div>
+					<div class="col s4">
+						難度：<div class="chip mao-chip query-opt" ng-repeat="(k,v) in s_opts.level" ng-if="v.value==true">{{ v.text }}</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<!--===============================
@@ -228,7 +240,7 @@
 	app.controller('searchCtrl', function($scope) {
 		$scope.s_opts = {
 			'chord': {
-				'all': {'text':'全', 'value': false},
+				'all': {'text':'全', 'value':false},
 				'C':   {'text': 'C', 'value':false},
 				'D':   {'text': 'D', 'value':false},
 				'E':   {'text': 'E', 'value':false},
