@@ -162,23 +162,9 @@
 				<div class="card">
 					<div class="card-image waves-effect waves-block waves-light">
 						<img class="activator" src="{{ music.img }}">
-					</div>
-					<div class="card-content">
-						<a href="/notebox/player/{{ music.song_id }}" class="card-title activator grey-text text-darken-3">
-							{{ music.title }}
+						<a href="/notebox/player/{{ music.song_id }}" class="card-title activator">
+						{{ music.title }}
 						</a>
-						<p class="grey-text text-darken-1">
-							{{ music.desc|linebreaks }}
-						</p>
-					</div>
-					<div class="card-reveal">
-						<span class="card-title activator grey-text text-darken-3">
-							{{ music.title }}
-							<i class="fa fa-times right"></i>
-						</span>
-						<p class="grey-text text-darken-1">
-							{{ music.desc|linebreaks }}
-						</p>
 					</div>
 				</div>
 			</div>
