@@ -3,8 +3,9 @@ from django.shortcuts import render
 from django.contrib.auth import logout as django_logout
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.contrib.auth.decorators import login_required
-from .forms import RegistrationForm, LoginForm
+from .forms import RegistrationForm, LoginForm, UploadForm
 from .models import Song
+from .models import Style
 
 """
 /*===========================================
@@ -36,6 +37,16 @@ def form_checker(request):
                 else:
                     # Show error message
                     return HttpResponseRedirect(request.path)
+
+        # elif 'upload' in request.POST:
+        #     form = UploadForm(request.POST)
+        #     if form.is_valid():
+        #         if form.save(request):
+        #             # Save successful
+        #             return HttpResponseRedirect(request.path)
+        #         else:
+        #             # Show error message
+        #             return HttpResponseRedirect(request.path)
 
     return False
 
@@ -187,6 +198,8 @@ def player(request, song_id):
         return render(request, 'notebox/player.html', context)
 
 def upload(request):
-    return render(request, 'notebox/upload_music.html')
+    upload_form = UploadForm(auto_id=True)
+    context = {'upload_form': upload_form}
+    return render(request, 'notebox/upload_music.html', context)
 
 

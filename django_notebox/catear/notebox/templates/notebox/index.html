@@ -2,307 +2,305 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-	<meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-	<!-- font awesome icon -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-	<!--Import materialize.css-->
-	<link type="text/css" rel="stylesheet" href="{% static 'notebox/css/materialize.min.css' %}" media="screen,projection"/>
-	<!-- my style -->
-	<link rel="stylesheet" type="text/css" href="{% static 'notebox/css/w-style.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'notebox/css/general.css' %}">
+  <!-- font awesome icon -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="{% static 'notebox/css/materialize.min.css' %}" media="screen,projection"/>
+  <!-- my style -->
+  <link rel="stylesheet" type="text/css" href="{% static 'notebox/css/w-style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'notebox/css/general.css' %}">
 
-	<!--Let browser know website is optimized for mobile-->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-	<title>NoteBox</title>
+  <title>NoteBox</title>
 </head>
 
 <body>
-	<!-- ===== Header Block ===== -->
-	<div class="slider">
-		<div class="black-mask"></div>
-		
-		<!--====================================
-		=            Include navbar            =
-		=====================================-->
-		{% include 'notebox/navbar.html' %}
-		<!--====  End of Include navbar  ====-->
+  <!-- ===== Header Block ===== -->
+  <div class="slider">
+    <div class="black-mask"></div>
+    
+    <!--====================================
+    =            Include navbar            =
+    =====================================-->
+    {% include 'notebox/navbar.html' %}
+    <!--====  End of Include navbar  ====-->
 
-		<!-- search bar -->
-		<div class="container">
-			<div class="row header-content">
-				<div class="col s12 caption center-align">
-					<h1 class="header white-text text-shadow">NoteBox</h1>
-					<h5 class="header light white-text text-shadow">A classical, indie, modern music framework based on Cat Ear</h5>
-				</div>
+    <!-- search bar -->
+    <div class="container">
+      <div class="row header-content">
+        <div class="col s12 caption center-align">
+          <h1 class="header white-text text-shadow">NoteBox</h1>
+          <h5 class="header light white-text text-shadow">A classical, indie, modern music framework based on Cat Ear</h5>
+        </div>
 
-				<div class="col s12 m12 push-l2 l8">
-					<!-- search bar -->
-					<nav class="bg-twhite-8 search-input">
-						<div class="nav-wrapper">
-							<form>
-								<div class="input-field">
-									<input type="search" class="brown-text text-darken-1" placeholder="依曲名、作曲家、歌手..." required>
-									<label for="search"><i class="fa fa-search brown-text"></i></label>
-								</div>
-							</form>
-						</div>
-					</nav>
-				</div>
-			</div>
-		</div><!-- end of search bar -->
+        <div class="col s12 m12 push-l2 l8">
+          <!-- search bar -->
+          <nav class="bg-twhite-8 search-input">
+            <div class="nav-wrapper">
+              <form>
+                <div class="input-field">
+                  <input type="search" class="brown-text text-darken-1" placeholder="依曲名、作曲家、歌手..." required>
+                  <label for="search"><i class="fa fa-search brown-text"></i></label>
+                </div>
+              </form>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div><!-- end of search bar -->
 
-		<!-- slide images -->
-		<ul class="slides slides-bg-transparent">
-			<li>
-				<img src="{% static 'notebox/images/main-bg1.jpg' %}"> <!-- random image -->
-			</li>
-			<li>
-				<img src="{% static 'notebox/images/main-bg2.jpg' %}"> <!-- random image -->
-			</li>
-			<li>
-				<img src="{% static 'notebox/images/main-bg4.jpg' %}"> <!-- random image -->
-			</li>
-			<li>
-				<img src="{% static 'notebox/images/main-bg5.jpg' %}"> <!-- random image -->
-			</li>
-		</ul><!-- end of slide images -->
+    <!-- slide images -->
+    <ul class="slides slides-bg-transparent">
+      <li>
+        <img src="{% static 'notebox/images/main-bg1.jpg' %}"> <!-- random image -->
+      </li>
+      <li>
+        <img src="{% static 'notebox/images/main-bg2.jpg' %}"> <!-- random image -->
+      </li>
+      <li>
+        <img src="{% static 'notebox/images/main-bg4.jpg' %}"> <!-- random image -->
+      </li>
+      <li>
+        <img src="{% static 'notebox/images/main-bg5.jpg' %}"> <!-- random image -->
+      </li>
+    </ul><!-- end of slide images -->
 
-	</div><!-- end of Header Block -->
+  </div><!-- end of Header Block -->
 
-	<!-- ===== Vedio Block ===== -->
-	<div class="container med-pad-block">
-		<!-- latest video row -->
-		<h5 class="brown-text">最新歌曲</h5>
-		<div class="row">
-			{% for music in latest|slice:":4" %}
-			<div class="col s12 m6 l3">
-				<div class="card">
-					<div class="card-image waves-effect waves-light">
-						<a href="/notebox/player/{{ music.song_id }}">
-							<div class="song-img-container">
-								<img class="song-img-cropped" src="{{ music.img }}" alt="{{ music.title }}">
-							</div>
-						</a>
-						<span class="card-title black-bg-text">{{ music.title }}</span>
-					</div>
-				</div>
-			</div>
-			{% endfor %}
-			<div class="col s12 right-align">
-				<a href="/notebox/overview/" class="white grey-text text-darken-2 btn waves-effect waves-brown">更多最新歌曲</a>
-			</div>
-		</div><!-- end of latest video row -->
+  <!-- ===== Vedio Block ===== -->
+  <div class="container med-pad-block">
+    <!-- latest video row -->
+    <h5 class="brown-text">最新歌曲</h5>
 
-		<!-- popular video row -->
-		<h5 class="brown-text">人氣歌曲</h5>
-		<div class="row">
-			{% for music in popular|slice:":4" %}
-			<div class="col s12 m6 l3">
-				<div class="card">
-					<div class="card-image waves-effect waves-light">
-						<a href="#!">
-							<div class="song-img-container">
-								<img class="song-img-cropped" src="{{ music.img }}" alt="{{ music.title }}">
-							</div>
-						</a>
-						<span class="card-title black-bg-text">{{ music.title }}</span>
-					</div>
-				</div>
-			</div>
-			{% endfor %}
-			<div class="col s12 right-align">
-				<a href="/notebox/overview/" class="white grey-text text-darken-2 btn waves-effect waves-brown">更多人氣歌曲</a>
-			</div>
-		</div><!-- end of popular video row -->
-	</div><!-- ===== end of Vedio Block ===== -->
+    <div class="row">
+      {% for music in latest|slice:":4" %}
+      <div class="col s12 m6 l3">
+        <div class="card">
+          <div class="card-image waves-effect waves-light waves-block">
+            <a href="/notebox/player/{{ music.song_id }}">
+              <img src="{{ music.img }}" alt="{{ music.title }}">
+            </a>
+            <span class="card-title black-bg-text">{{ music.title }}</span>
+          </div>
+        </div>
+      </div>
 
-	<!-- divider -->
-	<div class="container">
-		<div class="row">
-			<div class="col s10 push-s1">
-				<div class="divider"></div>
-			</div>
-		</div>
-	</div>
+      {% endfor %}
+      <div class="col s12 right-align">
+        <a href="/notebox/overview/" class="white grey-text text-darken-2 btn waves-effect waves-brown">更多最新歌曲</a>
+      </div>
+    </div><!-- end of latest video row -->
 
+      <!-- popular video row -->
+      <h5 class="brown-text">人氣歌曲</h5>
 
-	<!-- Introduce Div -->
-	<div class="container">
-		<!--   Icon Section   -->
-		<div class="row big-pad-block">
-			<div class="col s12 m4">
-				<h2 class="center brown-text"><i class="fa fa-music"></i></h2>
-				<h5 class="center">和弦搜尋</h5>
+      <div class="row">
+        {% for music in popular|slice:":4" %}
+        <div class="col s12 m6 l3">
+          <div class="card">
+            <div class="card-image waves-effect waves-light waves-block">
+              <a href="#!">
+                <img src="{{ music.img }}" alt="{{ music.title }}">
+              </a>
+              <span class="card-title black-bg-text">{{ music.title }}</span>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <div class="col s12 right-align">
+          <a href="/notebox/overview/" class="white grey-text text-darken-2 btn waves-effect waves-brown">更多人氣歌曲</a>
+        </div>
+      </div><!-- end of popular video row -->
+    </div><!-- ===== end of Vedio Block ===== -->
 
-				<p class="light">建構音樂學習生態圈, We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
-			</div>
-
-			<div class="col s12 m4">
-				<h2 class="center brown-text"><i class="fa fa-th-list"></i></h2>
-				<h5 class="center">類別搜尋</h5>
-
-				<p class="light">時間.空間限制, y utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
-			</div>
-
-			<div class="col s12 m4">
-				<h2 class="center brown-text"><i class="fa fa-sliders"></i></h2>
-				<h5 class="center">難易度搜尋</h5>
-
-				<p class="light">提高音樂素質, 支持獨立音樂.作曲者自主有夢想, We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
-			</div>
-		</div>
-	</div><!-- end of Introduce Div -->
-
-	<div class="container">
-		<div class="row">
-			<div class="col s8 push-s2">
-				<div class="divider"></div>
-			</div>
-		</div>
-	</div>
-
-	<!-- ===== Chord Div ===== -->
-	<div class="container big-pad-block">
-			<div class="row">
-				<div class="col s12 center">
-					<img src="http://kemall.tw.rakuten-static.com/house/E006DM-20110.jpg" alt="巧拼" class="circle contact-img">
-				</div>
-			</div>
-			<div class="row">
-				<div class="col s6 center push-s3">
-					<h5>和弦巧拼</h5>
-					<p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie.</p>
-				</div>
-			</div>
-	</div><!-- end of Chord Div -->
-
-	<!-- Introduce Div -->
-	<div class="grey lighten-4">
-		<div class="container">
-			<!--   Icon Section   -->
-			<div class="row big-pad-block">
-				<a href="#!" class="block-link">
-					<div class="col s12 m3">
-						<h2 class="center brown-text"><i class="fa fa-user-md"></i></h2>
-						<h5 class="center">音樂診療室</h5>
-
-						<p class="light">建構音樂學習生態圈, We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
-					</div>
-				</a>
-
-				<div class="col s12 m3">
-					<a href="#!" class="block-link">
-						<h2 class="center brown-text"><i class="fa fa-paw"></i></h2>
-						<h5 class="center">樂遊闖關</h5>
-
-						<p class="light">時間.空間限制, y utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
-					</a>
-				</div>
-
-				<div class="col s12 m3">
-					<a href="#!" class="block-link">
-						<h2 class="center brown-text"><i class="fa fa-compress"></i></h2>
-						<h5 class="center">藝術與人文交流版</h5>
-
-						<p class="light">提高音樂素質, 支持獨立音樂.作曲者自主有夢想, We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
-					</a>
-				</div>
-
-				<div class="col s12 m3">
-					<a href="#!" class="block-link">
-						<h2 class="center brown-text"><i class="fa fa-users"></i></h2>
-						<h5 class="center">音樂活動</h5>
-
-						<p class="light">多樣化的音樂活動, 讓您的生活更有樂趣, We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div><!-- end of Introduce Div -->
+    <!-- divider -->
+    <div class="container">
+      <div class="row">
+        <div class="col s10 push-s1">
+          <div class="divider"></div>
+        </div>
+      </div>
+    </div>
 
 
-	<!--============================
-	=            Footer            =
-	=============================-->
-	{% include 'notebox/footer.html' %}
-	<!--====  End of Footer  ====-->
-	
+    <!-- Introduce Div -->
+    <div class="container">
+      <!--   Icon Section   -->
+      <div class="row big-pad-block">
+        <div class="col s12 m4">
+          <h2 class="center brown-text"><i class="fa fa-music"></i></h2>
+          <h5 class="center">和弦搜尋</h5>
 
-	<!--Import jQuery before materialize.js-->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	<script type="text/javascript" src="http://code.jquery.com/color/jquery.color-2.1.0.js"></script>
-	<!-- Load materialize js -->
-	<script type="text/javascript" src="{% static 'notebox/js/materialize.min.js' %}"></script>
+          <p class="light">建構音樂學習生態圈, We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+        </div>
 
-	<script type="text/javascript">
+        <div class="col s12 m4">
+          <h2 class="center brown-text"><i class="fa fa-th-list"></i></h2>
+          <h5 class="center">類別搜尋</h5>
 
-	$(document).ready(function() {
-		$('.button-collapse').sideNav();
+          <p class="light">時間.空間限制, y utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+        </div>
 
-		// slider setting
-		$('.slider').slider({
-			'indicators': false,
-			'height': 600,
-			'interval': 4000,
-			'transition': 1000
-		});
+        <div class="col s12 m4">
+          <h2 class="center brown-text"><i class="fa fa-sliders"></i></h2>
+          <h5 class="center">難易度搜尋</h5>
 
-		// Navbar dropdown setting
-		$('.dropdown-button:contains("分類搜尋")').dropdown({
-			inDuration: 300,
-			constrain_width: false,
-			outDuration: 225,
+          <p class="light">提高音樂素質, 支持獨立音樂.作曲者自主有夢想, We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
+        </div>
+      </div>
+    </div><!-- end of Introduce Div -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col s8 push-s2">
+          <div class="divider"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Chord Div ===== -->
+    <div class="container big-pad-block">
+      <div class="row">
+        <div class="col s12 center">
+          <img src="http://kemall.tw.rakuten-static.com/house/E006DM-20110.jpg" alt="巧拼" class="circle contact-img">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6 center push-s3">
+          <h5>和弦巧拼</h5>
+          <p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie.</p>
+        </div>
+      </div>
+    </div><!-- end of Chord Div -->
+
+    <!-- Introduce Div -->
+    <div class="grey lighten-4">
+      <div class="container">
+        <!--   Icon Section   -->
+        <div class="row big-pad-block">
+          <a href="#!" class="block-link">
+            <div class="col s12 m3">
+              <h2 class="center brown-text"><i class="fa fa-user-md"></i></h2>
+              <h5 class="center">音樂診療室</h5>
+
+              <p class="light">建構音樂學習生態圈, We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+            </div>
+          </a>
+
+          <div class="col s12 m3">
+            <a href="#!" class="block-link">
+              <h2 class="center brown-text"><i class="fa fa-paw"></i></h2>
+              <h5 class="center">樂遊闖關</h5>
+
+              <p class="light">時間.空間限制, y utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+            </a>
+          </div>
+
+          <div class="col s12 m3">
+            <a href="#!" class="block-link">
+              <h2 class="center brown-text"><i class="fa fa-compress"></i></h2>
+              <h5 class="center">藝術與人文交流版</h5>
+
+              <p class="light">提高音樂素質, 支持獨立音樂.作曲者自主有夢想, We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
+            </a>
+          </div>
+
+          <div class="col s12 m3">
+            <a href="#!" class="block-link">
+              <h2 class="center brown-text"><i class="fa fa-users"></i></h2>
+              <h5 class="center">音樂活動</h5>
+
+              <p class="light">多樣化的音樂活動, 讓您的生活更有樂趣, We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div><!-- end of Introduce Div -->
+
+
+  <!--============================
+  =            Footer            =
+  =============================-->
+  {% include 'notebox/footer.html' %}
+  <!--====  End of Footer  ====-->
+  
+
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/color/jquery.color-2.1.0.js"></script>
+  <!-- Load materialize js -->
+  <script type="text/javascript" src="{% static 'notebox/js/materialize.min.js' %}"></script>
+
+  <script type="text/javascript">
+
+  $(document).ready(function() {
+    $('.button-collapse').sideNav();
+
+    // slider setting
+    $('.slider').slider({
+      'indicators': false,
+      'height': 600,
+      'interval': 4000,
+      'transition': 1000
+    });
+
+    // Navbar dropdown setting
+    $('.dropdown-button:contains("分類搜尋")').dropdown({
+      inDuration: 300,
+      constrain_width: false,
+      outDuration: 225,
       hover: true, // Activate on hover
       belowOrigin: true,
       alignment: 'left'
     });
 
+    /*=============================
+    =            Modal            =
+    =============================*/
+    
+    $('.modal-trigger').leanModal();
+    
+    /*=====  End of Modal  ======*/
+
     $('footer').addClass('no-top-margin');
+    changeOpacityOnScroll();
 
-		/*=============================
-		=            Modal            =
-		=============================*/
-		
-		$('.modal-trigger').leanModal();
-		
-		/*=====  End of Modal  ======*/
+    function changeOpacityOnScroll() {
+      // ===== scroll changing opacity =====
+      var logo = $('#logo');
+      var navs = $('.navs');
+      var target = $('#navbar-fixed');
+      var targetHeight = 500;
 
-		changeOpacityOnScroll();
+      logo.addClass('text-shadow');
+      logo.addClass('hide-on-med-and-down');
+      navs.addClass('text-shadow');
 
-		function changeOpacityOnScroll() {
-			// ===== scroll changing opacity =====
-			var logo = $('#logo');
-			var navs = $('.navs');
-			var target = $('#navbar-fixed');
-			var targetHeight = 500;
+      // initial brown color
+      target.css('background-color', 'rgba(121,85,72,0)');
+      target.addClass('no-shadow');
 
-			logo.addClass('text-shadow');
-			logo.addClass('hide-on-med-and-down');
-			navs.addClass('text-shadow');
-
-			// initial brown color
-			target.css('background-color', 'rgba(121,85,72,0)');
-			target.addClass('no-shadow');
-
-			$(document).scroll(function(e){
-				var scrollPercent = 1 - (targetHeight - window.scrollY) / targetHeight;
-				if(scrollPercent <= 1){
-					target.css('background-color', 'rgba(121,85,72,' + scrollPercent + ')');
-					target.addClass('no-shadow');
-					logo.addClass('text-shadow');
-					navs.addClass('text-shadow');
-				}
-				else{
-					target.css('background-color', 'rgba(121,85,72,1)');
-					target.removeClass('no-shadow');
-					logo.removeClass('text-shadow');
-					navs.removeClass('text-shadow');
-				}
-			});// end of scroll changing opacity
-		}
-	});
-	</script>
+      $(document).scroll(function(e){
+        var scrollPercent = 1 - (targetHeight - window.scrollY) / targetHeight;
+        if(scrollPercent <= 1){
+          target.css('background-color', 'rgba(121,85,72,' + scrollPercent + ')');
+          target.addClass('no-shadow');
+          logo.addClass('text-shadow');
+          navs.addClass('text-shadow');
+        }
+        else{
+          target.css('background-color', 'rgba(121,85,72,1)');
+          target.removeClass('no-shadow');
+          logo.removeClass('text-shadow');
+          navs.removeClass('text-shadow');
+        }
+      });// end of scroll changing opacity
+    }
+  });
+</script>
 </body>
 </html>
