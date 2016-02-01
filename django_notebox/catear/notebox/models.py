@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate as django_auth
 
 # Create your models here.
 
@@ -9,7 +11,7 @@ class Style(models.Model):
         return self.name
 
 class Song(models.Model):
-    upload_user  = models.ForeignKey('auth.User', related_name='song_upload_user')
+    upload_user  = models.ForeignKey(User, related_name='song_upload_user')
 
     title = models.CharField(max_length=200)
     desc = models.TextField(default=None)
@@ -36,7 +38,7 @@ class Song(models.Model):
         ordering = ('title',)
 
 class UserInfo(models.Model):
-    info_user = models.ForeignKey('auth.User', related_name='info_user')
+    info_user = models.ForeignKey(User, related_name='info_user')
 
     name = models.CharField(max_length=128)
     email = models.EmailField()
