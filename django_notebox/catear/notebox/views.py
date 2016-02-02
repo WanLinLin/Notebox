@@ -199,16 +199,22 @@ def player(request, song_id):
 
 @login_required(login_url='/notebox/')
 def upload(request):
+    upload_form = UploadForm(auto_id=True)
+    step = 0
+    cleaned_data = {}
+
     if request.method == 'POST':
         upload_form = UploadForm(request.POST)
         if upload_form.is_valid():
-            print("Form OK")
+            step = step + 1
+            upload_form.save(request)
+            cleaned_data['youtube_url'] = upload_form.cleaned_data['youtube_url']
+            cleaned_data['youtube_img_url'] = upload_form.youtube_img_url
+            cleaned_data['note'] = upload_form.cleaned_data['note']
         else:
             print("Form is NOT OK")
 
-
-    upload_form = UploadForm(auto_id=True)
-    context = {'upload_form': upload_form, }
+    context = {'upload_form': upload_form, 'step': step, 'cleaned_data': cleaned_data}
     return render(request, 'notebox/upload_music.html', context)
 
 

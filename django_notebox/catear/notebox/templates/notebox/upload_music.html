@@ -27,15 +27,26 @@
 
   <div class="grey lighten-5">
     <div class="container med-pad-block">
-      <h3 class="brown-text">上傳歌曲</h3>
+      <h3 class="brown-text">
+        {% if step == 0  %}
+          上傳歌曲第一步 - 歌曲基本資料
+        {% else %}
+          上傳歌曲第二步 - 寫譜
+        {% endif %}
+      </h3>
       <div class="row small-pad-block">
 
+        {% if step == 0 %}
+
         <!--==========================
-        =            Form            =
+        =            Step 0 Form     =
         ===========================-->
         <form action="" method="POST"> {% csrf_token %}
           <div class="card">
             <div class="card-content row">
+              <!-- <div class="col s12" id="youtube_preview">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/cOzZfxVa0qE" frameborder="0" allowfullscreen></iframe>
+              </div> -->
               <div class="col s12">
                 <div class="">
                 <b>{{ upload_form.youtube_url.label_tag}}</b>
@@ -84,8 +95,6 @@
                 </div>
               </div>
 
-              
-
               <div class="col s12 center-align">
                 <button class="btn-large waves-effect waves-light" type="submit" name="upload">
                   下一步 >> 寫譜
@@ -95,7 +104,24 @@
             </div>
           </div>
         </form>
-        <!--====  End of Form  ====-->
+        <!--====  End of Step 0 Form  ====-->
+
+        {% else %}
+        
+        <!--=======================================
+        =            Step1 Note Editor            =
+        ========================================-->
+        
+        <div class="card">
+          <div class="card-content">
+            {{cleaned_data}}
+          </div>
+        </div>
+        
+        <!--====  End of Step1 Note Editor  ====-->
+        
+
+        {% endif %}
 
       </div>
     </div>
@@ -132,6 +158,13 @@
 
     $('footer').addClass('no-top-margin');
     })
+
+    // var yt_preview = $("#youtube_preview");
+    // $('#{{ upload_form.youtube_url.id_for_label }}').focusout(function() {
+    //   var va = this.value.split('v=');
+    //   if (va.length == 2) {
+    //   }
+    // });
   </script>
 </body>
 </html>

@@ -43,7 +43,9 @@ class Song(models.Model):
     youtube_img_url = models.URLField(default=None)
     youtube_id = models.CharField(max_length=256)
     modify_time = models.DateTimeField(auto_now=True)
-    upload_time = models.DateTimeField(auto_now_add=True)    
+    upload_time = models.DateTimeField(auto_now_add=True)
+
+    activated = models.BooleanField(default=False)
     
     def __str__(self):
         return self.title

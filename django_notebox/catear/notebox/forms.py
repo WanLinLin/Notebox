@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate as django_auth, login as django_login
 from django.core.exceptions import ValidationError
 from django.forms import ModelChoiceField
-from .models import SongStyle, SongLevel
+from .models import SongStyle, SongLevel, Song
 
 def check_username(username):
     if User.objects.filter(username=username).exists():
@@ -73,9 +73,9 @@ class UploadForm(forms.Form):
     def save(self, request):
         # Generate not-user-provided data
         self.upload_user  = request.user
-        self.youtube_id   = youtube_url.split('v=')[-1]
+        self.youtube_id   = self.cleaned_data['youtube_url'].split('v=')[-1]
         self.time_length  = None
-        self.youtube_img_url = 'http://img.youtube.com/vi/{id}/0.jpg'.format(id=youtube_id)
+        self.youtube_img_url = 'http://img.youtube.com/vi/{id}/0.jpg'.format(id=self.youtube_id)
 
         # New Song object
         new_song = Song(
@@ -97,7 +97,8 @@ class UploadForm(forms.Form):
             youtube_img_url=self.youtube_img_url,
             youtube_id=self.youtube_id,
             upload_user=self.upload_user,
-            time_length=self.time_length
+            time_length=self.time_length,
+            activated=False
         )
-
-        new_song.save()
+        
+        # new_song.save()
