@@ -64,7 +64,6 @@ if __name__ == '__main__':
         elif level == '3': level = SongLevel.objects.get(name='高級')
         else: level = SongLevel.objects.get(name='其他')
 
-
         style_obj = SongStyle.objects.get(name=style)
 
         if title not in cur_songs:
@@ -73,10 +72,10 @@ if __name__ == '__main__':
                 artist=artist,
                 composer=composer,
                 note=chord,
-                url=yt_url,
-                song_yt_id=yt_id, 
-                song_img_url='http://img.youtube.com/vi/{id}/0.jpg'.format(id=yt_id),
-                level=level, desc='test', tab_url=note_url, time_length=0, song_style=style_obj, upload_user=user)
+                youtube_url=yt_url,
+                youtube_id=yt_id, 
+                youtube_img_url='http://img.youtube.com/vi/{id}/0.jpg'.format(id=yt_id),
+                song_level=level, desc='test', tab_url=note_url, time_length=0, song_style=style_obj, upload_user=user)
             new_song.save()
 
 

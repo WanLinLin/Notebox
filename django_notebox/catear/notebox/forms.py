@@ -42,7 +42,7 @@ class LoginForm(forms.Form):
 class UploadForm(forms.Form):
     # Provided by user
     title        = forms.CharField(label='樂曲名稱', max_length=100, required=True)
-    desc         = forms.CharField(label='樂曲故事', 
+    desc         = forms.CharField(label='樂曲故事/簡介', 
                         widget=forms.Textarea(attrs={'class': 'materialize-textarea'}), max_length=300, required=False)
     artist       = forms.CharField(label='演奏者/歌手', max_length=100, required=False)
     composer     = forms.CharField(label='作曲者', max_length=100, required=False)
@@ -97,4 +97,3 @@ class UploadForm(forms.Form):
         )
 
         new_song.save()
-        
