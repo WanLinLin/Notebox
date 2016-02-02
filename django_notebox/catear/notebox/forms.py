@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate as django_auth, login as django_login
 from django.core.exceptions import ValidationError
 from django.forms import ModelChoiceField
-from .models import SongStyle
+from .models import SongStyle, SongLevel
 
 def check_username(username):
     if User.objects.filter(username=username).exists():
@@ -41,20 +41,21 @@ class LoginForm(forms.Form):
 
 class UploadForm(forms.Form):
     # Provided by user
-    title        = forms.CharField(label='樂曲名稱', max_length=100, required=True)
+    title        = forms.CharField(label='*樂曲名稱', max_length=100, required=True)
     desc         = forms.CharField(label='樂曲故事/簡介', 
                         widget=forms.Textarea(attrs={'class': 'materialize-textarea'}), max_length=300, required=False)
     artist       = forms.CharField(label='演奏者/歌手', max_length=100, required=False)
     composer     = forms.CharField(label='作曲者', max_length=100, required=False)
-    youtube_url  = forms.URLField(label='YouTube 網址', required=True)
-    song_style   = forms.ModelChoiceField(label="風格", 
+    youtube_url  = forms.URLField(label='*YouTube 網址', required=True)
+    song_style   = forms.ModelChoiceField(label="*風格", 
                         queryset=SongStyle.objects.all(), empty_label=None, required=True)
-    song_level   = forms.CharField(label='難度', max_length=100, required=True)
-    # 範例譜網址
-    tab_url      = forms.URLField(label='範例譜網址', required=False)
+    song_level   = forms.ModelChoiceField(label='*難度', 
+                        queryset=SongLevel.objects.all(), empty_label=None, required=True)
+
+    tab_url      = forms.URLField(label='外連譜網址', required=False)
     # 和弦譜
-    note         = forms.CharField(label='和弦', 
-                        widget=forms.Textarea(attrs={'class': 'materialize-textarea'}), max_length=100, required=False)
+    note         = forms.CharField(label='*和弦', 
+                        widget=forms.Textarea(attrs={'class': 'materialize-textarea'}), max_length=100, required=True)
 
     # Vex tab note
     vex_piano    = None
