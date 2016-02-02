@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate as django_auth, login as django_login
 from django.core.exceptions import ValidationError
 from django.forms import ModelChoiceField
-from .models import Style
+from .models import SongStyle
 
 def check_username(username):
     if User.objects.filter(username=username).exists():
@@ -40,15 +40,13 @@ class LoginForm(forms.Form):
         return False
 
 class UploadForm(forms.Form):
-    styles = [ (i.name , i.name ) for i in Style.objects.all() ]
-
     title = forms.CharField(label='title', max_length=100, required=True)
     artist = forms.CharField(label='artist', max_length=100, required=True)
     youtube_url = forms.URLField(label='youtube_url', required=True)
     time_length = forms.IntegerField(label='time_length', required=True)
     song_img_url = forms.URLField(label='song_img_url', required=False)
     tab_url = forms.URLField(label='tab_url', required=False)
-    song_style = forms.ChoiceField(label="song_style", widget=forms.Select, choices=styles, required=True)
+    song_style = forms.ModelChoiceField(label="風格", queryset=SongStyle.objects.all(), empty_label=None, required=True)
     level = forms.CharField(label='level', max_length=100, required=True)
     desc = forms.CharField(label='desc', widget=forms.Textarea(attrs={'class': 'materialize-textarea'}), max_length=300, required=False)
     note = forms.CharField(label='note', widget=forms.Textarea(attrs={'class': 'materialize-textarea'}), max_length=100, required=False)

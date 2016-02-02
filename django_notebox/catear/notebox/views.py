@@ -4,8 +4,7 @@ from django.contrib.auth import logout as django_logout
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.contrib.auth.decorators import login_required
 from .forms import RegistrationForm, LoginForm, UploadForm
-from .models import Song
-from .models import Style
+from .models import Song, SongStyle
 
 """
 /*===========================================
@@ -197,6 +196,7 @@ def player(request, song_id):
 
         return render(request, 'notebox/player.html', context)
 
+@login_required(login_url='/notebox/')
 def upload(request):
     upload_form = UploadForm(auto_id=True)
     context = {'upload_form': upload_form}

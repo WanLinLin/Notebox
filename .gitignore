@@ -1,4 +1,5 @@
 db.sqlite3
 *.pyc
 django_notebox/catear/static
-*.sassc
+*.sassear
+django_notebox/catear/notebox/migrations/*

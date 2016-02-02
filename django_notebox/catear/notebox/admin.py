@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from notebox.models import UserInfo, Song, Style
+from notebox.models import *
 
 # Register your models here.
 class UserInfoAdmin(admin.ModelAdmin):
@@ -12,6 +12,10 @@ class SongAdmin(admin.ModelAdmin):
 class StyleAdmin(admin.ModelAdmin):
     pass
 
+class LevelAdmin(admin.ModelAdmin):
+    pass
+
 admin.site.register(UserInfo, UserInfoAdmin)
 admin.site.register(Song, SongAdmin)
-admin.site.register(Style, StyleAdmin)
+admin.site.register(SongStyle, StyleAdmin)
+admin.site.register(SongLevel, LevelAdmin)
