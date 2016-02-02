@@ -59,7 +59,7 @@ def logout(request):
 
 def index(request):
     songs = Song.objects.all()
-    songs_list = [{'title':i.title, 'desc':i.desc, 'img':i.song_img_url, 'song_id':i.id} for i in songs[0:9]]
+    songs_list = [{'title':i.title, 'desc':i.desc, 'img':i.youtube_img_url, 'song_id':i.id} for i in songs[0:9]]
     print(songs_list)
 
     if not request.user.is_authenticated():
@@ -109,7 +109,7 @@ def index(request):
 def overview(request):
     # Get song data
     songs = Song.objects.all()
-    songs_list = [{'title':i.title, 'desc':i.desc, 'img':i.song_img_url, 'song_id':i.id} for i in songs]
+    songs_list = [{'title':i.title, 'desc':i.desc, 'img':i.youtube_img_url, 'song_id':i.id} for i in songs]
     print(songs_list)
 
 
@@ -172,8 +172,8 @@ def player(request, song_id):
     # Get song data by id
     song = Song.objects.get(id=song_id)
     song_info = {
-        'title': song.title, 'song_yt_id':song.song_yt_id, 'yt_url': song.url, 
-        'desc': song.desc, 'level': song.level, 'style': song.song_style,
+        'title': song.title, 'song_yt_id':song.youtube_id, 'yt_url': song.youtube_url, 
+        'desc': song.desc, 'level': song.song_level, 'style': song.song_style,
         'note': song.note, 'artist': song.artist}
 
     if not request.user.is_authenticated():

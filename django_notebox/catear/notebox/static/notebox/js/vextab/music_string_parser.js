@@ -5,7 +5,7 @@ var key = 'C';
 var temple = 'temple=120';
 var time = '4/4';
 
-var musicString = '|: Fmajh Emh | Dm7h Ch :|';
+var musicString = '|: Fmaj7h Emh | Dm7h Ch :|';
 var token = musicString.split(" ");
 var vextabString = 'notes ';
 var curChord = '';
@@ -26,7 +26,7 @@ function parseBar(t) {
 
 function parseChord(t) {
 	switch(t) {
-		case 'Fmaj':
+		case 'Fmaj7':
 			curChord = '(0/1.1/2.2/3.3/4) ';
 			break;
 		case 'Em':
