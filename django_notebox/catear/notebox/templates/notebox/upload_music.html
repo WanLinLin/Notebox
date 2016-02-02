@@ -108,19 +108,54 @@
 
         {% else %}
         
-        <!--=======================================
-        =            Step1 Note Editor            =
-        ========================================-->
+        <!--========================================
+        =            Step 1 Note Editor            =
+        =========================================-->
         
-        <div class="card">
-          <div class="card-content">
-            {{cleaned_data}}
+        <!-- Video preview -->
+        <div class="col s4">
+          <div class="card">
+            <div class="card-content">
+              <div class="card-title" id='vp-title'>
+                {{ cleaned_data.title }}
+                <div class="divider"></div>
+              </div>
+              <div class="section">
+                <iframe width="" height="" 
+                  src="https://www.youtube.com/embed/{{ cleaned_data.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+              </div>
+            </div>
           </div>
         </div>
-        
-        <!--====  End of Step1 Note Editor  ====-->
-        
+        <!-- Note preview -->
+        <div class="col s8">
+          <div class="card">
+            <div class="card-content">
+              <div class="card-title">
+                <h5>樂譜預覽</h5>
+                <div class="divider"></div>
+              </div>
+              <div class="section">
+              </div>
+            </div>
+          </div>
+        </div>
 
+        <!-- Chord keyboard -->
+        <div class="col s12">
+          <div class="card">
+            <div class="card-content" id="chord-keyboard">
+              <div class="section">
+              {% for c in cleaned_data.note %}
+                <button class="btn">{{ c }}</button>
+              {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+          
+        
+        <!--====  End of Step 1 Note Editor  ====-->
         {% endif %}
 
       </div>
@@ -138,7 +173,7 @@
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="{% static 'notebox/js/materialize.min.js' %}"></script>
-
+<script type="text/javascript" src="{% static 'notebox/js/keymap.js' %}"></script>
   <script>
   $(document).ready(function() {
     // ===== Materialze Setup =====
@@ -157,7 +192,28 @@
     // ===== end of Materialze Setup =====
 
     $('footer').addClass('no-top-margin');
-    })
+
+
+    {% if step == 1 %}
+    /*==============================
+    =            Step 1            =
+    ==============================*/
+
+    // RWD video
+    var width = $("#vp-title").width();
+    $("iframe").width(width);
+    // Key map
+    var enable_ck = false;
+    var ck = $("#chord-keyboard");
+    var bts = ck.find("button");
+    var keymap = new Keymap({
+      'a': function() {console.log("ah")}
+    });
+    keymap.install(document.body);
+    /*=====  End of Step 1  ======*/
+    {% endif %}
+
+  });
 
     // var yt_preview = $("#youtube_preview");
     // $('#{{ upload_form.youtube_url.id_for_label }}').focusout(function() {

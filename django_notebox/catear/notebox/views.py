@@ -209,8 +209,10 @@ def upload(request):
             step = step + 1
             upload_form.save(request)
             cleaned_data['youtube_url'] = upload_form.cleaned_data['youtube_url']
+            cleaned_data['youtube_id'] = upload_form.youtube_id
             cleaned_data['youtube_img_url'] = upload_form.youtube_img_url
-            cleaned_data['note'] = upload_form.cleaned_data['note']
+            cleaned_data['note'] = upload_form.cleaned_data['note'].split(',')
+            cleaned_data['title'] = upload_form.cleaned_data['title']
         else:
             print("Form is NOT OK")
 
