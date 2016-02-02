@@ -2,21 +2,21 @@
 <!doctype html>
 <html lang="zh-tw">
 <head>
-	<meta charset="utf-8">
+  <meta charset="utf-8">
 
-	<!--import google icon font-->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!--import google icon font-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
-	<!--Import materialize.css-->
-	<link type="text/css" rel="stylesheet" href="{% static 'notebox/css/materialize.min.css' %}" media="screen,projection"/>
-	<!-- my style -->
-	<link rel="stylesheet" type="text/css" href="{% static 'notebox/css/w-style.css' %}">
-	<link rel="stylesheet" href="{% static 'notebox/js/bower_components/tether-drop/dist/css/drop-theme-arrows.min.css' %}" />
-	<link rel="stylesheet" href="{% static 'notebox/css/overview.css' %}" />
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="{% static 'notebox/css/materialize.min.css' %}" media="screen,projection"/>
+  <!-- my style -->
+  <link rel="stylesheet" type="text/css" href="{% static 'notebox/css/w-style.css' %}">
+  <link rel="stylesheet" href="{% static 'notebox/js/bower_components/tether-drop/dist/css/drop-theme-arrows.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'notebox/css/overview.css' %}" />
 
-	<!--let browser know website is optimized for mobile-->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<title>歌曲總覽</title>
+  <!--let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>歌曲總覽</title>
 </head>
 
 <body ng-app="myApp" ng-controller="searchCtrl">
@@ -168,7 +168,7 @@
 	    	target: document.querySelector('.drop-target'),
 	    	content: document.querySelector('#search-menu'),
 	    	classes: 'drop-theme-arrows',
-	    	position: 'top left',
+	    	position: 'bottom left',
 	    	openOn: 'click'
 	    });
 	});
@@ -208,6 +208,5 @@
 
 	</script>
 	<!--====  End of JavaScript  ====-->
-
 </body>
 </html>
