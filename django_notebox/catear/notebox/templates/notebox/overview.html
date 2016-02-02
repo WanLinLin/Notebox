@@ -109,57 +109,23 @@
 		{% endverbatim %}
 
 		<div class="row">
-			<div class="col s12">
-				<ul class="tabs">
-					<li class="tab col s3"><a class="active" href="#latest">最新音樂</a></li>
-					<li class="tab col s3"><a href="#popular">熱門音樂</a></li>
-				</ul>
+			<div class="row">
+				<!-- Generate latest music boxes -->
+				{% for music in latest %}
+				<div class="col s12 m3">
+					<div class="card">
+						<div class="card-image waves-effect waves-block waves-light">
+							<img class="activator" src="{{ music.img }}">
+							<a href="/notebox/player/{{ music.song_id }}" class="card-title black-bg-text activator">
+							{{ music.title }}
+							</a>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
 			</div>
 		</div>
-
 	</div><!-- ===== end of header ===== -->
-
-	<!-- ===== latest section ===== -->
-	<div id="latest" class="section container">
-		<div class="row">
-			<!-- Generate latest music boxes -->
-			{% for music in latest %}
-			<div class="col s12 m3">
-				<div class="card">
-					<div class="card-image waves-effect waves-block waves-light">
-						<img class="activator" src="{{ music.img }}">
-						<a href="/notebox/player/{{ music.song_id }}" class="card-title black-bg-text activator">
-						{{ music.title }}
-						</a>
-					</div>
-				</div>
-			</div>
-			{% endfor %}
-		</div>
-	</div>
-	<!-- ===== end of latest section ===== -->
-
-	<!-- ===== popular section ===== -->
-	<div id="popular" class="section container">
-		<div class="row">
-			<!-- Generate popular music boxes -->
-			{% for music in popular %}
-			<div class="col s12 m3">
-				<div class="card">
-					<div class="card-image waves-effect waves-block waves-light">
-						<img class="activator" src="{{ music.img }}">
-						<a href="/notebox/player/{{ music.song_id }}" class="card-title black-bg-text activator">
-						{{ music.title }}
-						</a>
-					</div>
-				</div>
-			</div>
-			{% endfor %}
-		</div>
-	</div>
-	<!-- ===== end of popular section ===== -->
-
-	<br><br>
 	<!--====  End of Main Content  ====-->
 
 
@@ -202,7 +168,7 @@
 	    	target: document.querySelector('.drop-target'),
 	    	content: document.querySelector('#search-menu'),
 	    	classes: 'drop-theme-arrows',
-	    	position: 'bottom left',
+	    	position: 'top left',
 	    	openOn: 'click'
 	    });
 	});
