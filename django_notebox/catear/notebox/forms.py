@@ -54,8 +54,7 @@ class UploadForm(forms.Form):
 
     tab_url      = forms.URLField(label='外連譜網址', required=False)
     # 和弦譜
-    note         = forms.CharField(label='*和弦', 
-                        widget=forms.Textarea(attrs={'class': 'materialize-textarea'}), max_length=100, required=True)
+    note         = forms.CharField(label='*和弦', max_length=100, required=True)
 
     # Vex tab note
     vex_piano    = None
@@ -80,19 +79,23 @@ class UploadForm(forms.Form):
 
         # New Song object
         new_song = Song(
-            title=self.title,
-            desc=self.desc,
-            composer=self.composer,
-            artist=self.artist,
-            note=self.note,
-            tab_url=self.tab_url,
-            song_style=self.song_style,
-            song_level=self.song_level,
-            youtube_url=self.youtube_url,
-            youtube_img_url=self.youtube_img_url,
-            youtube_id=self.youtube_id,
+            # from form
+            title=self.cleaned_data['title'],
+            desc=self.cleaned_data['desc'],
+            composer=self.cleaned_data['composer'],
+            artist=self.cleaned_data['artist'],
+            note=self.cleaned_data['note'],
+            tab_url=self.cleaned_data['tab_url'],
+            song_style=self.cleaned_data['song_style'],
+            song_level=self.cleaned_data['song_level'],
+            youtube_url=self.cleaned_data['youtube_url'],
+
             vex_piano=self.vex_piano,
             vex_guitar=self.vex_guitar,
+
+            # not from form
+            youtube_img_url=self.youtube_img_url,
+            youtube_id=self.youtube_id,
             upload_user=self.upload_user,
             time_length=self.time_length
         )
