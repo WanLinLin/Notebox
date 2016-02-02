@@ -73,8 +73,7 @@
 		================================-->
 		<div id="search-menu">
 			<form><table>
-				<tbody>
-					
+				<tbody>				
 					<tr>
 						<td>根據和弦搜尋</td>
 						<td>
@@ -108,24 +107,28 @@
 		<!--====  End of Search Menu  ====-->
 		{% endverbatim %}
 
+		
+		<!--===============================
+		=            Music Box            =
+		================================-->
 		<div class="row">
-			<div class="row">
-				<!-- Generate latest music boxes -->
-				{% for music in latest %}
-				<div class="col s12 m3">
-					<div class="card">
-						<div class="card-image waves-effect waves-block waves-light">
-							<img class="activator" src="{{ music.img }}">
-							<a href="/notebox/player/{{ music.song_id }}" class="card-title black-bg-text activator">
-							{{ music.title }}
-							</a>
-						</div>
+			{% for music in latest %}
+			<div class="col s12 m3">
+				<div class="card">
+					<div class="card-image waves-effect waves-block waves-light">
+						<img class="activator" src="{{ music.img }}">
+						<a href="/notebox/player/{{ music.song_id }}" class="card-title black-bg-text activator">
+						{{ music.title }}
+						</a>
 					</div>
 				</div>
-				{% endfor %}
 			</div>
+			{% endfor %}
 		</div>
-	</div><!-- ===== end of header ===== -->
+		<!--====  End of Music Box  ====-->
+		
+	</div>
+	<!-- ===== end of header ===== -->
 	<!--====  End of Main Content  ====-->
 
 
@@ -168,7 +171,7 @@
 	    	target: document.querySelector('.drop-target'),
 	    	content: document.querySelector('#search-menu'),
 	    	classes: 'drop-theme-arrows',
-	    	position: 'bottom left',
+	    	position: 'top left',
 	    	openOn: 'click'
 	    });
 	});
