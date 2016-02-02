@@ -56,6 +56,7 @@ def logout(request):
 /*=====  End of User authentication  ======*/
 """
 
+
 def index(request):
     songs = Song.objects.all()
     songs_list = [{'title':i.title, 'desc':i.desc, 'img':i.song_img_url, 'song_id':i.id} for i in songs[0:9]]

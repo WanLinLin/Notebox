@@ -40,27 +40,61 @@ class LoginForm(forms.Form):
         return False
 
 class UploadForm(forms.Form):
-    title = forms.CharField(label='title', max_length=100, required=True)
-    artist = forms.CharField(label='artist', max_length=100, required=True)
-    youtube_url = forms.URLField(label='youtube_url', required=True)
-    time_length = forms.IntegerField(label='time_length', required=True)
-    song_img_url = forms.URLField(label='song_img_url', required=False)
-    tab_url = forms.URLField(label='tab_url', required=False)
-    song_style = forms.ModelChoiceField(label="風格", queryset=SongStyle.objects.all(), empty_label=None, required=True)
-    level = forms.CharField(label='level', max_length=100, required=True)
-    desc = forms.CharField(label='desc', widget=forms.Textarea(attrs={'class': 'materialize-textarea'}), max_length=300, required=False)
-    note = forms.CharField(label='note', widget=forms.Textarea(attrs={'class': 'materialize-textarea'}), max_length=100, required=False)
+    # Provided by user
+    title        = forms.CharField(label='樂曲名稱', max_length=100, required=True)
+    desc         = forms.CharField(label='樂曲故事', 
+                        widget=forms.Textarea(attrs={'class': 'materialize-textarea'}), max_length=300, required=False)
+    artist       = forms.CharField(label='演奏者/歌手', max_length=100, required=False)
+    composer     = forms.CharField(label='作曲者', max_length=100, required=False)
+    youtube_url  = forms.URLField(label='YouTube 網址', required=True)
+    song_style   = forms.ModelChoiceField(label="風格", 
+                        queryset=SongStyle.objects.all(), empty_label=None, required=True)
+    song_level   = forms.CharField(label='難度', max_length=100, required=True)
+    # 範例譜網址
+    tab_url      = forms.URLField(label='範例譜網址', required=False)
+    # 和弦譜
+    note         = forms.CharField(label='和弦', 
+                        widget=forms.Textarea(attrs={'class': 'materialize-textarea'}), max_length=100, required=False)
 
-    # def save(self, request):
-    #     song = Song.objects.create(
-    #         title=self.cleaned_data['title'], 
-    #         artist=self.cleaned_data['artist'],
-    #         youtube_url=self.cleaned_data['artist'],
-    #         time_length=self.cleaned_data['time_length'],
-    #         song_img_url=self.cleaned_data['song_img_url'],
-    #         tab_url=self.cleaned_data['tab_url'],
-    #         song_style=self.cleaned_data['song_style'],
-    #         level=self.cleaned_data['level'],
-    #         desc=self.cleaned_data['desc'],
-    #         note=self.cleaned_data['note'])
-    #     song.save()
+    # Vex tab note
+    vex_piano    = None
+    vex_guitar   = None
+
+    # Auto generated
+    time_length     = None
+    youtube_img_url = None
+    youtube_id      = None
+    upload_user     = None
+
+    def setVexTab(self, tabstr):
+        self.vex_guitar = tabstr
+        self.vex_piano  = tabstr
+
+    def save(self, request):
+        # Generate not-user-provided data
+        self.upload_user  = request.user
+        self.youtube_id   = youtube_url.split('v=')[-1]
+        self.time_length  = None
+        self.youtube_img_url = 'http://img.youtube.com/vi/{id}/0.jpg'.format(id=youtube_id)
+
+        # New Song object
+        new_song = Song(
+            title=self.title,
+            desc=self.desc,
+            composer=self.composer,
+            artist=self.artist,
+            note=self.note,
+            tab_url=self.tab_url,
+            song_style=self.song_style,
+            song_level=self.song_level,
+            youtube_url=self.youtube_url,
+            youtube_img_url=self.youtube_img_url,
+            youtube_id=self.youtube_id,
+            vex_piano=self.vex_piano,
+            vex_guitar=self.vex_guitar,
+            upload_user=self.upload_user,
+            time_length=self.time_length
+        )
+
+        new_song.save()
+        

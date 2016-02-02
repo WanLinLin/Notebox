@@ -17,36 +17,34 @@ class SongLevel(models.Model):
         return self.name
 
 class Song(models.Model):
-    # 上傳者
-    upload_user  = models.ForeignKey(User, related_name='song_upload_user')
-    # 標題
-    title = models.CharField(max_length=200)
-    # 描述
-    desc = models.TextField(default=None)
-    # 作曲者
-    composer = models.CharField(max_length=128, default=None)
-    # 歌手
-    artist = models.CharField(max_length=128, default=None)
+    # Provided by user
+    title        = models.CharField(max_length=200)
+    desc         = models.TextField(default=None)
+    composer     = models.CharField(max_length=128, default=None)
+    artist       = models.CharField(max_length=128, default=None)
     # 和弦
-    note = models.TextField(default=None)
+    note         = models.TextField(default=None)
     # 範例譜網址
-    tab_url = models.URLField(default=None)
-    # 風格類型
-    song_style = models.ForeignKey(SongStyle, related_name='song_style')
-    # 難易度
-    level = models.ForeignKey(SongLevel, related_name='song_level')
-    # 時間長度
-    time_length = models.IntegerField(default=None,)
-    # song_img = ImageField(default=None)
-    # youtube 縮圖 網址
-    song_img_url = models.URLField(default=None)
+    tab_url      = models.URLField(default=None)
+    song_style   = models.ForeignKey(SongStyle, related_name='song_style')
+    song_level   = models.ForeignKey(SongLevel, related_name='song_level')
     # youtube 網址
-    url = models.URLField(default=None)
-    song_yt_id = models.CharField(max_length=256)
+    youtube_url  = models.URLField(default=None)
 
+    # vex tab note
+    vex_piano    = models.TextField(default=None)
+    vex_guitar   = models.TextField(default=None)
+
+
+    # Not user editable
+    upload_user  = models.ForeignKey(User, related_name='song_upload_user')
+    time_length = models.IntegerField(default=None,)
+    # youtube 縮圖 網址
+    youtube_img_url = models.URLField(default=None)
+    youtube_id = models.CharField(max_length=256)
     modify_time = models.DateTimeField(auto_now=True)
-    upload_time = models.DateTimeField(auto_now_add=True)
-
+    upload_time = models.DateTimeField(auto_now_add=True)    
+    
     def __str__(self):
         return self.title
 
@@ -55,7 +53,6 @@ class Song(models.Model):
 
 class UserInfo(models.Model):
     info_user = models.ForeignKey(User, related_name='info_user')
-
     name = models.CharField(max_length=128)
     email = models.EmailField(default=None)
     phone = models.CharField(max_length=32, default=None)
