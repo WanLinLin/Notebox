@@ -112,8 +112,10 @@
 		<!--===============================
 		=            Music Box            =
 		================================-->
+		
+		{% for music_list in latest %}
 		<div class="row">
-			{% for music in latest %}
+			{% for music in music_list %}
 			<div class="col s12 m3">
 				<div class="card">
 					<div class="card-image waves-effect waves-block waves-light">
@@ -125,7 +127,8 @@
 				</div>
 			</div>
 			{% endfor %}
-		</div>
+		</div>	
+		{% endfor %}
 		<!--====  End of Music Box  ====-->
 		
 	</div>

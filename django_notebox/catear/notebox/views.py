@@ -110,8 +110,8 @@ def overview(request):
     # Get song data
     songs = Song.objects.all()
     songs_list = [{'title':i.title, 'desc':i.desc, 'img':i.youtube_img_url, 'song_id':i.id} for i in songs]
+    songs_list = [songs_list[i: i+4] for i in range(0, len(songs_list), 4)]
     print(songs_list)
-
 
     if not request.user.is_authenticated():
         # Check form
