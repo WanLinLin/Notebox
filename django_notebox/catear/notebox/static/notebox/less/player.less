@@ -3,11 +3,24 @@
 /*==============================
 =            Player            =
 ==============================*/
+body {
+    background-color: #F1F1F1;
+}
 .mao-player-wrapper {
+
+    .card-panel {
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+
     .mao-video-info {
-        padding-right: 3rem;
+        padding-right: 0.6rem;
         p,h5,h4,h6 {
             color: black;
+        }
+
+        .mao-video-short-info {
+            margin-top: 0.6rem;
         }
     }
 
@@ -17,7 +30,10 @@
     }
 
     .mao-music-sheet-wrapper {
-        background-image: url("../images/lightpaperfibers/lightpaperfibers_@2X.png");
+
+        margin-top: 0px;
+
+        // background-image: url("../images/lightpaperfibers/lightpaperfibers_@2X.png");
         .mao-music-sheet-box {
             height: 30rem;
             overflow: auto;
@@ -28,11 +44,15 @@
         }
 
         .mao-tab-content {
-            padding-top: 1rem;
+            // padding-top: 0.8rem;
         }
         li.tab > a {
-            background-image: url("../images/lightpaperfibers/lightpaperfibers_@2X.png");
+            // background-image: url("../images/lightpaperfibers/lightpaperfibers_@2X.png");
         }
     }
+}
+
+.mao-recommender {
+    
 }
 /*=====  End of Player  ======*/

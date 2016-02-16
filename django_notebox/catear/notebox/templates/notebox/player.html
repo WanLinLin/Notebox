@@ -33,31 +33,28 @@
         <div class="section row" style="margin-bottom: 0;">
           <!-- Video -->
           <div class="col s7 white-text mao-video-info">
-            <div class="section">
+            <div class="card-panel">
               <div class="video-container">
                 <iframe width="420" height="315" src="https://www.youtube.com/embed/{{ song_yt_id }}" frameborder="0" allowfullscreen></iframe>
               </div>
+              <!-- <a class="btn mao-simple-btn">AB 段重複</a>
+              <a class="btn mao-simple-btn">影片速度</a> -->
             </div>
-            <a class="btn mao-simple-btn">AB 段重複</a>
-            <a class="btn mao-simple-btn">影片速度</a>
+
             <!-- Video Short Info -->
-            <div class="divider"></div>
-            <div class="section">
+            <div class="card-panel mao-video-short-info">
               <!-- Info below -->
               <h5 style="display: inline;">{{ title }} - {{ artist }}</h5> 
-              <blockquote class="mao-blockquote">
-                <h6>歌曲難度</h6>
-                <p>
-                  <div class="chip mao-chip">{{ level }}</div>
-                  <div class="chip mao-chip">C</div>
-                  <div class="chip mao-chip">D</div>
-                  <div class="chip mao-chip">E</div>
-                  <div class="chip mao-chip">F</div>
-                  <div class="chip mao-chip">G</div>
-                  <div class="chip mao-chip">A</div>
-                  <div class="chip mao-chip">B</div>
-                </p>
-              </blockquote>
+              <p>
+                <div class="chip mao-chip">{{ level }}</div>
+                <div class="chip mao-chip">C</div>
+                <div class="chip mao-chip">D</div>
+                <div class="chip mao-chip">E</div>
+                <div class="chip mao-chip">F</div>
+                <div class="chip mao-chip">G</div>
+                <div class="chip mao-chip">A</div>
+                <div class="chip mao-chip">B</div>
+              </p>
               <!-- Buttons -->
               <a class="btn modal-trigger mao-simple-btn"  href="#modal1"><i class="fa fa-check"></i> 演奏訣竅</a>
               <a class="btn mao-simple-btn"><i class="fa fa-heart-o"></i></a>
@@ -66,7 +63,7 @@
             </div>
           </div>
           <!-- Note -->
-          <div class="col s5 center-align card mao-music-sheet-wrapper">
+          <div class="col s5 center-align card-panel mao-music-sheet-wrapper">
             <!-- Note box -->
             <div class="row mao-music-sheet-box">
               <!-- Tabs -->
@@ -93,19 +90,17 @@
           </div>
         </div>
       </div>
-      <div class="divider"></div>
     </div>
     <!--====  End of Video & Note  ====-->
 
     <!--=====================================
-    =            Video more info            =
+    =            Description                =
     ======================================-->
-    <div class="container">
-      <!-- Description -->
+    <!-- <div class="container">
       <h4>樂曲故事</h4>
       <p>{{ desc }}</p>
-    </div>
-    <!--====  End of Video more info  ====-->
+    </div> -->
+    <!--====  End of Description      ====-->
 
     <!--=================================
     =            Playing Tips           =
@@ -120,7 +115,7 @@
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ratione rem, sunt possimus eius cupiditate vel numquam reprehenderit voluptas! Voluptatem similique quidem repellat repudiandae ullam minima enim iure assumenda placeat!
             </div>
             <div class="col l5">
-              <img class="responsive-img" src="http://placehold.it/350x150" alt="">
+              <img class="responsive-img" src="http://placehold.it/350x200" alt="">
             </div>
           </div>
         </p>
@@ -155,7 +150,7 @@
     <!--==========================================
     =            Comment and Feedback            =
     ===========================================-->
-    <div class="container">
+   <!--  <div class="container">
       <div class="section">
         <h4>留言與回饋</h4>
         <div class="divider"></div>
@@ -179,32 +174,48 @@
           </ul>
         </p>
       </div>
-    </div>
+    </div> -->
     <!--====  End of Comment and Feedback  ====-->
 
     <!--====================================
     =            Recommanded Songs         =
     =====================================-->
     <div class="container">
-      <div class="section">
-        <h4>我們也推薦</h4>
-        <div class="row">
-          <div class="col l4 s12">
-            <div class="card">
-              <div class="card-image"><img src="http://placehold.it/350x150" alt=""></div>
-              <div class="card-content">Quis unde illum accusamus</div>
-            </div>
-          </div>
-          <div class="col l4 s12">
-            <div class="card">
-              <div class="card-image"><img src="http://placehold.it/350x150" alt=""></div>
-              <div class="card-content">voluptatum alias aperiam</div>
-            </div>
-          </div>
-          <div class="col l4 s12">
-            <div class="card">
-              <div class="card-image"><img src="http://placehold.it/350x150" alt=""></div>
-              <div class="card-content">perferendis harum blanditiis</div>
+      <div class="row">
+        <div class="col m12">
+          <div class="card-panel mao-recommender">
+            <h4>我們也推薦</h4>
+            <div class="row">
+              <div class="col l4 s12">
+                <div class="card">
+                  <div class="card-image waves-effect waves-block waves-light">
+                    <img src="http://placehold.it/350x200" alt="">
+                    <a href="/notebox/player/{{ music.song_id }}" class="card-title black-bg-text activator">
+                    Quis unde illum accusamus
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col l4 s12">
+                <div class="card">
+                  <div class="card-image waves-effect waves-block waves-light">
+                    <img src="http://placehold.it/350x200" alt="">
+                    <a href="/notebox/player/{{ music.song_id }}" class="card-title black-bg-text activator">
+                    Quis unde illum accusamus
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col l4 s12">
+                <div class="card">
+                  <div class="card-image waves-effect waves-block waves-light">
+                    <img src="http://placehold.it/350x200" alt="">
+                    <a href="/notebox/player/{{ music.song_id }}" class="card-title black-bg-text activator">
+                    Quis unde illum accusamus
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -261,8 +272,9 @@
   =======================================*/
   function initNotebox() {
     // Get height
-    var height = $("div.mao-video-info").height();
-    $("div.mao-music-sheet-box").height(height);
+    var height = $("div.mao-player-wrapper > div.container > div.section.row").height();
+    $("div.mao-music-sheet-wrapper").height(height);
+    $("div.mao-video-info").height(height);
   }
   /*=====  End of note box height  ======*/
   
