@@ -13,7 +13,13 @@
   <link rel="stylesheet" type="text/css" href="{% static 'notebox/css/general.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'notebox/css/w-style.css' %}">
 </head>
+
+{% if step == 0 %}
+<body>
+{% elif step == 1 %}
 <body ng-app="chordEdit">
+{% endif %}
+
   <!--====================================
   =            Include navbar            =
   =====================================-->
@@ -30,7 +36,7 @@
       <h3 class="brown-text">
         {% if step == 0  %}
           上傳歌曲第一步 - 歌曲基本資料
-        {% else %}
+        {% elif etep == 1 %}
           上傳歌曲第二步 - 寫譜
         {% endif %}
       </h3>
@@ -44,9 +50,15 @@
         <form action="" method="POST"> {% csrf_token %}
           <div class="card">
             <div class="card-content row">
+
+              <!-- YouTube video preview -->
+
               <!-- <div class="col s12" id="youtube_preview">
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/cOzZfxVa0qE" frameborder="0" allowfullscreen></iframe>
               </div> -->
+
+              <!-- YouTube URL and Title -->
+
               <div class="col s12">
                 <div class="">
                 <b>{{ upload_form.youtube_url.label_tag}}</b>
@@ -57,6 +69,8 @@
                 {{ upload_form.title}}
                 </div>
               </div>
+
+              <!-- Note, Artist and Composer -->
 
               <div class="col s8">
                 <div class="">
@@ -73,6 +87,8 @@
                 </div>
               </div>
 
+              <!-- Style, Level and outside tab URL -->
+
               <div class="col s4">
                 <div class="">
                 <b>{{ upload_form.song_style.label_tag}}</b>
@@ -87,6 +103,8 @@
                 {{ upload_form.tab_url}}
                 </div>
               </div>
+
+              <!-- Description -->
 
               <div class="col s12">
                 <div class="">
@@ -106,13 +124,15 @@
         </form>
         <!--====  End of Step 0 Form  ====-->
 
-        {% else %}
+        {% elif step == 1 %}
         
         <!--========================================
         =            Step 1 Note Editor            =
         =========================================-->
         <div ng-controller="ChordKeyCtrl">
+
           <!-- Video preview -->
+
           <div class="col s4">
             <div class="card">
               <div class="card-content">
@@ -129,7 +149,9 @@
           </div>
 
           {% verbatim %}
+
           <!-- Note preview -->
+
           <div class="col s8">
             <div class="card">
               <div class="card-content">
@@ -147,6 +169,7 @@
           </div>
 
           <!-- Chord keyboard -->
+
           <div class="col s12">
             <div class="card">
               <div class="card-content" id="chord-keyboard">
@@ -160,10 +183,12 @@
             </div>
           </div>
         </div>
-        {% endverbatim %}
-        <!--====  End of Step 1 Note Editor  ====-->
-        {% endif %}
 
+        {% endverbatim %}
+
+        <!--====  End of Step 1 Note Editor  ====-->
+
+        {% endif %}
       </div>
     </div>
   </div>
