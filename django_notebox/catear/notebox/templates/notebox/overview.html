@@ -43,20 +43,63 @@
 		<div class="row">
 			<div class="col s12 m12 push-l2 l8">
 				<div class="row">
-				<!-- search bar -->
-				<nav class="bg-twhite-8 search-input">
-					<div class="nav-wrapper">
-						<form>
-							<div class="input-field">
-								<input type="search" class="brown-text text-darken-1 drop-target" placeholder="依曲名、作曲家、歌手..." required
-								 value="">
-								<label for="search"><i class="fa fa-search brown-text"></i></label>
-							</div>
-						</form>
-					</div>
-				</nav>
+
+					<!-- search bar -->
+
+					<nav class="bg-twhite-8 search-input">
+						<div class="nav-wrapper">
+							<form>
+								<div class="input-field">
+									<input type="search" class="brown-text text-darken-1 drop-target" placeholder="依曲名、作曲家、歌手..." required
+									 value="">
+									<label for="search"><i class="fa fa-search brown-text"></i></label>
+								</div>
+							</form>
+						</div>
+					</nav>
 				</div>
-				<div class="row">
+
+				<!--===============================
+				=            Search Menu          =
+				================================-->
+
+				<div id="search-menu">
+					<form><table>
+						<tbody>				
+							<tr>
+								<td>根據和弦搜尋</td>
+								<td>
+									<label ng-repeat="(ok,ov) in s_opts.chord" class="input-opt">
+										<input type="checkbox" checked="false" ng-model="ov.value" ng-click="select_func($event)" />
+										{{ ov.text }}
+									</label>
+								</td>
+							</tr>
+							<tr>
+								<td>根據類別搜尋</td>
+								<td>
+									<label ng-repeat="(ok,ov) in s_opts.class" class="input-opt">
+										<input type="checkbox" checked="false" ng-model="ov.value" ng-click="select_func($event)" />
+										{{ ov.text }}
+									</label>
+								</td>
+							</tr>
+							<tr>
+								<td>根據難易度搜尋</td>
+								<td>
+									<label ng-repeat="(ok,ov) in s_opts.level" class="input-opt">
+										<input type="checkbox" checked="false" ng-model="ov.value" ng-click="select_func($event)" />
+										{{ ov.text }}
+									</label>
+								</td>
+							</tr>
+						</tbody>
+					</table></form>
+				</div>
+
+				<!--====  End of Search Menu  ====-->
+
+				<!-- <div class="row">
 					<div class="col s4">
 						和弦：<div class="chip mao-chip query-opt" ng-repeat="(k,v) in s_opts.chord" ng-if="v.value==true">{{ v.text }}</div>
 					</div>
@@ -66,46 +109,10 @@
 					<div class="col s4">
 						難度：<div class="chip mao-chip query-opt" ng-repeat="(k,v) in s_opts.level" ng-if="v.value==true">{{ v.text }}</div>
 					</div>
-				</div>
+				</div> -->
+
 			</div>
 		</div>
-		<!--===============================
-		=            Search Menu          =
-		================================-->
-		<div id="search-menu">
-			<form><table>
-				<tbody>				
-					<tr>
-						<td>根據和弦搜尋</td>
-						<td>
-							<label ng-repeat="(ok,ov) in s_opts.chord" class="input-opt">
-								<input type="checkbox" checked="false" ng-model="ov.value" ng-click="select_func($event)" />
-								{{ ov.text }}
-							</label>
-						</td>
-					</tr>
-					<tr>
-						<td>根據類別搜尋</td>
-						<td>
-							<label ng-repeat="(ok,ov) in s_opts.class" class="input-opt">
-								<input type="checkbox" checked="false" ng-model="ov.value" ng-click="select_func($event)" />
-								{{ ov.text }}
-							</label>
-						</td>
-					</tr>
-					<tr>
-						<td>根據難易度搜尋</td>
-						<td>
-							<label ng-repeat="(ok,ov) in s_opts.level" class="input-opt">
-								<input type="checkbox" checked="false" ng-model="ov.value" ng-click="select_func($event)" />
-								{{ ov.text }}
-							</label>
-						</td>
-					</tr>
-				</tbody>
-			</table></form>
-		</div>
-		<!--====  End of Search Menu  ====-->
 		{% endverbatim %}
 
 		
@@ -129,6 +136,7 @@
 			{% endfor %}
 		</div>	
 		{% endfor %}
+
 		<!--====  End of Music Box  ====-->
 		
 	</div>
@@ -162,22 +170,22 @@
 
 	    // Navbar dropdown setting
 	    $('.dropdown-button:contains("分類搜尋")').dropdown({
-			inDuration: 300,
-			constrain_width: false,
-			outDuration: 225,
-			hover: true, // Activate on hover
-			belowOrigin: true,
-			alignment: 'left'
+				inDuration: 300,
+				constrain_width: false,
+				outDuration: 225,
+				hover: true, // Activate on hover
+				belowOrigin: true,
+				alignment: 'left'
 	    });
 
 	    // Drop
-	    var drop = new Drop({
-	    	target: document.querySelector('.drop-target'),
-	    	content: document.querySelector('#search-menu'),
-	    	classes: 'drop-theme-arrows',
-	    	position: 'top left',
-	    	openOn: 'click'
-	    });
+	    // var drop = new Drop({
+	    // 	target: document.querySelector('.drop-target'),
+	    // 	content: document.querySelector('#search-menu'),
+	    // 	classes: 'drop-theme-arrows',
+	    // 	position: 'top left',
+	    // 	openOn: 'click'
+	    // });
 	});
 
 	// Search options (Angular JS here)
