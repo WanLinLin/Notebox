@@ -2,7 +2,7 @@ var pianoScore = $('#piano_score');
 var guitarScore = $('#guitar_score');
 
 // Key signature of the score
-var key = 'D';
+var key = 'C';
 
 // Tempo of the score
 var tempo = 'tempo=120';
@@ -14,7 +14,7 @@ var time = '4/4';
 var tuning = 'standard'
 
 // a cool string derive from Jfugue MusicString
-var musicString = '|: Dh Dh | Dh Dh :|';
+// var musicString = '|: Dh Dh | Dh Dh :|';
 
 // tokens in musicString
 var token = musicString.split(" ");
@@ -444,9 +444,29 @@ function parseChord(t) {
 
 function parseDuration(t) {
   switch(t) {
+    case 'w':
+      pianoVexStr += ':w ';
+      guitarVexStr += ':w ';
+      break;
     case 'h':
       pianoVexStr += ':h ';
       guitarVexStr += ':h ';
+      break;
+    case 'q':
+      pianoVexStr += ':q ';
+      guitarVexStr += ':q ';
+      break;
+    case '8':
+      pianoVexStr += ':8 ';
+      guitarVexStr += ':8 ';
+      break;
+    case '16':
+      pianoVexStr += ':16 ';
+      guitarVexStr += ':16 ';
+      break;
+    case '32':
+      pianoVexStr += ':32 ';
+      guitarVexStr += ':32 ';
       break;
   }
 
@@ -456,31 +476,36 @@ function parseDuration(t) {
   curGuitarChord = '';
 }
 
+// main parse function
 for(var i = 0; i < token.length; i++) {
   var t = token[i];
 
+  // parse bar
   if(t.indexOf('|') > -1) {
     parseBar(t);
   }
 
-  if(t.indexOf('C') > -1) {
-    parseChord(t.substring(0, t.length - 1));
-    t = t.substring(t.length - 1, t.length);
-  }
-  if(t.indexOf('D') > -1) {
-    parseChord(t.substring(0, t.length - 1));
-    t = t.substring(t.length - 1, t.length);
-  }
-  if(t.indexOf('E') > -1) {
-    parseChord(t.substring(0, t.length - 1));
-    t = t.substring(t.length - 1, t.length);
-  }
-  if(t.indexOf('F') > -1) {
+  // parse chord
+  if(t.indexOf('C') > -1 ||
+    t.indexOf('D') > -1 ||
+    t.indexOf('E') > -1 ||
+    t.indexOf('F') > -1 ||
+    t.indexOf('G') > -1 ||
+    t.indexOf('A') > -1 ||
+    t.indexOf('B') > -1)
+  {
     parseChord(t.substring(0, t.length - 1));
     t = t.substring(t.length - 1, t.length);
   }
 
-  if(t.indexOf('h') > -1) {
+  // parse duration
+  if(t.indexOf('w') > -1 ||
+    t.indexOf('h') > -1 ||
+    t.indexOf('q') > -1 ||
+    t.indexOf('8') > -1 ||
+    t.indexOf('16') > -1 ||
+    t.indexOf('32') > -1)
+  {
     parseDuration(t);
   }
 }
@@ -489,13 +514,12 @@ pianoVexStr += '\n';
 guitarVexStr += '\n';
 // alert(pianoVexStr);
 
-pianoScore.append('options space=0\n');
+pianoScore.append('options space=0 width=600 scale=1.0 player=true\n');
 pianoScore.append('stave\n');
 pianoScore.append('key=' + key + ' time=' + time + '\n');
 pianoScore.append(pianoVexStr);
 
-guitarScore.append('options space=0\n');
+guitarScore.append('options space=0 width=600 scale=1.0 tab-stems=true player=true\n');
 guitarScore.append('tabstave\n');
-guitarScore.append('notation=true\n');
 guitarScore.append('key=' + key + ' time=' + time + '\n');
 guitarScore.append(guitarVexStr);

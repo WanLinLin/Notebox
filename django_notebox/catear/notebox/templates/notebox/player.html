@@ -66,7 +66,7 @@
           <div class="col s5">
             <div class="card-panel center-align mao-music-sheet-wrapper">
               <!-- Note box -->
-              <div class="row mao-music-sheet-box">
+              <div id="mao-music-sheet-box" class="row mao-music-sheet-box">
                 <!-- Tabs -->
                 <div class="col s12">
                   <ul class="tabs">
@@ -76,15 +76,15 @@
                 </div>
                 <!-- Tab content -->
                 <div id="type1_note" class="col s12 mao-tab-content">
-                  <div id="piano_score" class="vex-tabdiv" width=600 scale=1.0></div>
+                  <div id="piano_score" class="vex-tabdiv" editor="true" editor_height="80"></div>
                   {% comment %}
                   Insert note here
                   {% endcomment %}
-                  {{ note }}
-                  <canvas id="mao-music-sheet" width="600" height="200"></canvas>
+                  <!-- {{ note }} -->
+                  <!-- <canvas id="mao-music-sheet" width="600" height="200"></canvas> -->
                 </div>
                 <div id="type2_note" class="col s12 mao-tab-content">
-                  <div id="guitar_score" class="vex-tabdiv" width=600 scale=1.0></div>
+                  <div id="guitar_score" class="vex-tabdiv" editor="true" editor_height="80"></div>
                 </div>
               </div>
             </div>
@@ -255,6 +255,20 @@
       belowOrigin: true,
       alignment: 'left'
     });
+
+    var songChords = "{{ note }}";
+    var songChordsArr = songChords.split(",");
+
+    var musicString = '| ';
+    for (var i = 0; i < songChordsArr.length; i++) {
+      musicString += songChordsArr[i] + 'h ';
+
+      if(i % 2 == 1 && i != songChordsArr.length) {
+        musicString += '| ';
+      }
+    }
+    musicString += '|';
+
   </script>
 
   <script type="text/javascript" src="{% static 'notebox/js/vextab/chords.js' %}"></script>
@@ -265,6 +279,21 @@
 
   $(document).ready(function(){
     initNotebox();
+
+    // var $element = $("#mao-music-sheet-box");
+    // var lastWidth = $("#mao-music-sheet-box").css('width');
+    // function checkForChanges() {
+    //   if ($element.css('width') != lastWidth) {
+    //     // alert($('textarea .editor').val());
+    //     alert("change");
+    //   }
+
+    //   setTimeout(checkForChanges, 500);
+    // }
+
+    $('#mao-music-sheet-box').bind('resize', function(){
+      console.log('resized');
+    });
   });
   
   /*=======================================
@@ -278,7 +307,7 @@
     $("div.mao-video-info").height(height);
   }
   /*=====  End of note box height  ======*/
-  
+
   </script>
 
 </body>
