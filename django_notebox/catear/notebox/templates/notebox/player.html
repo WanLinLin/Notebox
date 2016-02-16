@@ -29,7 +29,7 @@
     =            Video & Note            =
     ===================================-->
     <div class="mao-player-wrapper">
-      <div class="container">
+      <div class="">
         <div class="section row" style="margin-bottom: 0;">
           <!-- Video -->
           <div class="col s7 white-text mao-video-info">
@@ -63,27 +63,29 @@
             </div>
           </div>
           <!-- Note -->
-          <div class="col s5 center-align card-panel mao-music-sheet-wrapper">
-            <!-- Note box -->
-            <div class="row mao-music-sheet-box">
-              <!-- Tabs -->
-              <div class="col s12">
-                <ul class="tabs">
-                  <li class="tab col s3"><a href="#type1_note">鋼琴譜</a></li>
-                  <li class="tab col s3"><a href="#type2_note">吉他譜</a></li>
-                </ul>
-              </div>
-              <!-- Tab content -->
-              <div id="type1_note" class="col s12 mao-tab-content">
-                <div id="piano_score" class="vex-tabdiv" width=600 scale=1.0></div>
-                {% comment %}
-                Insert note here
-                {% endcomment %}
-                {{ note }}
-                <canvas id="mao-music-sheet" width="600" height="200"></canvas>
-              </div>
-              <div id="type2_note" class="col s12 mao-tab-content">
-                <div id="guitar_score" class="vex-tabdiv" width=600 scale=1.0></div>
+          <div class="col s5">
+            <div class="card-panel center-align mao-music-sheet-wrapper">
+              <!-- Note box -->
+              <div class="row mao-music-sheet-box">
+                <!-- Tabs -->
+                <div class="col s12">
+                  <ul class="tabs">
+                    <li class="tab col s3"><a href="#type1_note">鋼琴譜</a></li>
+                    <li class="tab col s3"><a href="#type2_note">吉他譜</a></li>
+                  </ul>
+                </div>
+                <!-- Tab content -->
+                <div id="type1_note" class="col s12 mao-tab-content">
+                  <div id="piano_score" class="vex-tabdiv" width=600 scale=1.0></div>
+                  {% comment %}
+                  Insert note here
+                  {% endcomment %}
+                  {{ note }}
+                  <canvas id="mao-music-sheet" width="600" height="200"></canvas>
+                </div>
+                <div id="type2_note" class="col s12 mao-tab-content">
+                  <div id="guitar_score" class="vex-tabdiv" width=600 scale=1.0></div>
+                </div>
               </div>
             </div>
           </div>
@@ -269,8 +271,9 @@
   =======================================*/
   function initNotebox() {
     // Get height
-    var height = $("div.mao-player-wrapper > div.container > div.section.row").height();
-    $("div.mao-music-sheet-wrapper").height(height);
+    var height = $("div.mao-player-wrapper > div > div.section.row").height();
+    console.log(height);
+    $("div.mao-music-sheet-wrapper").height(height-40);
     $("div.mao-video-info").height(height);
   }
   /*=====  End of note box height  ======*/
