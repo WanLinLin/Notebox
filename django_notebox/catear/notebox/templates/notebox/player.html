@@ -256,6 +256,7 @@
       alignment: 'left'
     });
 
+    // convert all chords to musicString
     var songChords = "{{ note }}";
     var songChordsArr = songChords.split(",");
 
@@ -274,26 +275,13 @@
   <script type="text/javascript" src="{% static 'notebox/js/vextab/chords.js' %}"></script>
   <script type="text/javascript" src="{% static 'notebox/js/vextab/music_string_parser.js' %}"></script>
   <script type="text/javascript" src="{% static 'notebox/js/vextab/releases/vextab-div.js' %}"></script>
+  <script type="text/javascript" src="{% static 'notebox/js/css-element-queries/src/ResizeSensor.js' %}"></script>
 
   <script type="text/javascript">
 
   $(document).ready(function(){
     initNotebox();
-
-    // var $element = $("#mao-music-sheet-box");
-    // var lastWidth = $("#mao-music-sheet-box").css('width');
-    // function checkForChanges() {
-    //   if ($element.css('width') != lastWidth) {
-    //     // alert($('textarea .editor').val());
-    //     alert("change");
-    //   }
-
-    //   setTimeout(checkForChanges, 500);
-    // }
-
-    $('#mao-music-sheet-box').bind('resize', function(){
-      console.log('resized');
-    });
+    changeScoreWidthOnResize();
   });
   
   /*=======================================
@@ -307,6 +295,39 @@
     $("div.mao-video-info").height(height);
   }
   /*=====  End of note box height  ======*/
+
+
+  function changeScoreWidthOnResize() {
+    var isWidthAdd = false;
+    var oldWidthString;
+    var scoreWidth;
+    var newWidthString;
+    var pianoEditorString;
+    var guitarEditorString;
+
+    new ResizeSensor(jQuery('#mao-music-sheet-box'), function() {
+      // console.log('main content dimension changed');
+      
+      scoreWidth = $('#mao-music-sheet-box').width() - 30;
+      newWidthString = ' width=' + scoreWidth.toString();
+      pianoEditorString = $('#piano_score .editor').val();
+      guitarEditorString = $('#guitar_score .editor').val();
+
+      if(isWidthAdd) {
+        $('#piano_score .editor').val(pianoEditorString.replace(oldWidthString, newWidthString));
+        $('#guitar_score .editor').val(guitarEditorString.replace(oldWidthString, newWidthString));
+        oldWidthString = newWidthString;
+      }
+      else { // first time
+        var position = 7; // 'option' string length
+
+        $('#piano_score .editor').val([pianoEditorString.slice(0, position), newWidthString, pianoEditorString.slice(position)].join(''));
+        $('#guitar_score .editor').val([guitarEditorString.slice(0, position), newWidthString, guitarEditorString.slice(position)].join(''));
+        oldWidthString = newWidthString;
+        isWidthAdd = true;
+      }
+    });
+  }
 
   </script>
 
