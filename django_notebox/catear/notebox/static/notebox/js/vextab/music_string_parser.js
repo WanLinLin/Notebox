@@ -684,12 +684,14 @@ pianoVexStr += '\n';
 guitarVexStr += '\n';
 // alert(pianoVexStr);
 
-pianoScore.append('options space=0 scale=1.0\n');
+pianoScore.append('options space=0 scale=1.0 ');
+pianoScore.append('width=' + scoreWidth + '\n');
 pianoScore.append('stave\n');
 pianoScore.append('key=' + key + ' time=' + time + '\n');
 pianoScore.append(pianoVexStr);
 
-guitarScore.append('options space=0 scale=1.0 tab-stems=true\n');
+guitarScore.append('options space=0 scale=1.0 tab-stems=true ');
+guitarScore.append('width=' + scoreWidth + '\n');
 guitarScore.append('tabstave\n');
 guitarScore.append('key=' + key + ' time=' + time + '\n');
 guitarScore.append(guitarVexStr);
