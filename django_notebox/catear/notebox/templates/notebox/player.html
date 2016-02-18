@@ -76,7 +76,8 @@
                 </div>
                 <!-- Tab content -->
                 <div id="type1_note" class="col s12 mao-tab-content">
-                  <div id="piano_score" class="vex-tabdiv" editor="true" editor_height="80"></div>
+                  <!-- <div class="vex-tabdiv"></div> -->
+                  <canvas id="piano_score"></canvas>
                   {% comment %}
                   Insert note here
                   {% endcomment %}
@@ -84,7 +85,8 @@
                   <!-- <canvas id="mao-music-sheet" width="600" height="200"></canvas> -->
                 </div>
                 <div id="type2_note" class="col s12 mao-tab-content">
-                  <div id="guitar_score" class="vex-tabdiv" editor="true" editor_height="80"></div>
+                  <!-- <div id="guitar_score" class="vex-tabdiv"></div> -->
+                  <canvas id="guitar_score"></canvas>
                 </div>
               </div>
             </div>
@@ -272,17 +274,21 @@
     var scoreWidth = $('#mao-music-sheet-box').width() - 30;
 
   </script>
-
+  <!-- chords bank -->
   <script type="text/javascript" src="{% static 'notebox/js/vextab/chords.js' %}"></script>
-  <script type="text/javascript" src="{% static 'notebox/js/vextab/music_string_parser.js' %}"></script>
+  <!-- vextab lib -->
   <script type="text/javascript" src="{% static 'notebox/js/vextab/releases/vextab-div.js' %}"></script>
+  <!-- loader lib -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.2.1/lodash.js"></script>
+  <!-- music string parser -->
+  <script type="text/javascript" src="{% static 'notebox/js/vextab/vextab_parser_and_renderer.js' %}"></script>
+  <!-- resize detector -->
   <script type="text/javascript" src="{% static 'notebox/js/css-element-queries/src/ResizeSensor.js' %}"></script>
 
   <script type="text/javascript">
 
   $(document).ready(function(){
     initNotebox();
-    changeScoreWidthOnResize();
   });
   
   /*=======================================
@@ -296,38 +302,6 @@
     $("div.mao-video-info").height(height);
   }
   /*=====  End of note box height  ======*/
-
-
-  function changeScoreWidthOnResize() {
-    var isWidthAdd = false;
-    var oldWidthString;
-    var newWidthString;
-    var pianoEditorString;
-    var guitarEditorString;
-
-    new ResizeSensor(jQuery('#mao-music-sheet-box'), function() {
-      // console.log('main content dimension changed');
-      
-      scoreWidth = $('#mao-music-sheet-box').width() - 30;
-      newWidthString = ' width=' + scoreWidth.toString();
-      pianoEditorString = $('#piano_score .editor').val();
-      guitarEditorString = $('#guitar_score .editor').val();
-
-      if(isWidthAdd) {
-        $('#piano_score .editor').val(pianoEditorString.replace(oldWidthString, newWidthString));
-        $('#guitar_score .editor').val(guitarEditorString.replace(oldWidthString, newWidthString));
-        oldWidthString = newWidthString;
-      }
-      else { // first time
-        var position = 7; // 'option' string length
-
-        $('#piano_score .editor').val([pianoEditorString.slice(0, position), newWidthString, pianoEditorString.slice(position)].join(''));
-        $('#guitar_score .editor').val([guitarEditorString.slice(0, position), newWidthString, guitarEditorString.slice(position)].join(''));
-        oldWidthString = newWidthString;
-        isWidthAdd = true;
-      }
-    });
-  }
 
   </script>
 

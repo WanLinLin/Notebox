@@ -1,35 +1,129 @@
+// score width: using initial mao-music-sheet-box div width to set score width
+var initial_width = $('#mao-music-sheet-box').width() - 30;
+
 var pianoScore = $('#piano_score');
 var guitarScore = $('#guitar_score');
 
 // Key signature of the score
 var key = 'C';
-
 // Tempo of the score
 var tempo = 'tempo=120';
-
 // Tempo of the score
 var time = '4/4';
-
 // Guitar tuning of the score (standard|dropd|eb|E/5,B/4,G/4,D/4,A/3,E/3)
 var tuning = 'standard'
-
-// a cool string derive from Jfugue MusicString
-// var musicString = '|: Dh Dh | Dh Dh :|';
-
 // tokens in musicString
 var token = musicString.split(" ");
-
 // piano vextab string, starts with "notes"
 var pianoVexStr = 'notes ';
-
 // guitar vextab string, starts with "notes"
 var guitarVexStr = 'notes ';
-
+// piano final vextab string
+var pianoVexTab;
+// guitar final vextab string
+var guitarVexTab;
 // current parsing chord for piano
 var curPianoChord = '';
-
 // current parsing chord for guitar
 var curGuitarChord = '';
+
+const musicalAlphabets = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+const durations = ['w', 'h', 'q', '8', '16', '32'];
+
+// =======================
+// = main parse function =
+// =======================
+for(var i = 0; i < token.length; i++) {
+  var t = token[i];
+
+  // parse bar
+  if(t.indexOf('|') > -1) {
+    parseBar(t);
+  }
+
+  // parse chord
+  if(hasMusialAlphabes(t)) {
+    parseChord(t.substring(0, t.length - 1));
+    t = t.substring(t.length - 1, t.length);
+  }
+
+  // parse duration
+  if(hasDurations(t)){
+    parseDuration(t);
+  }
+}
+
+pianoVexStr += '\n';
+guitarVexStr += '\n';
+
+pianoVexTab = 'options width=' + initial_width.toString() + ' space=0 scale=1.0 \n';
+pianoVexTab += 'stave\n';
+pianoVexTab += 'key=' + key + ' time=' + time + '\n';
+pianoVexTab += pianoVexStr;
+
+guitarVexTab = 'options width=' + initial_width.toString() + ' space=0 scale=1.0 tab-stems=true \n';
+guitarVexTab += 'tabstave\n';
+guitarVexTab += 'key=' + key + ' time=' + time + '\n';
+guitarVexTab += guitarVexStr;
+
+
+// ========================
+// = main render function =
+// ========================
+
+// Load VexTab module.
+vextab = VexTabDiv;
+
+$(function() {
+  VexTab = vextab.VexTab;
+  Artist = vextab.Artist;
+  Renderer = Vex.Flow.Renderer;
+
+  Artist.DEBUG = false;
+  VexTab.DEBUG = false;
+
+  // Create VexFlow Renderer from canvas element with id #boo
+  piano_renderer = new Renderer($('#piano_score')[0], Renderer.Backends.CANVAS);
+  guitar_renderer = new Renderer($('#guitar_score')[0], Renderer.Backends.CANVAS);
+
+  // Initialize VexTab artist and parser.
+  piano_artist = new Artist(10, 10, 600, {scale: 1.0});
+  piano_vextab = new VexTab(piano_artist);
+  guitar_artist = new Artist(10, 10, 600, {scale: 1.0});
+  guitar_vextab = new VexTab(guitar_artist);
+
+  function render() {
+    try {
+      // parse and render piano score
+      piano_vextab.reset();
+      piano_artist.reset();
+      piano_vextab.parse(pianoVexTab);
+      piano_artist.render(piano_renderer);
+
+      // parse and render guitar score
+      guitar_vextab.reset();
+      guitar_artist.reset();
+      guitar_vextab.parse(guitarVexTab);
+      guitar_artist.render(guitar_renderer);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  // $("#blah").keyup(_.throttle(render, 0));
+  var oldWidthString = 'width=' + initial_width.toString();
+
+  new ResizeSensor(jQuery('#mao-music-sheet-box'), function() {
+    var detectScoreWidth = $('#mao-music-sheet-box').width() - 30;
+    var newWidthString = ' width=' + detectScoreWidth.toString();
+
+    pianoVexTab = pianoVexTab.replace(oldWidthString, newWidthString);
+    guitarVexTab = guitarVexTab.replace(oldWidthString, newWidthString);
+    oldWidthString = newWidthString;
+    
+    render();
+  });
+});
 
 function parseBar(t) {
   switch(t) {
@@ -646,52 +740,20 @@ function parseDuration(t) {
   curGuitarChord = '';
 }
 
-// main parse function
-for(var i = 0; i < token.length; i++) {
-  var t = token[i];
-
-  // parse bar
-  if(t.indexOf('|') > -1) {
-    parseBar(t);
+function hasMusialAlphabes(t) {
+  for (var i = 0; i < musicalAlphabets.length; i++) {
+    if(t.indexOf(musicalAlphabets[i]) > -1) {
+      return true;
+    }
   }
-
-  // parse chord
-  if(t.indexOf('C') > -1 ||
-    t.indexOf('D') > -1 ||
-    t.indexOf('E') > -1 ||
-    t.indexOf('F') > -1 ||
-    t.indexOf('G') > -1 ||
-    t.indexOf('A') > -1 ||
-    t.indexOf('B') > -1)
-  {
-    parseChord(t.substring(0, t.length - 1));
-    t = t.substring(t.length - 1, t.length);
-  }
-
-  // parse duration
-  if(t.indexOf('w') > -1 ||
-    t.indexOf('h') > -1 ||
-    t.indexOf('q') > -1 ||
-    t.indexOf('8') > -1 ||
-    t.indexOf('16') > -1 ||
-    t.indexOf('32') > -1)
-  {
-    parseDuration(t);
-  }
+  return false;
 }
 
-pianoVexStr += '\n';
-guitarVexStr += '\n';
-// alert(pianoVexStr);
-
-pianoScore.append('options space=0 scale=1.0 ');
-pianoScore.append('width=' + scoreWidth + '\n');
-pianoScore.append('stave\n');
-pianoScore.append('key=' + key + ' time=' + time + '\n');
-pianoScore.append(pianoVexStr);
-
-guitarScore.append('options space=0 scale=1.0 tab-stems=true ');
-guitarScore.append('width=' + scoreWidth + '\n');
-guitarScore.append('tabstave\n');
-guitarScore.append('key=' + key + ' time=' + time + '\n');
-guitarScore.append(guitarVexStr);
+function hasDurations(t) {
+  for (var i = 0; i < durations.length; i++) {
+    if(t.indexOf(durations[i]) > -1) {
+      return true;
+    }
+  }
+  return false;
+}
