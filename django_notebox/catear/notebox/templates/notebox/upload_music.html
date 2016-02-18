@@ -159,7 +159,9 @@
                   <h5>樂譜預覽</h5>
                   <div class="divider"></div>
                 </div>
-                <div class="section">
+                <div id="tab" class="section">
+                  <div id="key"></div>
+                  <div id="time"></div>
                   <span ng-repeat="ic in inputChords track by $index">
                     {{ ic }}
                   </span>
@@ -175,35 +177,35 @@
                 <div class="collapsible-body">
                   <div class="section row">
                     <div class="col s10 push-s1">
-                      <a class="btn-floating waves-effect waves-light center-align">C</a>
-                      <a class="btn-floating waves-effect waves-light center-align">#C</a>
+                      <a class="key-signature btn-floating waves-effect waves-light center-align">C</a>
+                      <a class="key-signature btn-floating waves-effect waves-light center-align">#C</a>
                     </div>
                     <div class="col s10 push-s1">
-                      <a class="btn-floating waves-effect waves-light center-align">bD</a>
-                      <a class="btn-floating waves-effect waves-light center-align">D</a>
-                      <a class="btn-floating waves-effect waves-light center-align">#D</a>
+                      <a class="key-signature btn-floating waves-effect waves-light center-align">bD</a>
+                      <a class="key-signature btn-floating waves-effect waves-light center-align">D</a>
+                      <a class="key-signature btn-floating waves-effect waves-light center-align">#D</a>
                     </div>
                     <div class="col s10 push-s1">
-                      <a class="btn-floating waves-effect waves-light center-align">bE</a>
-                      <a class="btn-floating waves-effect waves-light center-align">E</a>
+                      <a class="key-signature btn-floating waves-effect waves-light center-align">bE</a>
+                      <a class="key-signature btn-floating waves-effect waves-light center-align">E</a>
                     </div>
                     <div class="col s10 push-s1">
-                      <a class="btn-floating waves-effect waves-light center-align">F</a>
-                      <a class="btn-floating waves-effect waves-light center-align">#F</a>
+                      <a class="key-signature btn-floating waves-effect waves-light center-align">F</a>
+                      <a class="key-signature btn-floating waves-effect waves-light center-align">#F</a>
                     </div>
                     <div class="col s10 push-s1">
-                      <a class="btn-floating waves-effect waves-light center-align">bG</a>
-                      <a class="btn-floating waves-effect waves-light center-align">G</a>
-                      <a class="btn-floating waves-effect waves-light center-align">#G</a>
+                      <a class="key-signature btn-floating waves-effect waves-light center-align">bG</a>
+                      <a class="key-signature btn-floating waves-effect waves-light center-align">G</a>
+                      <a class="key-signature btn-floating waves-effect waves-light center-align">#G</a>
                     </div>
                     <div class="col s10 push-s1">
-                      <a class="btn-floating waves-effect waves-light center-align">bA</a>
-                      <a class="btn-floating waves-effect waves-light center-align">A</a>
-                      <a class="btn-floating waves-effect waves-light center-align">#A</a>
+                      <a class="key-signature btn-floating waves-effect waves-light center-align">bA</a>
+                      <a class="key-signature btn-floating waves-effect waves-light center-align">A</a>
+                      <a class="key-signature btn-floating waves-effect waves-light center-align">#A</a>
                     </div>
                     <div class="col s10 push-s1">
-                      <a class="btn-floating waves-effect waves-light center-align">bB</a>
-                      <a class="btn-floating waves-effect waves-light center-align">B</a>
+                      <a class="key-signature btn-floating waves-effect waves-light center-align">bB</a>
+                      <a class="key-signature btn-floating waves-effect waves-light center-align">B</a>
                     </div>
                   </div>
                 </div>
@@ -213,8 +215,8 @@
                 <div class="collapsible-body">
                   <div class="section row">
                     <div class="col s10 push-s1">
-                      <a class="btn-floating waves-effect waves-light center-align">4/4</a>
-                      <a class="btn-floating waves-effect waves-light center-align">3/4</a>
+                      <a class="time-signature btn-floating waves-effect waves-light center-align">4/4</a>
+                      <a class="time-signature btn-floating waves-effect waves-light center-align">3/4</a>
                     </div>
                   </div>
                 </div>
@@ -224,10 +226,12 @@
                 <div class="collapsible-body">
                   <div class="section row">
                     <div class="col s10 push-s1">
-                      <a class="btn-floating waves-effect waves-light center-align"><i class="fa fa-music"></i></a>
-                      <a class="btn-floating waves-effect waves-light center-align"><i class="fa fa-music"></i></a>
-                      <a class="btn-floating waves-effect waves-light center-align"><i class="fa fa-music"></i></a>
-                      <a class="btn-floating waves-effect waves-light center-align"><i class="fa fa-music"></i></a>
+                      <a class="btn-floating waves-effect waves-light center-align">w</i></a>
+                      <a class="btn-floating waves-effect waves-light center-align">h</i></a>
+                      <a class="btn-floating waves-effect waves-light center-align">q</i></a>
+                      <a class="btn-floating waves-effect waves-light center-align">8</i></a>
+                      <a class="btn-floating waves-effect waves-light center-align">16</i></a>
+                      <a class="btn-floating waves-effect waves-light center-align">32</i></a>
                     </div>
                   </div>
                 </div>
@@ -324,7 +328,7 @@
   {% endif %}
 
   $(document).ready(function() {
-    // ===== Materialze Setup =====
+    // ===== Materialize Setup =====
     $('select').material_select();
     $('.button-collapse').sideNav();
     $('.modal-trigger').leanModal();
@@ -337,7 +341,7 @@
       belowOrigin: true,
       alignment: 'left'
     });
-    // ===== end of Materialze Setup =====
+    // ===== end of Materialize Setup =====
 
     $('footer').addClass('no-top-margin');
 
@@ -351,6 +355,40 @@
     $("iframe").width(width);
     /*=====  End of Step 1  ======*/
     {% endif %}
+
+    /*=======================
+    =   Add Key Signature   =
+    ========================*/
+    var oldKey;
+    $('.key-signature').click(function() {
+      if($('#key').text().indexOf('KEY') > -1) {
+        $('#key').text($('#key').text().replace('KEY = ' + oldKey, 'KEY = ' + $(this).text()));
+        oldKey = $(this).text();
+      }
+      else {
+        $('#key').prepend('KEY = ' + $(this).text());
+        oldKey = $(this).text();
+      }
+    });
+    /*===== End of add key signature =====*/
+
+    /*=======================
+    =   Add Time Signature   =
+    ========================*/
+    var oldTime;
+    $('.time-signature').click(function() {
+      if($('#time').text().indexOf('TIME') > -1) {
+        $('#time').text($('#time').text().replace('TIME = ' + oldTime, 'TIME = ' + $(this).text()));
+        oldTime = $(this).text();
+      }
+      else {
+        $('#time').prepend('TIME = ' + $(this).text());
+        oldTime = $(this).text();
+      }
+    });
+    /*===== End of add key signature =====*/
+
+
   });
   </script>
 </body>
