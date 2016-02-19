@@ -1,6 +1,7 @@
 // score width: using initial mao-music-sheet-box div width to set score width
 var initial_width = $('#mao-music-sheet-box').width() - 30;
 
+// piano and guitar score canvas
 var pianoScore = $('#piano_score');
 var guitarScore = $('#guitar_score');
 
@@ -109,8 +110,7 @@ $(function() {
       console.log(e);
     }
   }
-
-  // $("#blah").keyup(_.throttle(render, 0));
+  
   var oldWidthString = 'width=' + initial_width.toString();
 
   new ResizeSensor(jQuery('#mao-music-sheet-box'), function() {

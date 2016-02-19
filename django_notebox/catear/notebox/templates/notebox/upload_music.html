@@ -160,11 +160,21 @@
                   <div class="divider"></div>
                 </div>
                 <div id="tab" class="section">
+                  <!-- key signature -->
                   <div id="key"></div>
+                  <!-- time signature -->
                   <div id="time"></div>
-                  <span ng-repeat="ic in inputChords track by $index">
+
+                  <span class="chord waves-effect btn-flat" ng-repeat="ic in inputChords track by $index">
                     {{ ic }}
                   </span>
+                </div>
+
+                <!-- add stave button -->
+                <div class="row">
+                  <a class="stave-btn col s12 waves-effect waves-light btn grey lighten-2 grey-text text-lighten-1">
+                    <i class="fa fa-plus"></i>
+                  </a>
                 </div>
               </div>
             </div>
@@ -356,38 +366,59 @@
     /*=====  End of Step 1  ======*/
     {% endif %}
 
-    /*=======================
-    =   Add Key Signature   =
-    ========================*/
+    
+    /*=========================================
+    =            Add Key Signature            =
+    =========================================*/
     var oldKey;
     $('.key-signature').click(function() {
-      if($('#key').text().indexOf('KEY') > -1) {
-        $('#key').text($('#key').text().replace('KEY = ' + oldKey, 'KEY = ' + $(this).text()));
+      if($('#key').text().indexOf('key') > -1) {
+        $('#key').text($('#key').text().replace('key=' + oldKey, 'key=' + $(this).text()));
         oldKey = $(this).text();
       }
       else {
-        $('#key').prepend('KEY = ' + $(this).text());
+        $('#key').prepend('key=' + $(this).text());
         oldKey = $(this).text();
       }
     });
-    /*===== End of add key signature =====*/
+    /*=====  End of Add Key Signature  ======*/
+    
 
-    /*=======================
-    =   Add Time Signature   =
-    ========================*/
+    /*==========================================
+    =            Add Time Signature            =
+    ==========================================*/
     var oldTime;
     $('.time-signature').click(function() {
-      if($('#time').text().indexOf('TIME') > -1) {
-        $('#time').text($('#time').text().replace('TIME = ' + oldTime, 'TIME = ' + $(this).text()));
+      if($('#time').text().indexOf('time') > -1) {
+        $('#time').text($('#time').text().replace('time=' + oldTime, 'time=' + $(this).text()));
         oldTime = $(this).text();
       }
       else {
-        $('#time').prepend('TIME = ' + $(this).text());
+        $('#time').prepend('time=' + $(this).text());
         oldTime = $(this).text();
       }
     });
-    /*===== End of add key signature =====*/
+    /*=====  End of Add Time Signature  ======*/
 
+    /*===========================================
+    =            Chords Add Duration            =
+    ===========================================*/
+    $('.chord').click(function() {
+      alert('fuk');
+    });
+    /*=====  End of Chords Add Duration  ======*/
+
+    /*=================================
+    =            Add Stave            =
+    =================================*/
+    var staveCount = 0;
+    $('.stave-btn').click(function() {
+      $('#tab').append('<div id="stave' + staveCount + '" class="row grey lighten-3">This is stave' + staveCount + '</div>');
+      staveCount++;
+    });
+    /*=====  End of Add Stave  ======*/
+    
+    
 
   });
   </script>
