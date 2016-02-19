@@ -60,7 +60,7 @@ def logout(request):
 def index(request):
     songs = Song.objects.all()
     songs_list = [{'title':i.title, 'desc':i.desc, 'img':i.youtube_img_url, 'song_id':i.id} for i in songs[0:9]]
-    print(songs_list)
+    # print(songs_list)
 
     if not request.user.is_authenticated():
         # Check form
@@ -111,7 +111,7 @@ def overview(request):
     songs = Song.objects.all()
     songs_list = [{'title':i.title, 'desc':i.desc, 'img':i.youtube_img_url, 'song_id':i.id} for i in songs]
     songs_list = [songs_list[i: i+4] for i in range(0, len(songs_list), 4)]
-    print(songs_list)
+    # print(songs_list)
 
     if not request.user.is_authenticated():
         # Check form
@@ -214,7 +214,8 @@ def upload(request):
             cleaned_data['note'] = upload_form.cleaned_data['note'].split(',')
             cleaned_data['title'] = upload_form.cleaned_data['title']
         else:
-            print("Form is NOT OK")
+            pass
+            # print("Form is NOT OK")
 
     context = {'upload_form': upload_form, 'step': step, 'cleaned_data': cleaned_data}
     return render(request, 'notebox/upload_music.html', context)

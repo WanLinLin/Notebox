@@ -129,7 +129,7 @@
         <!--========================================
         =            Step 1 Note Editor            =
         =========================================-->
-        <div ng-controller="ChordKeyCtrl">
+        <div id="note-editor" ng-controller="ChordKeyCtrl">
 
           <!-- Video preview -->
 
@@ -166,8 +166,13 @@
                   <div id="time"></div>
 
                   <span class="chord waves-effect btn-flat" ng-repeat="ic in inputChords track by $index">
-                    {{ ic }}
+                    <!-- {{ ic }} -->
                   </span>
+
+                  <!-- Stave will be inserted BELOW -->
+
+                  <!-- <div id="stave0" class="row grey lighten-3">This is stave0</div> -->
+
                 </div>
 
                 <!-- add stave button -->
@@ -307,6 +312,9 @@
   // Angular JS
   var chordEdit = angular.module("chordEdit", ['cfp.hotkeys']);
   chordEdit.controller('ChordKeyCtrl', function($scope, hotkeys) {
+
+    $scope.selected_stave = null;
+
     // Chord list
     $scope.chords = [ 
       {% for c in cleaned_data.note %}
@@ -318,12 +326,23 @@
     $scope.inputChords = [];
     $scope.chordKeyFunc = function(key) {
       $scope.inputChords.push(key);
+
+      // Add chord into the selected stave
+
+      if ($scope.selected_stave !== null) {
+        $scope.selected_stave.append('<span>'+key+'</span>');
+      }
+
     };
 
     // Bind keyboard
     $scope.availableKeys = [
       'a', 's', 'd', 'f', 'g', 
-      'h', 'j', 'k', 'l', ';'
+      'h', 'j', 'k', 'l', ';',
+      'z', 'x', 'c', 'v', 'b', 
+      'n', 'm', ',', '.', '/',
+      'q', 'w', 'e', 'r', 't', 
+      'y', 'u', 'i', 'o', 'p'
     ];
     $scope.bindKeyboard = function(index, chord) {
       hotkeys.add({
@@ -363,9 +382,6 @@
     // RWD video
     var width = $("#vp-title").width();
     $("iframe").width(width);
-    /*=====  End of Step 1  ======*/
-    {% endif %}
-
     
     /*=========================================
     =            Add Key Signature            =
@@ -413,13 +429,24 @@
     =================================*/
     var staveCount = 0;
     $('.stave-btn').click(function() {
-      $('#tab').append('<div id="stave' + staveCount + '" class="row grey lighten-3">This is stave' + staveCount + '</div>');
+      var stave = $('<div id="stave' + staveCount + '" class="row grey lighten-3">This is stave' + staveCount + '</div>')
+
+      // Bind click event
+      stave.click(function() {
+        var ss = $(this);
+        var note_editor_scope = angular.element($("#note-editor")).scope();
+        note_editor_scope.$apply(function() {
+          note_editor_scope.selected_stave = ss;
+        });
+      });
+
+      $('#tab').append(stave);
       staveCount++;
     });
     /*=====  End of Add Stave  ======*/
-    
-    
 
+    /*=====  End of Step 1  ======*/
+    {% endif %}
   });
   </script>
 </body>
