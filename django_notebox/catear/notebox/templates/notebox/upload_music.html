@@ -242,12 +242,12 @@
                 <div class="collapsible-body">
                   <div class="section row">
                     <div class="col s10 push-s1">
-                      <a class="btn-floating waves-effect waves-light center-align">w</i></a>
-                      <a class="btn-floating waves-effect waves-light center-align">h</i></a>
-                      <a class="btn-floating waves-effect waves-light center-align">q</i></a>
-                      <a class="btn-floating waves-effect waves-light center-align">8</i></a>
-                      <a class="btn-floating waves-effect waves-light center-align">16</i></a>
-                      <a class="btn-floating waves-effect waves-light center-align">32</i></a>
+                      <a class="musical-duration btn-floating waves-effect waves-light center-align">w</i></a>
+                      <a class="musical-duration btn-floating waves-effect waves-light center-align">h</i></a>
+                      <a class="musical-duration btn-floating waves-effect waves-light center-align">q</i></a>
+                      <!-- <a class="musical-duration btn-floating waves-effect waves-light center-align">8</i></a>
+                      <a class="musical-duration btn-floating waves-effect waves-light center-align">16</i></a>
+                      <a class="musical-duration btn-floating waves-effect waves-light center-align">32</i></a> -->
                     </div>
                   </div>
                 </div>
@@ -309,9 +309,12 @@
   <!-- AngularJS -->
   <script type="text/javascript" src="{% static 'notebox/js/bower_components/angular/angular.js' %}"></script>
   <script type="text/javascript" src="{% static 'notebox/js/bower_components/angular-hotkeys/build/hotkeys.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'notebox/js/vextab/music.js' %}"></script>
   <script>
 
   {% if step == 1 %}
+  var curEditChord;
+
   // Angular JS
   var chordEdit = angular.module("chordEdit", ['cfp.hotkeys']);
   chordEdit.controller('ChordKeyCtrl', function($scope, hotkeys) {
@@ -338,7 +341,7 @@
 
         /*----------  chords add duration  ----------*/
         chord_span.click(function() {
-          
+          curEditChord = $(this);
         });
       }
 
@@ -452,6 +455,25 @@
       staveCount++;
     });
     /*=====  End of Add Stave  ======*/
+
+    /*====================================
+    =            Add Duration            =
+    ====================================*/
+    $('.musical-duration').click(function() {
+      var chordText = curEditChord.text();
+      var lastChar = chordText.substring(chordText.length - 1, chordText.length);
+      if(hasDurations(lastChar)) {
+        // replace
+        curEditChord.text(chordText.replace(lastChar, $(this).text()));
+      }
+      else {
+        // append
+        curEditChord.append($(this).text());
+      }
+    });
+    
+    /*=====  End of Add Duration  ======*/
+    
 
     /*=====  End of Step 1  ======*/
     {% endif %}

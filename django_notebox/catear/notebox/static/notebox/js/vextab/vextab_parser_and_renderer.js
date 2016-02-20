@@ -40,9 +40,6 @@ var curPianoChord = {'name':'', 'composition':''};
 // current parsing chord for guitar
 var curGuitarChord = {'name':'', 'composition':''};
 
-const musicalAlphabets = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
-const durations = ['w', 'h', 'q', '8', '16', '32'];
-
 /*===========================================
 =            main parse function            =
 ===========================================*/
@@ -70,7 +67,7 @@ for(var i = 0; i < token.length; i++) {
 pianoNoteStr += '\n';
 guitarNoteStr += '\n';
 
-alert(musicString);
+// alert(musicString);
 
 pianoVexStr = 'options width=' + initial_width.toString() + ' space=14 scale=1.0 font-size=16\n';
 pianoVexStr += 'stave\n';
@@ -866,21 +863,21 @@ function parseDuration(t) {
       pianoTextStr += ':q, ';
       guitarTextStr += ':q, ';
       break;
-    case '8':
+    case 'i':
       pianoNoteStr += ':8';
       guitarNoteStr += ':8';
 
       pianoTextStr += ':8, ';
       guitarTextStr += ':8, ';
       break;
-    case '16':
+    case 's':
       pianoNoteStr += ':16';
       guitarNoteStr += ':16';
 
       pianoTextStr += ':16, ';
       guitarTextStr += ':16, ';
       break;
-    case '32':
+    case 't':
       pianoNoteStr += ':32';
       guitarNoteStr += ':32';
 
@@ -899,22 +896,4 @@ function parseDuration(t) {
   curGuitarChord['composition'] = '';
   curPianoChord['name'] = '';
   curGuitarChord['name'] = '';
-}
-
-function hasMusialAlphabes(t) {
-  for (var i = 0; i < musicalAlphabets.length; i++) {
-    if(t.indexOf(musicalAlphabets[i]) > -1) {
-      return true;
-    }
-  }
-  return false;
-}
-
-function hasDurations(t) {
-  for (var i = 0; i < durations.length; i++) {
-    if(t.indexOf(durations[i]) > -1) {
-      return true;
-    }
-  }
-  return false;
 }
