@@ -15,25 +15,30 @@ var time = '4/4';
 var tuning = 'standard'
 // tokens in musicString
 var token = musicString.split(" ");
-// piano vextab string, starts with "notes"
-var pianoVexStr = 'notes ';
-// guitar vextab string, starts with "notes"
-var guitarVexStr = 'notes ';
+// piano vextab 'notes' string, starts with "notes"
+var pianoNoteStr = 'notes ';
+// guitar vextab 'notes' string, starts with "notes"
+var guitarNoteStr = 'notes ';
+// piano vextab 'text' string, starts with "notes"
+var pianoTextStr = 'text ';
+// guitar vextab 'text' string, starts with "notes"
+var guitarTextStr = 'text ';
 // piano final vextab string
-var pianoVexTab;
+var pianoVexStr;
 // guitar final vextab string
-var guitarVexTab;
+var guitarVexStr;
 // current parsing chord for piano
-var curPianoChord = '';
+var curPianoChord = {'name':'', 'composition':''};
 // current parsing chord for guitar
-var curGuitarChord = '';
+var curGuitarChord = {'name':'', 'composition':''};
 
 const musicalAlphabets = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
 const durations = ['w', 'h', 'q', '8', '16', '32'];
 
-// =======================
-// = main parse function =
-// =======================
+/*===========================================
+=            main parse function            =
+===========================================*/
+
 for(var i = 0; i < token.length; i++) {
   var t = token[i];
 
@@ -54,23 +59,28 @@ for(var i = 0; i < token.length; i++) {
   }
 }
 
-pianoVexStr += '\n';
-guitarVexStr += '\n';
+pianoNoteStr += '\n';
+guitarNoteStr += '\n';
 
-pianoVexTab = 'options width=' + initial_width.toString() + ' space=0 scale=1.0 \n';
-pianoVexTab += 'stave\n';
-pianoVexTab += 'key=' + key + ' time=' + time + '\n';
-pianoVexTab += pianoVexStr;
+// alert(musicString);
 
-guitarVexTab = 'options width=' + initial_width.toString() + ' space=0 scale=1.0 tab-stems=true \n';
-guitarVexTab += 'tabstave\n';
-guitarVexTab += 'key=' + key + ' time=' + time + '\n';
-guitarVexTab += guitarVexStr;
+pianoVexStr = 'options width=' + initial_width.toString() + ' space=14 scale=1.0 font-size=16\n';
+pianoVexStr += 'stave\n';
+pianoVexStr += 'key=' + key + ' time=' + time + '\n';
+pianoVexStr += pianoNoteStr;
+pianoVexStr += pianoTextStr.substring(0, pianoTextStr.length - 2); // substring to remove the last comma
 
+guitarVexStr = 'options width=' + initial_width.toString() + ' space=14 scale=1.0 tab-stems=true font-size=16 tab-stem-direction=down\n';
+guitarVexStr += 'tabstave\n';
+guitarVexStr += 'key=' + key + ' time=' + time + '\n';
+guitarVexStr += guitarNoteStr;
+guitarVexStr += guitarTextStr.substring(0, guitarTextStr.length - 2); // substring to remove the last comma
 
-// ========================
-// = main render function =
-// ========================
+/*=====  End of main parse function  ======*/
+
+/*============================================
+=            main render function            =
+============================================*/
 
 // Load VexTab module.
 vextab = VexTabDiv;
@@ -98,13 +108,13 @@ $(function() {
       // parse and render piano score
       piano_vextab.reset();
       piano_artist.reset();
-      piano_vextab.parse(pianoVexTab);
+      piano_vextab.parse(pianoVexStr);
       piano_artist.render(piano_renderer);
 
       // parse and render guitar score
       guitar_vextab.reset();
       guitar_artist.reset();
-      guitar_vextab.parse(guitarVexTab);
+      guitar_vextab.parse(guitarVexStr);
       guitar_artist.render(guitar_renderer);
     } catch (e) {
       console.log(e);
@@ -117,38 +127,54 @@ $(function() {
     var detectScoreWidth = $('#mao-music-sheet-box').width() - 30;
     var newWidthString = ' width=' + detectScoreWidth.toString();
 
-    pianoVexTab = pianoVexTab.replace(oldWidthString, newWidthString);
-    guitarVexTab = guitarVexTab.replace(oldWidthString, newWidthString);
+    pianoVexStr = pianoVexStr.replace(oldWidthString, newWidthString);
+    guitarVexStr = guitarVexStr.replace(oldWidthString, newWidthString);
     oldWidthString = newWidthString;
     
     render();
   });
 });
 
+/*=====  End of main render function  ======*/
+
+
 function parseBar(t) {
   switch(t) {
     // begin repeat bar
     case '|:':
-      pianoVexStr += '=|: ';
-      guitarVexStr += '=|: ';
+      pianoNoteStr += '=|: ';
+      guitarNoteStr += '=|: ';
+
+      pianoTextStr += '=|:, ';
+      guitarTextStr += '=|:, ';
       break;
 
     // end repeat bar
     case ':|':
-      pianoVexStr += '=:| ';
-      guitarVexStr += '=:| ';
+      pianoNoteStr += '=:| ';
+      guitarNoteStr += '=:| ';
+
+      pianoTextStr += '=:|, ';
+      guitarTextStr += '=:|, ';
       break;
 
     // standard bar
     case '|':
-      pianoVexStr += '| ';
-      guitarVexStr += '| ';
+      pianoNoteStr += '| ';
+      guitarNoteStr += '| ';
+
+      pianoTextStr += '|, ';
+      guitarTextStr += '|, ';
       break;
 
     // double bar
     case '||':
-      pianoVexStr += '=|| ';
-      guitarVexStr += '=|| ';
+      pianoNoteStr += '=|| ';
+      guitarNoteStr += '=|| ';
+
+      pianoTextStr += '=||, ';
+      guitarTextStr += '=||, ';
+      break;
 
     default:
       break;
@@ -159,585 +185,695 @@ function parseChord(t) {
   switch(t) {
     // C family
     case 'C':
-      curPianoChord = GuitarChords['C'];
-      curGuitarChord = GuitarChords['C'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['C'];
+      curGuitarChord['composition'] = GuitarChords['C'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'Cm':
-      curPianoChord = GuitarChords['Cm'];
-      curGuitarChord = GuitarChords['Cm'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['Cm'];
+      curGuitarChord['composition'] = GuitarChords['Cm'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'Cm7':
-      curPianoChord = GuitarChords['Cm7'];
-      curGuitarChord = GuitarChords['Cm7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['Cm7'];
+      curGuitarChord['composition'] = GuitarChords['Cm7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'Cmaj7':
-      curPianoChord = GuitarChords['Cmaj7'];
-      curGuitarChord = GuitarChords['Cmaj7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['Cmaj7'];
+      curGuitarChord['composition'] = GuitarChords['Cmaj7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'C7':
-      curPianoChord = GuitarChords['C7'];
-      curGuitarChord = GuitarChords['C7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['C7'];
+      curGuitarChord['composition'] = GuitarChords['C7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
 
     // #C family
     case '#C':
-      curPianoChord = GuitarChords['#C'];
-      curGuitarChord = GuitarChords['#C'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#C'];
+      curGuitarChord['composition'] = GuitarChords['#C'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case '#Cm':
-      curPianoChord = GuitarChords['#Cm'];
-      curGuitarChord = GuitarChords['#Cm'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#Cm'];
+      curGuitarChord['composition'] = GuitarChords['#Cm'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case '#Cm7':
-      curPianoChord = GuitarChords['#Cm7'];
-      curGuitarChord = GuitarChords['#Cm7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#Cm7'];
+      curGuitarChord['composition'] = GuitarChords['#Cm7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case '#Cmaj7':
-      curPianoChord = GuitarChords['#Cmaj7'];
-      curGuitarChord = GuitarChords['#Cmaj7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#Cmaj7'];
+      curGuitarChord['composition'] = GuitarChords['#Cmaj7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case '#C7':
-      curPianoChord = GuitarChords['#C7'];
-      curGuitarChord = GuitarChords['#C7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#C7'];
+      curGuitarChord['composition'] = GuitarChords['#C7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
 
     // bD family
     case 'bD':
-      curPianoChord = GuitarChords['bD'];
-      curGuitarChord = GuitarChords['bD'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bD'];
+      curGuitarChord['composition'] = GuitarChords['bD'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'bDm':
-      curPianoChord = GuitarChords['bDm'];
-      curGuitarChord = GuitarChords['bDm'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bDm'];
+      curGuitarChord['composition'] = GuitarChords['bDm'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'bDm7':
-      curPianoChord = GuitarChords['bDm7'];
-      curGuitarChord = GuitarChords['bDm7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bDm7'];
+      curGuitarChord['composition'] = GuitarChords['bDm7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'bDmaj7':
-      curPianoChord = GuitarChords['bDmaj7'];
-      curGuitarChord = GuitarChords['bDmaj7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bDmaj7'];
+      curGuitarChord['composition'] = GuitarChords['bDmaj7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'bD7':
-      curPianoChord = GuitarChords['bD7'];
-      curGuitarChord = GuitarChords['bD7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bD7'];
+      curGuitarChord['composition'] = GuitarChords['bD7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
 
     // D family
     case 'D':
-      curPianoChord = GuitarChords['D'];
-      curGuitarChord = GuitarChords['D'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['D'];
+      curGuitarChord['composition'] = GuitarChords['D'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'Dm':
-      curPianoChord = GuitarChords['Dm'];
-      curGuitarChord = GuitarChords['Dm'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['Dm'];
+      curGuitarChord['composition'] = GuitarChords['Dm'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'Dm7':
-      curPianoChord = GuitarChords['Dm7'];
-      curGuitarChord = GuitarChords['Dm7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['Dm7'];
+      curGuitarChord['composition'] = GuitarChords['Dm7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'Dmaj7':
-      curPianoChord = GuitarChords['Dmaj7'];
-      curGuitarChord = GuitarChords['Dmaj7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['Dmaj7'];
+      curGuitarChord['composition'] = GuitarChords['Dmaj7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'D7':
-      curPianoChord = GuitarChords['D7'];
-      curGuitarChord = GuitarChords['D7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['D7'];
+      curGuitarChord['composition'] = GuitarChords['D7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
 
     // #D family
     case '#D':
-      curPianoChord = GuitarChords['#D'];
-      curGuitarChord = GuitarChords['#D'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#D'];
+      curGuitarChord['composition'] = GuitarChords['#D'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case '#Dm':
-      curPianoChord = GuitarChords['#Dm'];
-      curGuitarChord = GuitarChords['#Dm'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#Dm'];
+      curGuitarChord['composition'] = GuitarChords['#Dm'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case '#Dm7':
-      curPianoChord = GuitarChords['#Dm7'];
-      curGuitarChord = GuitarChords['#Dm7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#Dm7'];
+      curGuitarChord['composition'] = GuitarChords['#Dm7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case '#Dmaj7':
-      curPianoChord = GuitarChords['#Dmaj7'];
-      curGuitarChord = GuitarChords['#Dmaj7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#Dmaj7'];
+      curGuitarChord['composition'] = GuitarChords['#Dmaj7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case '#D7':
-      curPianoChord = GuitarChords['#D7'];
-      curGuitarChord = GuitarChords['#D7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#D7'];
+      curGuitarChord['composition'] = GuitarChords['#D7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
 
     // bE family
     case 'bE':
-      curPianoChord = GuitarChords['bE'];
-      curGuitarChord = GuitarChords['bE'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bE'];
+      curGuitarChord['composition'] = GuitarChords['bE'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'bEm':
-      curPianoChord = GuitarChords['bEm'];
-      curGuitarChord = GuitarChords['bEm'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bEm'];
+      curGuitarChord['composition'] = GuitarChords['bEm'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'bEm7':
-      curPianoChord = GuitarChords['bEm7'];
-      curGuitarChord = GuitarChords['bEm7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bEm7'];
+      curGuitarChord['composition'] = GuitarChords['bEm7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'bEmaj7':
-      curPianoChord = GuitarChords['bEmaj7'];
-      curGuitarChord = GuitarChords['bEmaj7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bEmaj7'];
+      curGuitarChord['composition'] = GuitarChords['bEmaj7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'bE7':
-      curPianoChord = GuitarChords['bE7'];
-      curGuitarChord = GuitarChords['bE7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bE7'];
+      curGuitarChord['composition'] = GuitarChords['bE7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
 
     // E family
     case 'E':
-      curPianoChord = GuitarChords['E'];
-      curGuitarChord = GuitarChords['E'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['E'];
+      curGuitarChord['composition'] = GuitarChords['E'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'Em':
-      curPianoChord = GuitarChords['Em'];
-      curGuitarChord = GuitarChords['Em'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['Em'];
+      curGuitarChord['composition'] = GuitarChords['Em'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'Em7':
-      curPianoChord = GuitarChords['Em7'];
-      curGuitarChord = GuitarChords['Em7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['Em7'];
+      curGuitarChord['composition'] = GuitarChords['Em7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'Emaj7':
-      curPianoChord = GuitarChords['Emaj7'];
-      curGuitarChord = GuitarChords['Emaj7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['Emaj7'];
+      curGuitarChord['composition'] = GuitarChords['Emaj7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'E7':
-      curPianoChord = GuitarChords['E7'];
-      curGuitarChord = GuitarChords['E7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['E7'];
+      curGuitarChord['composition'] = GuitarChords['E7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
 
     // F family
     case 'F':
-      curPianoChord = GuitarChords['F'];
-      curGuitarChord = GuitarChords['F'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['F'];
+      curGuitarChord['composition'] = GuitarChords['F'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'Fm':
-      curPianoChord = GuitarChords['Fm'];
-      curGuitarChord = GuitarChords['Fm'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['Fm'];
+      curGuitarChord['composition'] = GuitarChords['Fm'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'Fm7':
-      curPianoChord = GuitarChords['Fm7'];
-      curGuitarChord = GuitarChords['Fm7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['Fm7'];
+      curGuitarChord['composition'] = GuitarChords['Fm7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'Fmaj7':
-      curPianoChord = GuitarChords['Fmaj7'];
-      curGuitarChord = GuitarChords['Fmaj7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['Fmaj7'];
+      curGuitarChord['composition'] = GuitarChords['Fmaj7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'F7':
-      curPianoChord = GuitarChords['F7'];
-      curGuitarChord = GuitarChords['F7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['F7'];
+      curGuitarChord['composition'] = GuitarChords['F7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
 
     // #F family
     case '#F':
-      curPianoChord = GuitarChords['#F'];
-      curGuitarChord = GuitarChords['#F'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#F'];
+      curGuitarChord['composition'] = GuitarChords['#F'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case '#Fm':
-      curPianoChord = GuitarChords['#Fm'];
-      curGuitarChord = GuitarChords['#Fm'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#Fm'];
+      curGuitarChord['composition'] = GuitarChords['#Fm'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case '#Fm7':
-      curPianoChord = GuitarChords['#Fm7'];
-      curGuitarChord = GuitarChords['#Fm7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#Fm7'];
+      curGuitarChord['composition'] = GuitarChords['#Fm7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case '#Fmaj7':
-      curPianoChord = GuitarChords['#Fmaj7'];
-      curGuitarChord = GuitarChords['#Fmaj7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#Fmaj7'];
+      curGuitarChord['composition'] = GuitarChords['#Fmaj7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case '#F7':
-      curPianoChord = GuitarChords['#F7'];
-      curGuitarChord = GuitarChords['#F7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#F7'];
+      curGuitarChord['composition'] = GuitarChords['#F7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
 
     // bG family
     case 'bG':
-      curPianoChord = GuitarChords['bG'];
-      curGuitarChord = GuitarChords['bG'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bG'];
+      curGuitarChord['composition'] = GuitarChords['bG'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'bGm':
-      curPianoChord = GuitarChords['bGm'];
-      curGuitarChord = GuitarChords['bGm'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bGm'];
+      curGuitarChord['composition'] = GuitarChords['bGm'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'bGm7':
-      curPianoChord = GuitarChords['bGm7'];
-      curGuitarChord = GuitarChords['bGm7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bGm7'];
+      curGuitarChord['composition'] = GuitarChords['bGm7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'bGmaj7':
-      curPianoChord = GuitarChords['bGmaj7'];
-      curGuitarChord = GuitarChords['bGmaj7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bGmaj7'];
+      curGuitarChord['composition'] = GuitarChords['bGmaj7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'bG7':
-      curPianoChord = GuitarChords['bG7'];
-      curGuitarChord = GuitarChords['bG7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bG7'];
+      curGuitarChord['composition'] = GuitarChords['bG7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
 
     // G family
     case 'G':
-      curPianoChord = GuitarChords['G'];
-      curGuitarChord = GuitarChords['G'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['G'];
+      curGuitarChord['composition'] = GuitarChords['G'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'Gm':
-      curPianoChord = GuitarChords['Gm'];
-      curGuitarChord = GuitarChords['Gm'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['Gm'];
+      curGuitarChord['composition'] = GuitarChords['Gm'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'Gm7':
-      curPianoChord = GuitarChords['Gm7'];
-      curGuitarChord = GuitarChords['Gm7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['Gm7'];
+      curGuitarChord['composition'] = GuitarChords['Gm7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'Gmaj7':
-      curPianoChord = GuitarChords['Gmaj7'];
-      curGuitarChord = GuitarChords['Gmaj7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['Gmaj7'];
+      curGuitarChord['composition'] = GuitarChords['Gmaj7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'G7':
-      curPianoChord = GuitarChords['G7'];
-      curGuitarChord = GuitarChords['G7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['G7'];
+      curGuitarChord['composition'] = GuitarChords['G7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
 
     // #G family
     case '#G':
-      curPianoChord = GuitarChords['#G'];
-      curGuitarChord = GuitarChords['#G'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#G'];
+      curGuitarChord['composition'] = GuitarChords['#G'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case '#Gm':
-      curPianoChord = GuitarChords['#Gm'];
-      curGuitarChord = GuitarChords['#Gm'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#Gm'];
+      curGuitarChord['composition'] = GuitarChords['#Gm'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case '#Gm7':
-      curPianoChord = GuitarChords['#Gm7'];
-      curGuitarChord = GuitarChords['#Gm7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#Gm7'];
+      curGuitarChord['composition'] = GuitarChords['#Gm7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case '#Gmaj7':
-      curPianoChord = GuitarChords['#Gmaj7'];
-      curGuitarChord = GuitarChords['#Gmaj7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#Gmaj7'];
+      curGuitarChord['composition'] = GuitarChords['#Gmaj7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case '#G7':
-      curPianoChord = GuitarChords['#G7'];
-      curGuitarChord = GuitarChords['#G7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#G7'];
+      curGuitarChord['composition'] = GuitarChords['#G7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
 
     // bA family
     case 'bA':
-      curPianoChord = GuitarChords['bA'];
-      curGuitarChord = GuitarChords['bA'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bA'];
+      curGuitarChord['composition'] = GuitarChords['bA'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'bAm':
-      curPianoChord = GuitarChords['bAm'];
-      curGuitarChord = GuitarChords['bAm'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bAm'];
+      curGuitarChord['composition'] = GuitarChords['bAm'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'bAm7':
-      curPianoChord = GuitarChords['bAm7'];
-      curGuitarChord = GuitarChords['bAm7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bAm7'];
+      curGuitarChord['composition'] = GuitarChords['bAm7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'bAmaj7':
-      curPianoChord = GuitarChords['bAmaj7'];
-      curGuitarChord = GuitarChords['bAmaj7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bAmaj7'];
+      curGuitarChord['composition'] = GuitarChords['bAmaj7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'bA7':
-      curPianoChord = GuitarChords['bA7'];
-      curGuitarChord = GuitarChords['bA7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bA7'];
+      curGuitarChord['composition'] = GuitarChords['bA7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
 
     // A family
     case 'A':
-      curPianoChord = GuitarChords['A'];
-      curGuitarChord = GuitarChords['A'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['A'];
+      curGuitarChord['composition'] = GuitarChords['A'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'Am':
-      curPianoChord = GuitarChords['Am'];
-      curGuitarChord = GuitarChords['Am'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['Am'];
+      curGuitarChord['composition'] = GuitarChords['Am'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'Am7':
-      curPianoChord = GuitarChords['Am7'];
-      curGuitarChord = GuitarChords['Am7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['Am7'];
+      curGuitarChord['composition'] = GuitarChords['Am7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'Amaj7':
-      curPianoChord = GuitarChords['Amaj7'];
-      curGuitarChord = GuitarChords['Amaj7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['Amaj7'];
+      curGuitarChord['composition'] = GuitarChords['Amaj7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'A7':
-      curPianoChord = GuitarChords['A7'];
-      curGuitarChord = GuitarChords['A7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['A7'];
+      curGuitarChord['composition'] = GuitarChords['A7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
 
     // #A family
     case '#A':
-      curPianoChord = GuitarChords['#A'];
-      curGuitarChord = GuitarChords['#A'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#A'];
+      curGuitarChord['composition'] = GuitarChords['#A'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case '#Am':
-      curPianoChord = GuitarChords['#Am'];
-      curGuitarChord = GuitarChords['#Am'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#Am'];
+      curGuitarChord['composition'] = GuitarChords['#Am'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case '#Am7':
-      curPianoChord = GuitarChords['#Am7'];
-      curGuitarChord = GuitarChords['#Am7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#Am7'];
+      curGuitarChord['composition'] = GuitarChords['#Am7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case '#Amaj7':
-      curPianoChord = GuitarChords['#Amaj7'];
-      curGuitarChord = GuitarChords['#Amaj7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#Amaj7'];
+      curGuitarChord['composition'] = GuitarChords['#Amaj7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case '#A7':
-      curPianoChord = GuitarChords['#A7'];
-      curGuitarChord = GuitarChords['#A7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['#A7'];
+      curGuitarChord['composition'] = GuitarChords['#A7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
 
     // bB family
     case 'bB':
-      curPianoChord = GuitarChords['bB'];
-      curGuitarChord = GuitarChords['bB'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bB'];
+      curGuitarChord['composition'] = GuitarChords['bB'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'bBm':
-      curPianoChord = GuitarChords['bBm'];
-      curGuitarChord = GuitarChords['bBm'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bBm'];
+      curGuitarChord['composition'] = GuitarChords['bBm'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'bBm7':
-      curPianoChord = GuitarChords['bBm7'];
-      curGuitarChord = GuitarChords['bBm7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bBm7'];
+      curGuitarChord['composition'] = GuitarChords['bBm7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'bBmaj7':
-      curPianoChord = GuitarChords['bBmaj7'];
-      curGuitarChord = GuitarChords['bBmaj7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bBmaj7'];
+      curGuitarChord['composition'] = GuitarChords['bBmaj7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'bB7':
-      curPianoChord = GuitarChords['bB7'];
-      curGuitarChord = GuitarChords['bB7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['bB7'];
+      curGuitarChord['composition'] = GuitarChords['bB7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
 
     // B family
     case 'B':
-      curPianoChord = GuitarChords['B'];
-      curGuitarChord = GuitarChords['B'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['B'];
+      curGuitarChord['composition'] = GuitarChords['B'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'Bm':
-      curPianoChord = GuitarChords['Bm'];
-      curGuitarChord = GuitarChords['Bm'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['Bm'];
+      curGuitarChord['composition'] = GuitarChords['Bm'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'Bm7':
-      curPianoChord = GuitarChords['Bm7'];
-      curGuitarChord = GuitarChords['Bm7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['Bm7'];
+      curGuitarChord['composition'] = GuitarChords['Bm7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'Bmaj7':
-      curPianoChord = GuitarChords['Bmaj7'];
-      curGuitarChord = GuitarChords['Bmaj7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['Bmaj7'];
+      curGuitarChord['composition'] = GuitarChords['Bmaj7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
     case 'B7':
-      curPianoChord = GuitarChords['B7'];
-      curGuitarChord = GuitarChords['B7'];
-      curPianoChord += ' ';
-      curGuitarChord += ' ';
+      curPianoChord['composition'] = GuitarChords['B7'];
+      curGuitarChord['composition'] = GuitarChords['B7'];
+
+      curPianoChord['name'] = t;
+      curGuitarChord['name'] = t;
       break;
 
+    // other chords
     default:
-      break;
+      return;
   }
 }
 
 function parseDuration(t) {
   switch(t) {
     case 'w':
-      pianoVexStr += ':w';
-      guitarVexStr += ':w';
+      pianoNoteStr += ':w';
+      guitarNoteStr += ':w';
+
+      pianoTextStr += ':w, ';
+      guitarTextStr += ':w, ';
       break;
     case 'h':
-      pianoVexStr += ':h';
-      guitarVexStr += ':h';
+      pianoNoteStr += ':h';
+      guitarNoteStr += ':h';
+
+      pianoTextStr += ':h, ';
+      guitarTextStr += ':h, ';
       break;
     case 'q':
-      pianoVexStr += ':q';
-      guitarVexStr += ':q';
+      pianoNoteStr += ':q';
+      guitarNoteStr += ':q';
+
+      pianoTextStr += ':q, ';
+      guitarTextStr += ':q, ';
       break;
     case '8':
-      pianoVexStr += ':8';
-      guitarVexStr += ':8';
+      pianoNoteStr += ':8';
+      guitarNoteStr += ':8';
+
+      pianoTextStr += ':8, ';
+      guitarTextStr += ':8, ';
       break;
     case '16':
-      pianoVexStr += ':16';
-      guitarVexStr += ':16';
+      pianoNoteStr += ':16';
+      guitarNoteStr += ':16';
+
+      pianoTextStr += ':16, ';
+      guitarTextStr += ':16, ';
       break;
     case '32':
-      pianoVexStr += ':32';
-      guitarVexStr += ':32';
+      pianoNoteStr += ':32';
+      guitarNoteStr += ':32';
+
+      pianoTextStr += ':32, ';
+      guitarTextStr += ':32, ';
       break;
   }
 
-  pianoVexStr += curPianoChord;
-  guitarVexStr += curGuitarChord;
-  curPianoChord = '';
-  curGuitarChord = '';
+  pianoNoteStr += curPianoChord['composition'] + ' ';
+  guitarNoteStr += curGuitarChord['composition'] + ' ';
+
+  pianoTextStr += curPianoChord['name'] + ', ';
+  guitarTextStr += curGuitarChord['name'] + ', ';
+
+  curPianoChord['composition'] = '';
+  curGuitarChord['composition'] = '';
+  curPianoChord['name'] = '';
+  curGuitarChord['name'] = '';
 }
 
 function hasMusialAlphabes(t) {

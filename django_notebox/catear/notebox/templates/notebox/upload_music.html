@@ -141,8 +141,9 @@
                   <div class="divider"></div>
                 </div>
                 <div class="section">
-                  <iframe width="" height="" 
-                    src="https://www.youtube.com/embed/{{ cleaned_data.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+                  <div class="video-container">
+                    <iframe width="" height="" src="https://www.youtube.com/embed/{{ cleaned_data.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+                  </div>
                 </div>
               </div>
             </div>
@@ -165,9 +166,9 @@
                   <!-- time signature -->
                   <div id="time"></div>
 
-                  <span class="chord waves-effect btn-flat" ng-repeat="ic in inputChords track by $index">
+                  <!-- <span class="chord waves-effect btn-flat" ng-repeat="ic in inputChords track by $index"> -->
                     <!-- {{ ic }} -->
-                  </span>
+                  <!-- </span> -->
 
                   <!-- Stave will be inserted BELOW -->
 
@@ -186,7 +187,7 @@
           </div>
 
           <div class="col s2">
-            <ul class="collapsible" data-collapsible="accordion">
+            <ul class="collapsible" data-collapsible="expandable">
               <li>
                 <div class="collapsible-header">調性</div>
                 <div class="collapsible-body">
@@ -237,7 +238,7 @@
                 </div>
               </li>
               <li>
-                <div class="collapsible-header active">節拍</div>
+                <div class="collapsible-header">節拍</div>
                 <div class="collapsible-body">
                   <div class="section row">
                     <div class="col s10 push-s1">
@@ -252,7 +253,7 @@
                 </div>
               </li>
               <li>
-                <div class="collapsible-header active">小節線</div>
+                <div class="collapsible-header">小節線</div>
                 <div class="collapsible-body">
                   <div class="section row">
                     <div class="col s10 push-s1">
@@ -303,6 +304,8 @@
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="{% static 'notebox/js/materialize.min.js' %}"></script>
+  <!-- Interact.js, using for drag and drop -->
+  <script type="text/javascript" src="{% static 'notebox/js/interact/interact.min.js' %}"></script>
   <!-- AngularJS -->
   <script type="text/javascript" src="{% static 'notebox/js/bower_components/angular/angular.js' %}"></script>
   <script type="text/javascript" src="{% static 'notebox/js/bower_components/angular-hotkeys/build/hotkeys.min.js' %}"></script>
@@ -330,7 +333,13 @@
       // Add chord into the selected stave
 
       if ($scope.selected_stave !== null) {
-        $scope.selected_stave.append('<span>'+key+'</span>');
+        var chord_span = $('<span class="chord waves-effect btn-flat">'+key+'</span>');
+        $scope.selected_stave.append(chord_span);
+
+        /*----------  chords add duration  ----------*/
+        chord_span.click(function() {
+          
+        });
       }
 
     };
@@ -357,7 +366,9 @@
   {% endif %}
 
   $(document).ready(function() {
-    // ===== Materialize Setup =====
+    /*=========================================
+    =            Materialize Setup            =
+    =========================================*/
     $('select').material_select();
     $('.button-collapse').sideNav();
     $('.modal-trigger').leanModal();
@@ -370,10 +381,10 @@
       belowOrigin: true,
       alignment: 'left'
     });
-    // ===== end of Materialize Setup =====
+    /*=====  End of Materialize Setup  ======*/
 
+    // remove footer top margin
     $('footer').addClass('no-top-margin');
-
 
     {% if step == 1 %}
     /*==============================
@@ -416,23 +427,20 @@
     });
     /*=====  End of Add Time Signature  ======*/
 
-    /*===========================================
-    =            Chords Add Duration            =
-    ===========================================*/
-    $('.chord').click(function() {
-      alert('fuk');
-    });
-    /*=====  End of Chords Add Duration  ======*/
 
     /*=================================
     =            Add Stave            =
     =================================*/
     var staveCount = 0;
     $('.stave-btn').click(function() {
-      var stave = $('<div id="stave' + staveCount + '" class="row grey lighten-3">This is stave' + staveCount + '</div>')
+      var stave = $('<div id="stave' + staveCount + '" class="stave row grey lighten-3"></div>')
+      var stave_content = $('<div class="stave-content">|</div>');
+      // add stave title
+      stave.append('<span class="stave-title">stave' + staveCount + '</span>');
+      stave.append(stave_content);
 
       // Bind click event
-      stave.click(function() {
+      stave_content.click(function() {
         var ss = $(this);
         var note_editor_scope = angular.element($("#note-editor")).scope();
         note_editor_scope.$apply(function() {
