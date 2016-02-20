@@ -1,7 +1,11 @@
-// =================================================================
-// = Chords Reference -> http://www.8notes.com/guitar_chord_chart/ =
-// =================================================================
+/**
+ * GuitarChords and PianoChords is currently the same, but basic piano chord composition 
+ * is different from basic guitar chord, so the VexStrs should be different in the future.
+ */
 
+/*============================================================================================
+=            Guitar Chords Reference -> http://www.8notes.com/guitar_chord_chart/            =
+============================================================================================*/
 var GuitarChords = {
   'bC': '(2/1.4/2.4/3.4/4.2/5)',
   'bCm': '(2/1.3/2.4/3.4/4.2/5)',

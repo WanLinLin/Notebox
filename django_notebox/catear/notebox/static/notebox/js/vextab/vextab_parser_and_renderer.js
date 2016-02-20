@@ -1,4 +1,4 @@
-// score width: using initial mao-music-sheet-box div width to set score width
+// score width: used to initial mao-music-sheet-box div width to set score width
 var initial_width = $('#mao-music-sheet-box').width() - 30;
 
 // piano and guitar score canvas
@@ -23,10 +23,18 @@ var guitarNoteStr = 'notes ';
 var pianoTextStr = 'text ';
 // guitar vextab 'text' string, starts with "notes"
 var guitarTextStr = 'text ';
+
+/**
+ * pianoVexStr and guitarVexStr is currently the same, but basic piano chord composition 
+ * is different from basic guitar chord, so the VexStrs will be different in the future.
+ */
+
 // piano final vextab string
 var pianoVexStr;
 // guitar final vextab string
 var guitarVexStr;
+
+
 // current parsing chord for piano
 var curPianoChord = {'name':'', 'composition':''};
 // current parsing chord for guitar
@@ -62,7 +70,7 @@ for(var i = 0; i < token.length; i++) {
 pianoNoteStr += '\n';
 guitarNoteStr += '\n';
 
-// alert(musicString);
+alert(musicString);
 
 pianoVexStr = 'options width=' + initial_width.toString() + ' space=14 scale=1.0 font-size=16\n';
 pianoVexStr += 'stave\n';
@@ -205,6 +213,7 @@ function parseChord(t) {
       curPianoChord['name'] = t;
       curGuitarChord['name'] = t;
       break;
+    case 'CM7':
     case 'Cmaj7':
       curPianoChord['composition'] = GuitarChords['Cmaj7'];
       curGuitarChord['composition'] = GuitarChords['Cmaj7'];
@@ -242,6 +251,7 @@ function parseChord(t) {
       curPianoChord['name'] = t;
       curGuitarChord['name'] = t;
       break;
+    case '#CM7':
     case '#Cmaj7':
       curPianoChord['composition'] = GuitarChords['#Cmaj7'];
       curGuitarChord['composition'] = GuitarChords['#Cmaj7'];
@@ -279,6 +289,7 @@ function parseChord(t) {
       curPianoChord['name'] = t;
       curGuitarChord['name'] = t;
       break;
+    case 'bDM7':
     case 'bDmaj7':
       curPianoChord['composition'] = GuitarChords['bDmaj7'];
       curGuitarChord['composition'] = GuitarChords['bDmaj7'];
@@ -316,6 +327,7 @@ function parseChord(t) {
       curPianoChord['name'] = t;
       curGuitarChord['name'] = t;
       break;
+    case 'DM7':
     case 'Dmaj7':
       curPianoChord['composition'] = GuitarChords['Dmaj7'];
       curGuitarChord['composition'] = GuitarChords['Dmaj7'];
@@ -353,6 +365,7 @@ function parseChord(t) {
       curPianoChord['name'] = t;
       curGuitarChord['name'] = t;
       break;
+    case '#DM7':
     case '#Dmaj7':
       curPianoChord['composition'] = GuitarChords['#Dmaj7'];
       curGuitarChord['composition'] = GuitarChords['#Dmaj7'];
@@ -390,6 +403,7 @@ function parseChord(t) {
       curPianoChord['name'] = t;
       curGuitarChord['name'] = t;
       break;
+    case 'bEM7':
     case 'bEmaj7':
       curPianoChord['composition'] = GuitarChords['bEmaj7'];
       curGuitarChord['composition'] = GuitarChords['bEmaj7'];
@@ -427,6 +441,7 @@ function parseChord(t) {
       curPianoChord['name'] = t;
       curGuitarChord['name'] = t;
       break;
+    case 'EM7':
     case 'Emaj7':
       curPianoChord['composition'] = GuitarChords['Emaj7'];
       curGuitarChord['composition'] = GuitarChords['Emaj7'];
@@ -464,6 +479,7 @@ function parseChord(t) {
       curPianoChord['name'] = t;
       curGuitarChord['name'] = t;
       break;
+    case 'FM7':
     case 'Fmaj7':
       curPianoChord['composition'] = GuitarChords['Fmaj7'];
       curGuitarChord['composition'] = GuitarChords['Fmaj7'];
@@ -501,6 +517,7 @@ function parseChord(t) {
       curPianoChord['name'] = t;
       curGuitarChord['name'] = t;
       break;
+    case '#FM7':
     case '#Fmaj7':
       curPianoChord['composition'] = GuitarChords['#Fmaj7'];
       curGuitarChord['composition'] = GuitarChords['#Fmaj7'];
@@ -538,6 +555,7 @@ function parseChord(t) {
       curPianoChord['name'] = t;
       curGuitarChord['name'] = t;
       break;
+    case 'bGM7':
     case 'bGmaj7':
       curPianoChord['composition'] = GuitarChords['bGmaj7'];
       curGuitarChord['composition'] = GuitarChords['bGmaj7'];
@@ -575,6 +593,7 @@ function parseChord(t) {
       curPianoChord['name'] = t;
       curGuitarChord['name'] = t;
       break;
+    case 'GM7':
     case 'Gmaj7':
       curPianoChord['composition'] = GuitarChords['Gmaj7'];
       curGuitarChord['composition'] = GuitarChords['Gmaj7'];
@@ -612,6 +631,7 @@ function parseChord(t) {
       curPianoChord['name'] = t;
       curGuitarChord['name'] = t;
       break;
+    case '#GM7':
     case '#Gmaj7':
       curPianoChord['composition'] = GuitarChords['#Gmaj7'];
       curGuitarChord['composition'] = GuitarChords['#Gmaj7'];
@@ -649,6 +669,7 @@ function parseChord(t) {
       curPianoChord['name'] = t;
       curGuitarChord['name'] = t;
       break;
+    case 'bAM7':
     case 'bAmaj7':
       curPianoChord['composition'] = GuitarChords['bAmaj7'];
       curGuitarChord['composition'] = GuitarChords['bAmaj7'];
@@ -686,6 +707,7 @@ function parseChord(t) {
       curPianoChord['name'] = t;
       curGuitarChord['name'] = t;
       break;
+    case 'AM7':
     case 'Amaj7':
       curPianoChord['composition'] = GuitarChords['Amaj7'];
       curGuitarChord['composition'] = GuitarChords['Amaj7'];
@@ -723,6 +745,7 @@ function parseChord(t) {
       curPianoChord['name'] = t;
       curGuitarChord['name'] = t;
       break;
+    case '#AM7':
     case '#Amaj7':
       curPianoChord['composition'] = GuitarChords['#Amaj7'];
       curGuitarChord['composition'] = GuitarChords['#Amaj7'];
@@ -760,6 +783,7 @@ function parseChord(t) {
       curPianoChord['name'] = t;
       curGuitarChord['name'] = t;
       break;
+    case 'bBM7':
     case 'bBmaj7':
       curPianoChord['composition'] = GuitarChords['bBmaj7'];
       curGuitarChord['composition'] = GuitarChords['bBmaj7'];
@@ -797,6 +821,7 @@ function parseChord(t) {
       curPianoChord['name'] = t;
       curGuitarChord['name'] = t;
       break;
+    case 'BM7':
     case 'Bmaj7':
       curPianoChord['composition'] = GuitarChords['Bmaj7'];
       curGuitarChord['composition'] = GuitarChords['Bmaj7'];
