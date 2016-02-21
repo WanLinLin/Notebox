@@ -171,7 +171,7 @@ def query_song(request):
             'title': i.title, 
             'youtube_url': i.youtube_url,
             'img': i.youtube_img_url,
-            'song_id': i.youtube_id })
+            'song_id': i.id })
 
     # Generate HTML code
 
