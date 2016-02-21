@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from django.core import serializers
+from django.template import loader
 
 from .forms import RegistrationForm, LoginForm, UploadForm
 from .models import Song, SongStyle
@@ -124,16 +124,7 @@ def overview(request):
     context['latest'].extend(songs_list)
 
     # Popular (test)
-    context['popular'].extend([
-        {'title': 'D小調第九號交響曲', 'desc': '作曲家: 貝多芬/1770/1827\n演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響', 'img': static('notebox/images/main-bg2.jpg'), 'song_id': '12345'},
-        {'title': 'D小調第九號交響曲', 'desc': '作曲家: 貝多芬/1770/1827\n演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響', 'img': static('notebox/images/main-bg2.jpg'), 'song_id': '12345'},
-        {'title': 'D小調第九號交響曲', 'desc': '作曲家: 貝多芬/1770/1827\n演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響', 'img': static('notebox/images/main-bg2.jpg'), 'song_id': '12345'},
-        {'title': 'D小調第九號交響曲', 'desc': '作曲家: 貝多芬/1770/1827\n演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響', 'img': static('notebox/images/main-bg2.jpg'), 'song_id': '12345'},
-        {'title': 'D小調第九號交響曲', 'desc': '作曲家: 貝多芬/1770/1827\n演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響', 'img': static('notebox/images/main-bg2.jpg'), 'song_id': '12345'},
-        {'title': 'D小調第九號交響曲', 'desc': '作曲家: 貝多芬/1770/1827\n演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響', 'img': static('notebox/images/main-bg2.jpg'), 'song_id': '12345'},
-        {'title': 'D小調第九號交響曲', 'desc': '作曲家: 貝多芬/1770/1827\n演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響', 'img': static('notebox/images/main-bg2.jpg'), 'song_id': '12345'},
-        {'title': 'D小調第九號交響曲', 'desc': '作曲家: 貝多芬/1770/1827\n演奏者: 阿姆斯壯 女高音 雷諾茲 次女高音 雪利—奎克 男低音 提爾 男高音 朱里尼 指揮 倫敦交響', 'img': static('notebox/images/main-bg2.jpg'), 'song_id': '12345'},
-    ])
+    context['popular'].extend([])
 
     return render(request, 'notebox/overview.html', context)
 
@@ -172,15 +163,24 @@ def query_song(request):
             Q(composer__icontains=keyword)|
             Q(artist__icontains=keyword) )
 
-    # Prepare the result
+    # Extract QuerySet
 
     query_result = []
     for i in r1:
         query_result.append({
             'title': i.title, 
             'youtube_url': i.youtube_url,
-            'youtube_img_url': i.youtube_img_url,
-            'youtube_id': i.youtube_id })
+            'img': i.youtube_img_url,
+            'song_id': i.youtube_id })
+
+    # Generate HTML code
+
+    template = loader.get_template('notebox/query_result_template.html')
+    html_code = template.render(
+        {'query_result': [query_result[i:i+4] for i in range(0, len(query_result), 4)]})
+    result['html_code'] = html_code
+
+    # Insert query details
 
     result['level'] = level
     result['instructment'] = instructment
