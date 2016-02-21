@@ -39,48 +39,48 @@
         <!-- Difficulty -->
 
         <div class="input-field col s3">
-          <select ng-model="search_data.difficulty">
+          <select ng-model="search_data.difficulty" ng-change="do_search();">
             <option ng-repeat="option in search_data.difficulty_options"
               value="{{option.value}}">{{option.name}}</option>
           </select>
           <label>困難度</label>
-          <p>{{search_data.difficulty}}</p>
+          <!-- <p>{{search_data.difficulty}}</p> -->
         </div>
 
         <!-- instructment -->
 
         <div class="input-field col s3">
-          <select ng-model="search_data.instructment">
+          <select ng-model="search_data.instructment" ng-change="do_search();">
             <option ng-repeat="option in search_data.instructment_options"
-              value="{{option.value}}">{{option.name}}</option>
+              value="{{option.value}}">{{ option.name }}</option>
           </select>
           <label>樂器種類</label>
-          <p>{{search_data.instructment}}</p>
+          <!-- <p>{{search_data.instructment}}</p> -->
         </div>
 
         <!-- Keyword search -->
 
         <div class="input-field col s6">
-          <input ng-model="search_data.keyword" type="text" id="search-keyword" class="validate">
+          <input type="text" id="search-keyword" class="validate"
+            ng-model="search_data.keyword" ng-change="do_search();">
           <label for="search-keyword">關鍵字（曲名、作曲家、歌手）</label>
-          <p>{{search_data.keyword}}</p>
+          <!-- <p>{{search_data.keyword}}</p> -->
         </div>
-
 
         <!-- Chord -->
 
         <div class="col s12">
           <h6>依照和弦搜尋</h6>
           <div ng-repeat="(option_key, option) in search_data.chord_options" class="chord-btn">
-            <label><input type="checkbox" id="{{ option_key }}" ng-model="option.value">
-              <span>{{ option.name }}</span></label>
+            <label><input type="checkbox" id="{{ option_key }}" ng-model="option.value" ng-model="search_data.keyword" ng-change="do_search();">
+              <span>{{ option.name }}</span>
+            </label>
           </div>
           <!-- <span ng-repeat="(option_key, option) in search_data.chord_options">
             {{option.name}} = {{option.value}}
           </span> -->
         </div>
 
-        
       {% endverbatim %}
 
     </div>
@@ -148,13 +148,13 @@
   // Angular Search
 
   angular.module("searchApp", [])
-    .controller('searchCtrl', ['$scope', function($scope) {
-      $scope.search_data = {
-        difficulty: null,
-        instructment: null,
-        chord: null,
-        sub_chord: null,
-        keyword: null,
+    .controller('searchCtrl', ['$scope', '$http', function($scope, $http) {
+      $scope.search_data = { // Search data source
+        difficulty: '',
+        instructment: '',
+        chord: '',
+        sub_chord: '',
+        keyword: '',
 
         difficulty_options: [
           {value: '', name: '全部'},
@@ -170,25 +170,72 @@
         ],
 
         chord_options: {
-          chord_c:    {value: false,  name: "C"},
+          chord_c:    {value: false, name: "C"},
           chord_cs:   {value: false, name: "C#"},
           chord_db:   {value: false, name: "Db"},
-          chord_d:    {value: false,  name: "D"},
+          chord_d:    {value: false, name: "D"},
           chord_ds:   {value: false, name: "D#"},
           chord_eb:   {value: false, name: "Eb"},
-          chord_e:    {value: false,  name: "E"},
-          chord_f:    {value: false,  name: "F"},
+          chord_e:    {value: false, name: "E"},
+          chord_f:    {value: false, name: "F"},
           chord_fs:   {value: false, name: "F#"},
           chord_gb:   {value: false, name: "Gb"},
-          chord_g:    {value: false,  name: "G"},
+          chord_g:    {value: false, name: "G"},
           chord_gs:   {value: false, name: "G#"},
           chord_ab:   {value: false, name: "Ab"},
-          chord_a:    {value: false,  name: "A"},
+          chord_a:    {value: false, name: "A"},
           chord_as:   {value: false, name: "A#"},
           chord_bb:   {value: false, name: "Bb"},
-          chord_b:    {value: false,  name: "B"}
+          chord_b:    {value: false, name: "B"}
         },
       };
+
+      $scope.do_search = function() { // Search function
+        // Save keywords
+
+        var difficulty    = $scope.search_data.difficulty;
+        var instructment  = $scope.search_data.instructment;
+        var keyword       = $scope.search_data.keyword;
+
+        // Extract checked chords from the models
+
+        var chord = [];
+        var chord_options = $scope.search_data.chord_options;
+        for (var key in chord_options) {
+          if (chord_options[key].value)
+            chord.push(chord_options[key].name)
+        }
+        chord = chord.join();
+
+        // Test catched values
+
+        // console.log('difficulty: ' + difficulty);
+        // console.log('instructment: ' + instructment);
+        // console.log(chord);
+        // console.log('keyword: ' + keyword);
+
+        // Do querying here
+
+        $http({
+          method: 'GET',
+          url: '{% url "query_song" %}',
+          params: {
+            difficulty: difficulty,
+            instructment: instructment,
+            keyword: keyword,
+            chord: chord,
+          },
+        })
+        .then(function successCallback(response) {
+          // Success
+          var data = response.data;
+          console.log(data);
+
+        }, function errorCallback(response) {
+          // Error
+        });
+      };
+
   }]);
   </script>
   <!--====  End of JavaScript  ====-->

@@ -1,10 +1,13 @@
-from django.http import Http404, HttpResponseRedirect
+from django.http import HttpResponseRedirect
+from django.http import Http404
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.contrib.auth import logout as django_logout
 from django.contrib import messages
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.contrib.auth.decorators import login_required
+
 from .forms import RegistrationForm, LoginForm, UploadForm
 from .models import Song, SongStyle
 
@@ -131,6 +134,26 @@ def overview(request):
     ])
 
     return render(request, 'notebox/overview.html', context)
+
+def query_song(request):
+    result = {}
+    input_keys = request.GET
+
+    # Extract query keys
+
+    difficulty = input_keys.get('difficulty', '')
+    level = input_keys.get('level', '')
+    instructment = input_keys.get('instructment', '')
+    chord = input_keys.get('chord', '').split(',')
+
+    # QuerySet
+
+    result['difficulty'] = difficulty
+    result['level'] = level
+    result['instructment'] = instructment
+    result['chord'] = chord
+
+    return JsonResponse(result)
 
 @login_required(login_url='/notebox/')
 def account(request):
