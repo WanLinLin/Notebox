@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
 
-  <!--import google icon font-->
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
   <!--Import materialize.css-->
@@ -20,7 +20,7 @@
   <title>歌曲總覽</title>
 </head>
 
-<body ng-app="myApp" ng-controller="searchCtrl">
+<body ng-app="searchApp">
   <!--====================================
   =            Include navbar            =
   =====================================-->
@@ -30,92 +30,61 @@
   <!--==================================
   =            Main Content            =
   ===================================-->
-  <!-- ===== header ===== -->
   <div class="container">
-    <div class="section no-pad-bot row" id="index-banner">
-      <div class="col s10 push-s1">
-        <br><br>
-        <h1 class="header center brown-text">歌曲總覽</h1>
-      </div>
-    </div>
 
-    {% verbatim %}
-    <div class="row">
-      <div class="col s12 m12 push-l2 l8">
-        <div class="row">
+    <div class="row" ng-controller="searchCtrl">
+      <br><br>
+      {% verbatim %}
 
-          <!-- search bar -->
+        <!-- Difficulty -->
 
-          <nav class="bg-twhite-8 search-input">
-            <div class="nav-wrapper">
-              <form>
-                <div class="input-field">
-                  <input type="search" class="brown-text text-darken-1 drop-target" placeholder="依曲名、作曲家、歌手..." required
-                   value="">
-                  <label for="search"><i class="fa fa-search brown-text"></i></label>
-                </div>
-              </form>
-            </div>
-          </nav>
+        <div class="input-field col s3">
+          <select ng-model="search_data.difficulty">
+            <option ng-repeat="option in search_data.difficulty_options"
+              value="{{option.value}}">{{option.name}}</option>
+          </select>
+          <label>困難度</label>
+          <p>{{search_data.difficulty}}</p>
         </div>
 
-        <!--===============================
-        =            Search Menu          =
-        ================================-->
+        <!-- instructment -->
 
-        <div id="search-menu">
-          <form><table>
-            <tbody>       
-              <tr>
-                <td>根據和弦搜尋</td>
-                <td>
-                  <label ng-repeat="(ok,ov) in s_opts.chord" class="input-opt">
-                    <input type="checkbox" checked="false" ng-model="ov.value" ng-click="select_func($event)" />
-                    {{ ov.text }}
-                  </label>
-                </td>
-              </tr>
-              <tr>
-                <td>根據類別搜尋</td>
-                <td>
-                  <label ng-repeat="(ok,ov) in s_opts.class" class="input-opt">
-                    <input type="checkbox" checked="false" ng-model="ov.value" ng-click="select_func($event)" />
-                    {{ ov.text }}
-                  </label>
-                </td>
-              </tr>
-              <tr>
-                <td>根據難易度搜尋</td>
-                <td>
-                  <label ng-repeat="(ok,ov) in s_opts.level" class="input-opt">
-                    <input type="checkbox" checked="false" ng-model="ov.value" ng-click="select_func($event)" />
-                    {{ ov.text }}
-                  </label>
-                </td>
-              </tr>
-            </tbody>
-          </table></form>
+        <div class="input-field col s3">
+          <select ng-model="search_data.instructment">
+            <option ng-repeat="option in search_data.instructment_options"
+              value="{{option.value}}">{{option.name}}</option>
+          </select>
+          <label>樂器種類</label>
+          <p>{{search_data.instructment}}</p>
         </div>
 
-        <!--====  End of Search Menu  ====-->
+        <!-- Keyword search -->
 
-        <!-- <div class="row">
-          <div class="col s4">
-            和弦：<div class="chip mao-chip query-opt" ng-repeat="(k,v) in s_opts.chord" ng-if="v.value==true">{{ v.text }}</div>
-          </div>
-          <div class="col s4">
-            類別：<div class="chip mao-chip query-opt" ng-repeat="(k,v) in s_opts.class" ng-if="v.value==true">{{ v.text }}</div>
-          </div>
-          <div class="col s4">
-            難度：<div class="chip mao-chip query-opt" ng-repeat="(k,v) in s_opts.level" ng-if="v.value==true">{{ v.text }}</div>
-          </div>
-        </div> -->
+        <div class="input-field col s6">
+          <input ng-model="search_data.keyword" type="text" id="search-keyword" class="validate">
+          <label for="search-keyword">關鍵字（曲名、作曲家、歌手）</label>
+          <p>{{search_data.keyword}}</p>
+        </div>
 
-      </div>
+
+        <!-- Chord -->
+
+        <div class="col s12">
+          <h6>依照和弦搜尋</h6>
+          <div ng-repeat="(option_key, option) in search_data.chord_options" class="chord-btn">
+            <label><input type="checkbox" id="{{ option_key }}" ng-model="option.value">
+              <span>{{ option.name }}</span></label>
+          </div>
+          <!-- <span ng-repeat="(option_key, option) in search_data.chord_options">
+            {{option.name}} = {{option.value}}
+          </span> -->
+        </div>
+
+        
+      {% endverbatim %}
+
     </div>
-    {% endverbatim %}
 
-    
     <!--===============================
     =            Music Box            =
     ================================-->
@@ -138,9 +107,7 @@
     {% endfor %}
 
     <!--====  End of Music Box  ====-->
-    
   </div>
-  <!-- ===== end of header ===== -->
   <!--====  End of Main Content  ====-->
 
 
@@ -157,9 +124,6 @@
   <!--import jquery before materialize.js-->
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="{% static 'notebox/js/materialize.min.js' %}"></script>
-  <!-- Drop -->
-  <script type="text/javascript" src="{% static 'notebox/js/bower_components/tether/dist/js/tether.min.js' %}"></script>
-  <script type="text/javascript" src="{% static 'notebox/js/bower_components/tether-drop/dist/js/drop.min.js' %}"></script>
   <!-- AngularJS -->
   <script type="text/javascript" src="{% static 'notebox/js/bower_components/angular/angular.js' %}"></script>
 
@@ -177,41 +141,55 @@
         belowOrigin: true,
         alignment: 'left'
       });
+
+      $('select').material_select();
   });
 
-  // Search options (Angular JS here)
-  var app = angular.module("myApp", []);
-  app.controller('searchCtrl', function($scope) {
-    $scope.s_opts = {
-      'chord': {
-        'all': {'text':'全', 'value':false},
-        'C':   {'text': 'C', 'value':false},
-        'D':   {'text': 'D', 'value':false},
-        'E':   {'text': 'E', 'value':false},
-        'F':   {'text': 'F', 'value':false},
-        'G':   {'text': 'G', 'value':false},
-        'A':   {'text': 'A', 'value':false},
-        'B':   {'text': 'B', 'value':false}
-      },
-      'class': {
-        'all':{'text':'全', 'value':false},
-        'piano':{'text':'鋼琴', 'value':false},
-        'guitar':{'text':'吉他', 'value':false}
-      },
-      'level': {
-        'all':{'text':'全', 'value':false}, 
-        'ele':{'text':'初', 'value':false}, 
-        'mid':{'text':'中', 'value':false}, 
-        'high':{'text':'高', 'value':false}
-      }
-    };
-    $scope.select_func = function($event) {
-      // Change color
-      var tar = $($event.currentTarget).parent('label');
-      tar.toggleClass('selected');
-    };
-  });
+  // Angular Search
 
+  angular.module("searchApp", [])
+    .controller('searchCtrl', ['$scope', function($scope) {
+      $scope.search_data = {
+        difficulty: null,
+        instructment: null,
+        chord: null,
+        sub_chord: null,
+        keyword: null,
+
+        difficulty_options: [
+          {value: '', name: '全部'},
+          {value: '1', name: '初級'},
+          {value: '2', name: '中級'},
+          {value: '3', name: '高級'}
+        ],
+
+        instructment_options: [
+          {value: '', name: '全部'},
+          {value: 'piano', name: '鋼琴'},
+          {value: 'guitar', name: '吉他'},
+        ],
+
+        chord_options: {
+          chord_c:    {value: false,  name: "C"},
+          chord_cs:   {value: false, name: "C#"},
+          chord_db:   {value: false, name: "Db"},
+          chord_d:    {value: false,  name: "D"},
+          chord_ds:   {value: false, name: "D#"},
+          chord_eb:   {value: false, name: "Eb"},
+          chord_e:    {value: false,  name: "E"},
+          chord_f:    {value: false,  name: "F"},
+          chord_fs:   {value: false, name: "F#"},
+          chord_gb:   {value: false, name: "Gb"},
+          chord_g:    {value: false,  name: "G"},
+          chord_gs:   {value: false, name: "G#"},
+          chord_ab:   {value: false, name: "Ab"},
+          chord_a:    {value: false,  name: "A"},
+          chord_as:   {value: false, name: "A#"},
+          chord_bb:   {value: false, name: "Bb"},
+          chord_b:    {value: false,  name: "B"}
+        },
+      };
+  }]);
   </script>
   <!--====  End of JavaScript  ====-->
 </body>

@@ -15,18 +15,8 @@
     }
 }
 
-.input-opt {
-    background-color: @colorPlaceholdDark;
-    color: black;
-    box-shadow: none;
-
-    border: solid @colorPlaceholdDark 5px;
-    .border-radius(5px);
-
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    margin-left: 0.1rem;
-    margin-right: 0.1rem;
+.chord-btn {
+    // Disable text selection
 
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -34,8 +24,32 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+                                 
+    display: inline;
 
-    &.selected {
+    span {
+        background-color: @colorPlaceholdDark;
+        color: black;
+        box-shadow: none;
+
+        border: solid @colorPlaceholdDark 5px;
+        .border-radius(5px);
+
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        margin-left: 0.0rem;
+        margin-right: 0.1rem;
+
+        line-height: 28px;
+    }
+
+    span:hover {
+        background-color: @primaryColor;
+        color: white;
+        border: solid @primaryColor 5px;
+    }
+
+    input:checked + span {
         background-color: @primaryColor;
         color: white;
         border: solid @primaryColor 5px;
