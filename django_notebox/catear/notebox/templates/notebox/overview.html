@@ -39,12 +39,12 @@
         <!-- Difficulty -->
 
         <div class="input-field col s3">
-          <select ng-model="search_data.difficulty" ng-change="do_search();">
-            <option ng-repeat="option in search_data.difficulty_options"
+          <select ng-model="search_data.level" ng-change="do_search();">
+            <option ng-repeat="option in search_data.level_options"
               value="{{option.value}}">{{option.name}}</option>
           </select>
           <label>困難度</label>
-          <!-- <p>{{search_data.difficulty}}</p> -->
+          <!-- <p>{{search_data.level}}</p> -->
         </div>
 
         <!-- instructment -->
@@ -62,7 +62,9 @@
 
         <div class="input-field col s6">
           <input type="text" id="search-keyword" class="validate"
-            ng-model="search_data.keyword" ng-change="do_search();">
+            ng-model="search_data.keyword" 
+            ng-focus="keyword_focused=true" ng-blur="keyword_focused=false"
+            ng-keypress="keyword_focused && $event.which == 13 && do_search();">
           <label for="search-keyword">關鍵字（曲名、作曲家、歌手）</label>
           <!-- <p>{{search_data.keyword}}</p> -->
         </div>
@@ -150,13 +152,13 @@
   angular.module("searchApp", [])
     .controller('searchCtrl', ['$scope', '$http', function($scope, $http) {
       $scope.search_data = { // Search data source
-        difficulty: '',
+        level: '',
         instructment: '',
         chord: '',
         sub_chord: '',
         keyword: '',
 
-        difficulty_options: [
+        level_options: [
           {value: '', name: '全部'},
           {value: '1', name: '初級'},
           {value: '2', name: '中級'},
@@ -193,7 +195,7 @@
       $scope.do_search = function() { // Search function
         // Save keywords
 
-        var difficulty    = $scope.search_data.difficulty;
+        var level         = $scope.search_data.level;
         var instructment  = $scope.search_data.instructment;
         var keyword       = $scope.search_data.keyword;
 
@@ -209,29 +211,29 @@
 
         // Test catched values
 
-        // console.log('difficulty: ' + difficulty);
+        // console.log('level: ' + level);
         // console.log('instructment: ' + instructment);
         // console.log(chord);
         // console.log('keyword: ' + keyword);
 
-        // Do querying here
-
-        $http({
+        // Do querying here 
+        
+        $http({   // AJAX
           method: 'GET',
           url: '{% url "query_song" %}',
           params: {
-            difficulty: difficulty,
+            level: level,
             instructment: instructment,
             keyword: keyword,
             chord: chord,
-          },
-        })
-        .then(function successCallback(response) {
+          }
+        }).then(function successCallback(response) {  // On success
           // Success
           var data = response.data;
-          console.log(data);
+          var song_list = data.result;
 
-        }, function errorCallback(response) {
+          console.log(data);
+        }, function errorCallback(response) { // On error
           // Error
         });
       };

@@ -7,6 +7,8 @@ from django.contrib.auth import logout as django_logout
 from django.contrib import messages
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from django.core import serializers
 
 from .forms import RegistrationForm, LoginForm, UploadForm
 from .models import Song, SongStyle
@@ -136,22 +138,55 @@ def overview(request):
     return render(request, 'notebox/overview.html', context)
 
 def query_song(request):
+    """ Used to query song in the database. This view will be called 
+        through AJAX.
+    """
     result = {}
     input_keys = request.GET
 
     # Extract query keys
 
-    difficulty = input_keys.get('difficulty', '')
-    level = input_keys.get('level', '')
+    level = input_keys.get('level', '-1')
     instructment = input_keys.get('instructment', '')
     chord = input_keys.get('chord', '').split(',')
+    keyword = input_keys.get('keyword')
 
     # QuerySet
 
-    result['difficulty'] = difficulty
+    # Full-matched result
+    r1 = Song.objects.all()
+    if level:
+        r1 = r1.filter(song_level__value=int(level)) # Level
+    if instructment == 'piano': # Instructment
+        r1 = r1.exclude(vex_piano=None)
+        r1 = r1.exclude(vex_piano='')
+    if instructment == 'guitar': # Instructment
+        r1 = r1.exclude(vex_guitar=None)
+        r1 = r1.exclude(vex_guitar='')
+    if chord: # Chord
+        for i in chord:
+            r1 = r1.filter(note__icontains=i)
+    if keyword:
+        r1 = r1.filter(
+            Q(title__icontains=keyword)|
+            Q(composer__icontains=keyword)|
+            Q(artist__icontains=keyword) )
+
+    # Prepare the result
+
+    query_result = []
+    for i in r1:
+        query_result.append({
+            'title': i.title, 
+            'youtube_url': i.youtube_url,
+            'youtube_img_url': i.youtube_img_url,
+            'youtube_id': i.youtube_id })
+
     result['level'] = level
     result['instructment'] = instructment
     result['chord'] = chord
+    result['keyword'] = keyword
+    result['result'] = query_result
 
     return JsonResponse(result)
 
