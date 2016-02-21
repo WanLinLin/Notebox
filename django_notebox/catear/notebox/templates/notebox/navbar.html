@@ -29,73 +29,72 @@
         <li><a class="white-text navs" href="#!">補給站</a></li>
 
         {% if not user.is_authenticated %}
-        <li class="no-hvr-effect">
-          <a class="white-text nav-button modal-trigger navs" href="#login_modal">登入</a>
-        </li>
-        <li class="no-hvr-effect">
-          <a class="white-text nav-button modal-trigger navs" href="#register_modal">註冊</a>
-        </li>
+          <li class="no-hvr-effect">
+            <a class="white-text nav-button modal-trigger navs" href="#login_modal">登入</a>
+          </li>
+          <li class="no-hvr-effect">
+            <a class="white-text nav-button modal-trigger navs" href="#register_modal">註冊</a>
+          </li>
         {% else %}
-        <li>
-          <a class="white-text navs" href="/notebox/upload/">
-            <i class="fa fa-plus right"></i>上傳歌曲
-          </a>
-        </li>
-        <li class="no-hvr-effect">
-          <a class="white-text nav-button navs dropdown-button" data-activates='account_tools' href="#">{{ user.username }}</a>
-        </li>
+          <li>
+            <a class="white-text navs" href="/notebox/upload/">
+              <i class="fa fa-plus right"></i>上傳歌曲
+            </a>
+          </li>
+          <li class="no-hvr-effect">
+            <a class="white-text nav-button navs dropdown-button" data-activates='account_tools' href="#">{{ user.username }}</a>
+          </li>
         {% endif %}
 
       </ul>
 
-      {% comment "Not to do mobile now" %}
-      <!-- mobile nav -->
-            <!-- <ul id="nav-mobile" class="side-nav">
-                <li><a class="grey-text text-darken-2 modal-trigger" href="#login_modal">登入</a></li>
-                <li><a class="grey-text text-darken-2 modal-trigger" href="#register_modal">註冊</a></li>
-              </ul> -->    
-              {% endcomment %}
+    </div>
+  </nav>
+</div><!-- ===== end of Nav Bar ===== -->
 
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% if not user.is_authenticated %}
+  <!--==========================================
+  =            Login/Register Modal            =
+  ===========================================-->
+  <div id="login_modal" class="account_modal modal">
+      <!--==========================
+      =            Form            =
+      ===========================-->
+      <form action="{% url 'user_login' %}" method="post" class="mao-form">
+        {% csrf_token %}
+        <div class="modal-content">
+          {% for field in login_form %}
+          <div class="row">
+            <div class="col s12 input-field">
+              {{ field.errors }}
+              {{ field.label_tag }}
+              {{ field }}
             </div>
-          </nav>
-        </div><!-- ===== end of Nav Bar ===== -->
-
-        {% if not user.is_authenticated %}
-
-<!--==========================================
-=            Login/Register Modal            =
-===========================================-->
-<div id="login_modal" class="account_modal modal">
-    <!--==========================
-    =            Form            =
-    ===========================-->
-    <form action="" method="post" class="mao-form">
-      {% csrf_token %}
-      <div class="modal-content">
-        {% for field in login_form %}
-        <div class="row">
-          <div class="col s12 input-field">
-            {{ field.errors }}
-            {{ field.label_tag }}
-            {{ field }}
-          </div>
-        </div>    
-        {% endfor %}
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-flat" id="submit" type="submit" name="login">登入</button>
-        <button class="btn btn-flat">Google+ 登入</button>
-        <button class="btn btn-flat">Facebook 登入</button>
-      </div>
-    </form>
-    <!--====  End of Form  ====-->
+          </div>    
+          {% endfor %}
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-flat" id="submit" type="submit" name="login">登入</button>
+          <button class="btn btn-flat">Google+ 登入</button>
+          <button class="btn btn-flat">Facebook 登入</button>
+        </div>
+      </form>
+      <!--====  End of Form  ====-->
   </div>
 
   <div id="register_modal" class="account_modal modal">
     <!--==========================
     =            Form            =
     ===========================-->
-    <form action="" method="post" class="mao-form">
+    <form action="{% url 'user_login' %}" method="post" class="mao-form">
       {% csrf_token %}
       <div class="modal-content">
         {% for field in sign_form %}
@@ -116,9 +115,7 @@
     <!--====  End of Form  ====-->
   </div>
   <!--====  End of Login/Register Modal  ====-->
-
-  {% else %}
-
+{% else %}
   {% comment %}
   Add account dropdown tools here
   {% endcomment %}
@@ -129,5 +126,4 @@
     <li class="divider"></li>
     <li><a class="brown-text" href="/notebox/account/logout/">登出</a></li>
   </ul>
-
-  {% endif %}
+{% endif %}

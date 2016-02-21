@@ -21,207 +21,198 @@
 </head>
 
 <body ng-app="myApp" ng-controller="searchCtrl">
-	<!--====================================
-	=            Include navbar            =
-	=====================================-->
-	{% include 'notebox/navbar.html' %}
-	<!--====  End of Include navbar  ====-->
+  <!--====================================
+  =            Include navbar            =
+  =====================================-->
+  {% include 'notebox/navbar.html' %}
+  <!--====  End of Include navbar  ====-->
 
-	<!--==================================
-	=            Main Content            =
-	===================================-->
-	<!-- ===== header ===== -->
-	<div class="container">
-		<div class="section no-pad-bot row" id="index-banner">
-			<div class="col s10 push-s1">
-				<br><br>
-				<h1 class="header center brown-text">歌曲總覽</h1>
-			</div>
-		</div>
+  <!--==================================
+  =            Main Content            =
+  ===================================-->
+  <!-- ===== header ===== -->
+  <div class="container">
+    <div class="section no-pad-bot row" id="index-banner">
+      <div class="col s10 push-s1">
+        <br><br>
+        <h1 class="header center brown-text">歌曲總覽</h1>
+      </div>
+    </div>
 
-		{% verbatim %}
-		<div class="row">
-			<div class="col s12 m12 push-l2 l8">
-				<div class="row">
+    {% verbatim %}
+    <div class="row">
+      <div class="col s12 m12 push-l2 l8">
+        <div class="row">
 
-					<!-- search bar -->
+          <!-- search bar -->
 
-					<nav class="bg-twhite-8 search-input">
-						<div class="nav-wrapper">
-							<form>
-								<div class="input-field">
-									<input type="search" class="brown-text text-darken-1 drop-target" placeholder="依曲名、作曲家、歌手..." required
-									 value="">
-									<label for="search"><i class="fa fa-search brown-text"></i></label>
-								</div>
-							</form>
-						</div>
-					</nav>
-				</div>
+          <nav class="bg-twhite-8 search-input">
+            <div class="nav-wrapper">
+              <form>
+                <div class="input-field">
+                  <input type="search" class="brown-text text-darken-1 drop-target" placeholder="依曲名、作曲家、歌手..." required
+                   value="">
+                  <label for="search"><i class="fa fa-search brown-text"></i></label>
+                </div>
+              </form>
+            </div>
+          </nav>
+        </div>
 
-				<!--===============================
-				=            Search Menu          =
-				================================-->
+        <!--===============================
+        =            Search Menu          =
+        ================================-->
 
-				<div id="search-menu">
-					<form><table>
-						<tbody>				
-							<tr>
-								<td>根據和弦搜尋</td>
-								<td>
-									<label ng-repeat="(ok,ov) in s_opts.chord" class="input-opt">
-										<input type="checkbox" checked="false" ng-model="ov.value" ng-click="select_func($event)" />
-										{{ ov.text }}
-									</label>
-								</td>
-							</tr>
-							<tr>
-								<td>根據類別搜尋</td>
-								<td>
-									<label ng-repeat="(ok,ov) in s_opts.class" class="input-opt">
-										<input type="checkbox" checked="false" ng-model="ov.value" ng-click="select_func($event)" />
-										{{ ov.text }}
-									</label>
-								</td>
-							</tr>
-							<tr>
-								<td>根據難易度搜尋</td>
-								<td>
-									<label ng-repeat="(ok,ov) in s_opts.level" class="input-opt">
-										<input type="checkbox" checked="false" ng-model="ov.value" ng-click="select_func($event)" />
-										{{ ov.text }}
-									</label>
-								</td>
-							</tr>
-						</tbody>
-					</table></form>
-				</div>
+        <div id="search-menu">
+          <form><table>
+            <tbody>       
+              <tr>
+                <td>根據和弦搜尋</td>
+                <td>
+                  <label ng-repeat="(ok,ov) in s_opts.chord" class="input-opt">
+                    <input type="checkbox" checked="false" ng-model="ov.value" ng-click="select_func($event)" />
+                    {{ ov.text }}
+                  </label>
+                </td>
+              </tr>
+              <tr>
+                <td>根據類別搜尋</td>
+                <td>
+                  <label ng-repeat="(ok,ov) in s_opts.class" class="input-opt">
+                    <input type="checkbox" checked="false" ng-model="ov.value" ng-click="select_func($event)" />
+                    {{ ov.text }}
+                  </label>
+                </td>
+              </tr>
+              <tr>
+                <td>根據難易度搜尋</td>
+                <td>
+                  <label ng-repeat="(ok,ov) in s_opts.level" class="input-opt">
+                    <input type="checkbox" checked="false" ng-model="ov.value" ng-click="select_func($event)" />
+                    {{ ov.text }}
+                  </label>
+                </td>
+              </tr>
+            </tbody>
+          </table></form>
+        </div>
 
-				<!--====  End of Search Menu  ====-->
+        <!--====  End of Search Menu  ====-->
 
-				<!-- <div class="row">
-					<div class="col s4">
-						和弦：<div class="chip mao-chip query-opt" ng-repeat="(k,v) in s_opts.chord" ng-if="v.value==true">{{ v.text }}</div>
-					</div>
-					<div class="col s4">
-						類別：<div class="chip mao-chip query-opt" ng-repeat="(k,v) in s_opts.class" ng-if="v.value==true">{{ v.text }}</div>
-					</div>
-					<div class="col s4">
-						難度：<div class="chip mao-chip query-opt" ng-repeat="(k,v) in s_opts.level" ng-if="v.value==true">{{ v.text }}</div>
-					</div>
-				</div> -->
+        <!-- <div class="row">
+          <div class="col s4">
+            和弦：<div class="chip mao-chip query-opt" ng-repeat="(k,v) in s_opts.chord" ng-if="v.value==true">{{ v.text }}</div>
+          </div>
+          <div class="col s4">
+            類別：<div class="chip mao-chip query-opt" ng-repeat="(k,v) in s_opts.class" ng-if="v.value==true">{{ v.text }}</div>
+          </div>
+          <div class="col s4">
+            難度：<div class="chip mao-chip query-opt" ng-repeat="(k,v) in s_opts.level" ng-if="v.value==true">{{ v.text }}</div>
+          </div>
+        </div> -->
 
-			</div>
-		</div>
-		{% endverbatim %}
+      </div>
+    </div>
+    {% endverbatim %}
 
-		
-		<!--===============================
-		=            Music Box            =
-		================================-->
-		
-		{% for music_list in latest %}
-		<div class="row">
-			{% for music in music_list %}
-			<div class="col s12 m3">
-				<div class="card">
-					<div class="card-image waves-effect waves-block waves-light">
-						<img class="activator" src="{{ music.img }}">
-						<a href="/notebox/player/{{ music.song_id }}" class="card-title black-bg-text activator">
-						{{ music.title }}
-						</a>
-					</div>
-				</div>
-			</div>
-			{% endfor %}
-		</div>	
-		{% endfor %}
+    
+    <!--===============================
+    =            Music Box            =
+    ================================-->
+    
+    {% for music_list in latest %}
+    <div class="row">
+      {% for music in music_list %}
+      <div class="col s12 m3">
+        <div class="card">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" src="{{ music.img }}">
+            <a href="/notebox/player/{{ music.song_id }}" class="card-title black-bg-text activator">
+            {{ music.title }}
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>  
+    {% endfor %}
 
-		<!--====  End of Music Box  ====-->
-		
-	</div>
-	<!-- ===== end of header ===== -->
-	<!--====  End of Main Content  ====-->
+    <!--====  End of Music Box  ====-->
+    
+  </div>
+  <!-- ===== end of header ===== -->
+  <!--====  End of Main Content  ====-->
 
 
-	<!--============================
-	=            Footer            =
-	=============================-->
-	{% include 'notebox/footer.html' %}
-	<!--====  End of Footer  ====-->
-	
+  <!--============================
+  =            Footer            =
+  =============================-->
+  {% include 'notebox/footer.html' %}
+  <!--====  End of Footer  ====-->
+  
 
-	<!--================================
-	=            JavaScript            =
-	=================================-->
-	<!--import jquery before materialize.js-->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	<script type="text/javascript" src="{% static 'notebox/js/materialize.min.js' %}"></script>
-	<!-- Drop -->
-	<script type="text/javascript" src="{% static 'notebox/js/bower_components/tether/dist/js/tether.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'notebox/js/bower_components/tether-drop/dist/js/drop.min.js' %}"></script>
-	<!-- AngularJS -->
-	<script type="text/javascript" src="{% static 'notebox/js/bower_components/angular/angular.js' %}"></script>
+  <!--================================
+  =            JavaScript            =
+  =================================-->
+  <!--import jquery before materialize.js-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="{% static 'notebox/js/materialize.min.js' %}"></script>
+  <!-- Drop -->
+  <script type="text/javascript" src="{% static 'notebox/js/bower_components/tether/dist/js/tether.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'notebox/js/bower_components/tether-drop/dist/js/drop.min.js' %}"></script>
+  <!-- AngularJS -->
+  <script type="text/javascript" src="{% static 'notebox/js/bower_components/angular/angular.js' %}"></script>
 
-	<script type="text/javascript">
-	$(document).ready(function() {
-		$('.button-collapse').sideNav();
-		$('.modal-trigger').leanModal();
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $('.button-collapse').sideNav();
+    $('.modal-trigger').leanModal();
 
-	    // Navbar dropdown setting
-	    $('.dropdown-button:contains("分類搜尋")').dropdown({
-				inDuration: 300,
-				constrain_width: false,
-				outDuration: 225,
-				hover: true, // Activate on hover
-				belowOrigin: true,
-				alignment: 'left'
-	    });
+      // Navbar dropdown setting
+      $('.dropdown-button:contains("分類搜尋")').dropdown({
+        inDuration: 300,
+        constrain_width: false,
+        outDuration: 225,
+        hover: true, // Activate on hover
+        belowOrigin: true,
+        alignment: 'left'
+      });
+  });
 
-	    // Drop
-	    // var drop = new Drop({
-	    // 	target: document.querySelector('.drop-target'),
-	    // 	content: document.querySelector('#search-menu'),
-	    // 	classes: 'drop-theme-arrows',
-	    // 	position: 'top left',
-	    // 	openOn: 'click'
-	    // });
-	});
+  // Search options (Angular JS here)
+  var app = angular.module("myApp", []);
+  app.controller('searchCtrl', function($scope) {
+    $scope.s_opts = {
+      'chord': {
+        'all': {'text':'全', 'value':false},
+        'C':   {'text': 'C', 'value':false},
+        'D':   {'text': 'D', 'value':false},
+        'E':   {'text': 'E', 'value':false},
+        'F':   {'text': 'F', 'value':false},
+        'G':   {'text': 'G', 'value':false},
+        'A':   {'text': 'A', 'value':false},
+        'B':   {'text': 'B', 'value':false}
+      },
+      'class': {
+        'all':{'text':'全', 'value':false},
+        'piano':{'text':'鋼琴', 'value':false},
+        'guitar':{'text':'吉他', 'value':false}
+      },
+      'level': {
+        'all':{'text':'全', 'value':false}, 
+        'ele':{'text':'初', 'value':false}, 
+        'mid':{'text':'中', 'value':false}, 
+        'high':{'text':'高', 'value':false}
+      }
+    };
+    $scope.select_func = function($event) {
+      // Change color
+      var tar = $($event.currentTarget).parent('label');
+      tar.toggleClass('selected');
+    };
+  });
 
-	// Search options (Angular JS here)
-	var app = angular.module("myApp", []);
-	app.controller('searchCtrl', function($scope) {
-		$scope.s_opts = {
-			'chord': {
-				'all': {'text':'全', 'value':false},
-				'C':   {'text': 'C', 'value':false},
-				'D':   {'text': 'D', 'value':false},
-				'E':   {'text': 'E', 'value':false},
-				'F':   {'text': 'F', 'value':false},
-				'G':   {'text': 'G', 'value':false},
-				'A':   {'text': 'A', 'value':false},
-				'B':   {'text': 'B', 'value':false}
-			},
-			'class': {
-				'all':{'text':'全', 'value':false},
-				'piano':{'text':'鋼琴', 'value':false},
-				'guitar':{'text':'吉他', 'value':false}
-			},
-			'level': {
-				'all':{'text':'全', 'value':false}, 
-				'ele':{'text':'初', 'value':false}, 
-				'mid':{'text':'中', 'value':false}, 
-				'high':{'text':'高', 'value':false}
-			}
-		};
-		$scope.select_func = function($event) {
-			// Change color
-			var tar = $($event.currentTarget).parent('label');
-			tar.toggleClass('selected');
-		};
-	});
-
-	</script>
-	<!--====  End of JavaScript  ====-->
+  </script>
+  <!--====  End of JavaScript  ====-->
 </body>
 </html>
