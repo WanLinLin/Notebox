@@ -12,6 +12,7 @@
   <!-- my style -->
   <link rel="stylesheet" type="text/css" href="{% static 'notebox/css/general.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'notebox/css/w-style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'notebox/css/upload_music.css' %}">
 </head>
 
 {% if step == 0 %}
@@ -232,7 +233,7 @@
                   <div class="section row">
                     <div class="col s10 push-s1">
                       <a class="time-signature btn-floating waves-effect waves-light center-align">4/4</a>
-                      <a class="time-signature btn-floating waves-effect waves-light center-align">3/4</a>
+                      <!-- <a class="time-signature btn-floating waves-effect waves-light center-align">3/4</a> -->
                     </div>
                   </div>
                 </div>
@@ -282,6 +283,10 @@
               </div>
             </div>
           </div>
+
+          <div class="col s12 center">
+            <a class="waves-effect waves-light btn" onclick="saveScore()">儲存</a>
+          </div>
         </div>
 
         {% endverbatim %}
@@ -313,59 +318,148 @@
   <script>
 
   {% if step == 1 %}
-  var curEditChord;
+    var curEditChord;
+    var staves = {};
 
-  // Angular JS
-  var chordEdit = angular.module("chordEdit", ['cfp.hotkeys']);
-  chordEdit.controller('ChordKeyCtrl', function($scope, hotkeys) {
+    // Angular JS
+    var chordEdit = angular.module("chordEdit", ['cfp.hotkeys']);
+    chordEdit.controller('ChordKeyCtrl', function($scope, hotkeys) {
 
-    $scope.selected_stave = null;
+      $scope.selected_stave = null;
 
-    // Chord list
-    $scope.chords = [ 
-      {% for c in cleaned_data.note %}
-        "{{ c }}",
-      {% endfor %}
-    ];
+      // Chord list
+      $scope.chords = [
+        {% for c in cleaned_data.note %}
+          "{{ c }}",
+        {% endfor %}
+      ];
 
-    // Chord string
-    $scope.inputChords = [];
-    $scope.chordKeyFunc = function(key) {
-      $scope.inputChords.push(key);
+      // Chord string
+      $scope.inputChords = [];
+      $scope.chordKeyFunc = function(key) {
+        $scope.inputChords.push(key);
 
-      // Add chord into the selected stave
+        // Add chord into the selected stave
 
-      if ($scope.selected_stave !== null) {
-        var chord_span = $('<span class="chord waves-effect btn-flat">'+key+'</span>');
-        $scope.selected_stave.append(chord_span);
+        if ($scope.selected_stave !== null) {
+          var chord_span = $('<span class="chord waves-effect btn-flat">'+key+'q</span>');
+          $scope.selected_stave.append(chord_span);
 
-        /*----------  chords add duration  ----------*/
-        chord_span.click(function() {
-          curEditChord = $(this);
+          /*----------  chords add duration  ----------*/
+          chord_span.click(function() {
+            curEditChord = $(this);
+          });
+        }
+
+      };
+
+      // Bind keyboard
+      $scope.availableKeys = [
+        'a', 's', 'd', 'f', 'g', 
+        'h', 'j', 'k', 'l', ';',
+        'z', 'x', 'c', 'v', 'b', 
+        'n', 'm', ',', '.', '/',
+        'q', 'w', 'e', 'r', 't', 
+        'y', 'u', 'i', 'o', 'p'
+      ];
+      $scope.bindKeyboard = function(index, chord) {
+        hotkeys.add({
+          combo: $scope.availableKeys[index],
+          desciption: chord,
+          callback: function() {
+            $scope.chordKeyFunc(chord);
+          }
         });
+      };
+    });
+
+    /*==================================
+    =            Save Score            =
+    ==================================*/
+    function saveScore() {
+      var cleaned_data = {{cleaned_data|safe}};
+      var step = {{step}};
+
+      console.log(cleaned_data);
+      console.log(step);
+
+      var key = '';
+      var time = '';
+      var musicString = '';
+      var count = 0;
+
+      if($('#key').text().length != 0) {
+        key = $('#key').text().substring(4, $('#key').text().length);
       }
 
-    };
+      if($('#time').text().length != 0) {
+        time = $('#time').text().substring(5, $('#time').text().length);
+      }
 
-    // Bind keyboard
-    $scope.availableKeys = [
-      'a', 's', 'd', 'f', 'g', 
-      'h', 'j', 'k', 'l', ';',
-      'z', 'x', 'c', 'v', 'b', 
-      'n', 'm', ',', '.', '/',
-      'q', 'w', 'e', 'r', 't', 
-      'y', 'u', 'i', 'o', 'p'
-    ];
-    $scope.bindKeyboard = function(index, chord) {
-      hotkeys.add({
-        combo: $scope.availableKeys[index],
-        desciption: chord,
-        callback: function() {
-          $scope.chordKeyFunc(chord);
+      while(true) {
+        var curSaveMeausre = $('#measure' + count).children();
+
+        if(curSaveMeausre.length == 0) {
+          break;
         }
-      });
-    };
-  });
+        else {
+          if(curSaveMeausre != null) {
+
+            curSaveMeausre.each(function(index, elem){
+              musicString += $(this).text() + ' ';
+            });
+
+            count++;
+          }
+        }
+        musicString += '| ';
+      }
+      console.log(key);
+      console.log(time);
+      console.log(musicString);
+      console.log('===========');
+      musicString = JSON.stringify({'key': key, 'time': time, 'musicString': musicString});
+
+      var csrf_token = $("{% csrf_token %}").val();
+
+      post('{% url "song_upload" %}', 
+        {'step' : step,
+         'musicString' : musicString,
+         'csrfmiddlewaretoken': csrf_token,
+         'song_id': "{{ cleaned_data.song_id }}",
+        }, 'post');
+    }
+    /*=====  End of Save Score  ======*/
+
+
+    /*==========================================
+    =            send post function            =
+    ==========================================*/
+    function post(path, params, method) {
+      // Set method to post by default if not specified.
+      method = method || "post";
+
+      // The rest of this code assumes you are not using a library.
+      // It can be made less wordy if you use one.
+      var form = document.createElement("form");
+      form.setAttribute("method", method);
+      form.setAttribute("action", path);
+
+      for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+          var hiddenField = document.createElement("input");
+          hiddenField.setAttribute("type", "hidden");
+          hiddenField.setAttribute("name", key);
+          hiddenField.setAttribute("value", params[key]);
+
+          form.appendChild(hiddenField);
+        }
+      }
+
+      document.body.appendChild(form);
+      form.submit();
+    }
+    /*=====  End of send post function  ======*/
   {% endif %}
 
   $(document).ready(function() {
@@ -435,15 +529,22 @@
     =            Add Stave            =
     =================================*/
     var staveCount = 0;
+    var measureCount = 0;
     $('.stave-btn').click(function() {
-      var stave = $('<div id="stave' + staveCount + '" class="stave row grey lighten-3"></div>')
-      var stave_content = $('<div class="stave-content">|</div>');
+      var stave_div = $('<div class="row grey lighten-3"></div>')
+      var stave = $('<div id="stave' + staveCount + '" class="stave row"></div>');
+      var measure_left = $('<div id="measure' + measureCount++ + '" class="measure-left col s6"></div>');
+      var measure_right = $('<div id="measure' + measureCount++ + '" class="measure-right col s6"></div>');
+
+      stave.append(measure_left);
+      stave.append(measure_right);
       // add stave title
-      stave.append('<span class="stave-title">stave' + staveCount + '</span>');
-      stave.append(stave_content);
+      stave_div.append('<span class="title">stave' + staveCount + '</span>');
+      // add stave
+      stave_div.append(stave);
 
       // Bind click event
-      stave_content.click(function() {
+      measure_left.click(function() {
         var ss = $(this);
         var note_editor_scope = angular.element($("#note-editor")).scope();
         note_editor_scope.$apply(function() {
@@ -451,7 +552,15 @@
         });
       });
 
-      $('#tab').append(stave);
+      measure_right.click(function() {
+        var ss = $(this);
+        var note_editor_scope = angular.element($("#note-editor")).scope();
+        note_editor_scope.$apply(function() {
+          note_editor_scope.selected_stave = ss;
+        });
+      });
+
+      $('#tab').append(stave_div);
       staveCount++;
     });
     /*=====  End of Add Stave  ======*/
@@ -472,7 +581,7 @@
       }
     });
     
-    /*=====  End of Add Duration  ======*/
+    /*=====  End of Add Duration  ======*/    
     
 
     /*=====  End of Step 1  ======*/

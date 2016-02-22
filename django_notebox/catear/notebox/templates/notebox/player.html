@@ -75,17 +75,10 @@
                   </ul>
                 </div>
                 <!-- Tab content -->
-                <div id="type1_note" class="col s12 mao-tab-content">
-                  <!-- <div class="vex-tabdiv"></div> -->
+                <div id="type1_note" class="col s12 mao-tab-content center" overflow="scroll">
                   <canvas id="piano_score"></canvas>
-                  {% comment %}
-                  Insert note here
-                  {% endcomment %}
-                  <!-- {{ note }} -->
-                  <!-- <canvas id="mao-music-sheet" width="600" height="200"></canvas> -->
                 </div>
-                <div id="type2_note" class="col s12 mao-tab-content">
-                  <!-- <div id="guitar_score" class="vex-tabdiv"></div> -->
+                <div id="type2_note" class="col s12 mao-tab-content center" overflow="scroll">
                   <canvas id="guitar_score"></canvas>
                 </div>
               </div>
@@ -259,18 +252,20 @@
     });
 
     // convert all chords to musicString
-    var songChords = "{{ note }}";
-    var songChordsArr = songChords.split(",");
+    // var songChords = "{{ note }}";
+    // var songChordsArr = songChords.split(",");
 
-    var musicString = '';
-    for (var i = 0; i < songChordsArr.length; i++) {
-      musicString += songChordsArr[i] + 'h ';
+    // var musicString = '';
+    // for (var i = 0; i < songChordsArr.length; i++) {
+    //   musicString += songChordsArr[i] + 'h ';
 
-      if(i % 2 == 1 && i != songChordsArr.length) {
-        musicString += '| ';
-      }
-    }
-    musicString += '|';
+    //   if(i % 2 == 1 && i != songChordsArr.length) {
+    //     musicString += '| ';
+    //   }
+    // }
+    // musicString += '|';
+    vex_piano = {{ vex_piano|safe }};
+    console.log(vex_piano);
     var scoreWidth = $('#mao-music-sheet-box').width() - 30;
 
   </script>

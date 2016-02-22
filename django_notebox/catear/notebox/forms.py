@@ -101,4 +101,6 @@ class UploadForm(forms.Form):
             activated=False
         )
         
-        # new_song.save()
+        new_song.save()
+
+        return new_song;

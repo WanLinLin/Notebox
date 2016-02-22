@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 from django.http import Http404
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse
 from django.contrib.auth import logout as django_logout
 from django.contrib import messages
@@ -205,7 +206,7 @@ def player(request, song_id):
     song_info = {
         'title': song.title, 'song_yt_id':song.youtube_id, 'yt_url': song.youtube_url, 
         'desc': song.desc, 'level': song.song_level, 'style': song.song_style,
-        'note': song.note, 'artist': song.artist}
+        'note': song.note, 'artist': song.artist, 'vex_piano': song.vex_piano}
 
     if not request.user.is_authenticated():
         context = create_login_signup_form()
@@ -224,18 +225,41 @@ def upload(request):
     cleaned_data = {}
 
     if request.method == 'POST':
-        upload_form = UploadForm(request.POST)
-        if upload_form.is_valid():
-            step = step + 1
-            upload_form.save(request)
-            cleaned_data['youtube_url'] = upload_form.cleaned_data['youtube_url']
-            cleaned_data['youtube_id'] = upload_form.youtube_id
-            cleaned_data['youtube_img_url'] = upload_form.youtube_img_url
-            cleaned_data['note'] = upload_form.cleaned_data['note'].split(',')
-            cleaned_data['title'] = upload_form.cleaned_data['title']
-        else:
-            pass
-            # print("Form is NOT OK")
+
+        if 'step' in request.POST:
+            step = int(request.POST['step'])
+
+        if step == 0:
+            upload_form = UploadForm(request.POST)
+            if upload_form.is_valid():
+                step = step + 1
+
+                # if the song is not in the database
+                if(len(Song.objects.filter(youtube_id=upload_form.cleaned_data['youtube_url'].split('v=')[-1])) == 0):
+                    new_song = upload_form.save(request)
+                    cleaned_data['youtube_url'] = upload_form.cleaned_data['youtube_url']
+                    cleaned_data['youtube_id'] = upload_form.youtube_id
+                    cleaned_data['youtube_img_url'] = upload_form.youtube_img_url
+                    cleaned_data['note'] = upload_form.cleaned_data['note'].split(',')
+                    cleaned_data['title'] = upload_form.cleaned_data['title']
+                    cleaned_data['song_id'] = new_song.id
+                else:
+                    song = Song.objects.filter(youtube_id=upload_form.cleaned_data['youtube_url'].split('v=')[-1])[0]
+                    cleaned_data['youtube_url'] = song.youtube_url
+                    cleaned_data['youtube_id'] = song.youtube_id
+                    cleaned_data['youtube_img_url'] = song.youtube_img_url
+                    cleaned_data['note'] = song.note.split(',')
+                    cleaned_data['title'] = song.title
+                    cleaned_data['song_id'] = song.id
+            else:
+                pass
+                # print("Form is NOT OK")
+
+        elif step == 1:
+            new_song = get_object_or_404(Song, pk=int(request.POST.get('song_id', -1)))
+            new_song.vex_piano = request.POST.get('musicString', -1)
+            new_song.save()
+            return HttpResponseRedirect('/notebox/player/' + str(new_song.id))
 
     context = {'upload_form': upload_form, 'step': step, 'cleaned_data': cleaned_data}
     return render(request, 'notebox/upload_music.html', context)

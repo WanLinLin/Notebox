@@ -6,15 +6,15 @@ var pianoScore = $('#piano_score');
 var guitarScore = $('#guitar_score');
 
 // Key signature of the score
-var key = 'C';
+var key = vex_piano["key"];
 // Tempo of the score
 var tempo = 'tempo=120';
 // Tempo of the score
-var time = '4/4';
+var time = vex_piano["time"];
 // Guitar tuning of the score (standard|dropd|eb|E/5,B/4,G/4,D/4,A/3,E/3)
 var tuning = 'standard'
 // tokens in musicString
-var token = musicString.split(" ");
+var token = vex_piano["musicString"].split(" ");
 // piano vextab 'notes' string, starts with "notes"
 var pianoNoteStr = 'notes ';
 // guitar vextab 'notes' string, starts with "notes"
@@ -44,42 +44,88 @@ var curGuitarChord = {'name':'', 'composition':''};
 =            main parse function            =
 ===========================================*/
 
-for(var i = 0; i < token.length; i++) {
-  var t = token[i];
+// song has no vextab
+if(vex_piano["musicString"] == "" || vex_piano == 'None') {
+  pianoVexStr = 'options width=' + initial_width.toString() + ' space=14 scale=1.0 font-size=12\n';
+  pianoVexStr += 'stave\n';
+  pianoTextStr += ':q, 無樂譜資料'
+  pianoVexStr += pianoTextStr
 
-  // parse bar
-  if(t.indexOf('|') > -1) {
-    parseBar(t);
+  guitarVexStr = 'options width=' + initial_width.toString() + ' space=14 scale=1.0 font-size=12\n';
+  guitarVexStr += 'stave\n';
+  guitarTextStr += ':q, 無樂譜資料'
+  guitarVexStr += guitarTextStr
+}
+else {
+  pianoVexStr = 'options width=' + initial_width.toString() + ' space=14 scale=1.0 font-size=16 stave-distance=50\n';
+  pianoVexStr += 'stave\n';
+  if(key != '')
+    pianoVexStr += 'key=' + key + '\n';
+  if(time != '')
+    pianoVexStr += 'time=' + time + '\n';
+
+  guitarVexStr = 'options width=' + initial_width.toString() + ' space=14 scale=1.0 tab-stems=true font-size=16 stave-distance=200\n';
+  guitarVexStr += 'tabstave\n';
+  if(key != '')
+    guitarVexStr += 'key=' + key + '\n';
+  if(time != '')
+    guitarVexStr += 'time=' + time + '\n';
+
+  var measureCount = 0;
+
+  for(var i = 0; i < token.length; i++) {
+    var t = token[i];
+
+    // parse bar
+    if(t.indexOf('|') > -1) {
+      parseBar(t);
+      if(measureCount % 2 == 1) {
+        pianoNoteStr += '\n';
+        guitarNoteStr += '\n';
+
+        pianoVexStr += pianoNoteStr;
+        pianoVexStr += pianoTextStr.substring(0, pianoTextStr.length - 2); // substring to remove the last comma
+
+        guitarVexStr += guitarNoteStr;
+        guitarVexStr += guitarTextStr.substring(0, guitarTextStr.length - 2); // substring to remove the last comma
+
+        pianoVexStr += '\nstave\n'
+        pianoNoteStr = 'notes ';
+        pianoTextStr = 'text ';
+
+        guitarVexStr += '\ntabstave\n';
+        guitarNoteStr = 'notes ';
+        guitarTextStr = 'text ';
+      }
+      measureCount++;
+    }
+
+    // parse chord
+    if(hasMusialAlphabes(t)) {
+      parseChord(t.substring(0, t.length - 1));
+      t = t.substring(t.length - 1, t.length);
+    }
+
+    // parse duration
+    if(hasDurations(t)){
+      parseDuration(t);
+    }
   }
 
-  // parse chord
-  if(hasMusialAlphabes(t)) {
-    parseChord(t.substring(0, t.length - 1));
-    t = t.substring(t.length - 1, t.length);
-  }
+  /*----------  fix dumb parser  ----------*/
+  if(measureCount % 2 == 1) {
+    pianoVexStr += pianoNoteStr + '\n';
+    pianoVexStr += pianoTextStr.substring(0, pianoTextStr.length - 2); // substring to remove the last comma
 
-  // parse duration
-  if(hasDurations(t)){
-    parseDuration(t);
+    guitarVexStr += guitarNoteStr + '\n';
+    guitarVexStr += guitarTextStr.substring(0, guitarTextStr.length - 2); // substring to remove the last comma
+  }
+  if(measureCount % 2 == 0) {
+    // remove the last null stave
+    pianoVexStr = pianoVexStr.substring(0, pianoVexStr.lastIndexOf('stave'));
+    guitarVexStr = guitarVexStr.substring(0, guitarVexStr.lastIndexOf('tabstave'));
   }
 }
-
-pianoNoteStr += '\n';
-guitarNoteStr += '\n';
-
-// alert(musicString);
-
-pianoVexStr = 'options width=' + initial_width.toString() + ' space=14 scale=1.0 font-size=16\n';
-pianoVexStr += 'stave\n';
-pianoVexStr += 'key=' + key + ' time=' + time + '\n';
-pianoVexStr += pianoNoteStr;
-pianoVexStr += pianoTextStr.substring(0, pianoTextStr.length - 2); // substring to remove the last comma
-
-guitarVexStr = 'options width=' + initial_width.toString() + ' space=14 scale=1.0 tab-stems=true font-size=16 tab-stem-direction=down\n';
-guitarVexStr += 'tabstave\n';
-guitarVexStr += 'key=' + key + ' time=' + time + '\n';
-guitarVexStr += guitarNoteStr;
-guitarVexStr += guitarTextStr.substring(0, guitarTextStr.length - 2); // substring to remove the last comma
 
 /*=====  End of main parse function  ======*/
 
@@ -91,6 +137,8 @@ guitarVexStr += guitarTextStr.substring(0, guitarTextStr.length - 2); // substri
 vextab = VexTabDiv;
 
 $(function() {
+  console.log(pianoVexStr);
+  console.log(guitarVexStr);
   VexTab = vextab.VexTab;
   Artist = vextab.Artist;
   Renderer = Vex.Flow.Renderer;
@@ -122,7 +170,7 @@ $(function() {
       guitar_vextab.parse(guitarVexStr);
       guitar_artist.render(guitar_renderer);
     } catch (e) {
-      console.log(e);
+      console.log(e['message']);
     }
   }
   
