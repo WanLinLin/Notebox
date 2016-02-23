@@ -75,10 +75,10 @@
                   </ul>
                 </div>
                 <!-- Tab content -->
-                <div id="type1_note" class="col s12 mao-tab-content center" overflow="scroll">
+                <div id="type1_note" class="col s12 mao-tab-content score-container">
                   <canvas id="piano_score"></canvas>
                 </div>
-                <div id="type2_note" class="col s12 mao-tab-content center" overflow="scroll">
+                <div id="type2_note" class="col s12 mao-tab-content score-container">
                   <canvas id="guitar_score"></canvas>
                 </div>
               </div>
@@ -251,22 +251,8 @@
       alignment: 'left'
     });
 
-    // convert all chords to musicString
-    // var songChords = "{{ note }}";
-    // var songChordsArr = songChords.split(",");
-
-    // var musicString = '';
-    // for (var i = 0; i < songChordsArr.length; i++) {
-    //   musicString += songChordsArr[i] + 'h ';
-
-    //   if(i % 2 == 1 && i != songChordsArr.length) {
-    //     musicString += '| ';
-    //   }
-    // }
-    // musicString += '|';
-    vex_piano = {{ vex_piano|safe }};
-    console.log(vex_piano);
-    var scoreWidth = $('#mao-music-sheet-box').width() - 30;
+    vex_piano = '{{ vex_piano|safe }}';
+    // console.log(vex_piano);
 
   </script>
   <!-- chords bank -->
@@ -296,6 +282,8 @@
     console.log(height);
     $("div.mao-music-sheet-wrapper").height(height-40);
     $("div.mao-video-info").height(height);
+    $('#type1_note').height(height-80);
+    $('#type2_note').height(height-80);
   }
   /*=====  End of note box height  ======*/
 

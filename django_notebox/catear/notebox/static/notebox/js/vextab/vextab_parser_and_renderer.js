@@ -5,16 +5,6 @@ var initial_width = $('#mao-music-sheet-box').width() - 30;
 var pianoScore = $('#piano_score');
 var guitarScore = $('#guitar_score');
 
-// Key signature of the score
-var key = vex_piano["key"];
-// Tempo of the score
-var tempo = 'tempo=120';
-// Tempo of the score
-var time = vex_piano["time"];
-// Guitar tuning of the score (standard|dropd|eb|E/5,B/4,G/4,D/4,A/3,E/3)
-var tuning = 'standard'
-// tokens in musicString
-var token = vex_piano["musicString"].split(" ");
 // piano vextab 'notes' string, starts with "notes"
 var pianoNoteStr = 'notes ';
 // guitar vextab 'notes' string, starts with "notes"
@@ -39,13 +29,12 @@ var guitarVexStr;
 var curPianoChord = {'name':'', 'composition':''};
 // current parsing chord for guitar
 var curGuitarChord = {'name':'', 'composition':''};
-
-/*===========================================
-=            main parse function            =
-===========================================*/
+// using to count how many measure is parsed
+var measureCount = 0;
 
 // song has no vextab
-if(vex_piano["musicString"] == "" || vex_piano == 'None') {
+if(vex_piano["musicString"] == "" || vex_piano === 'None') {
+  console.log('no vextab');
   pianoVexStr = 'options width=' + initial_width.toString() + ' space=14 scale=1.0 font-size=12\n';
   pianoVexStr += 'stave\n';
   pianoTextStr += ':q, 無樂譜資料'
@@ -57,6 +46,22 @@ if(vex_piano["musicString"] == "" || vex_piano == 'None') {
   guitarVexStr += guitarTextStr
 }
 else {
+  vex_piano = JSON.parse(vex_piano);
+  // Key signature of the score
+  var key = vex_piano["key"];
+  // Tempo of the score
+  var tempo = 'tempo=120';
+  // Tempo of the score
+  var time = vex_piano["time"];
+  // Guitar tuning of the score (standard|dropd|eb|E/5,B/4,G/4,D/4,A/3,E/3)
+  var tuning = 'standard'
+  // tokens in musicString
+  var token = vex_piano["musicString"].split(" ");
+
+  /**
+   * initial vexstring: set up options and add the first stave 
+   * which has to show the time signature and key signature.
+   */
   pianoVexStr = 'options width=' + initial_width.toString() + ' space=14 scale=1.0 font-size=16 stave-distance=50\n';
   pianoVexStr += 'stave\n';
   if(key != '')
@@ -71,14 +76,17 @@ else {
   if(time != '')
     guitarVexStr += 'time=' + time + '\n';
 
-  var measureCount = 0;
-
+  /*===========================================
+  =            main parse function            =
+  ===========================================*/
   for(var i = 0; i < token.length; i++) {
     var t = token[i];
 
     // parse bar
     if(t.indexOf('|') > -1) {
       parseBar(t);
+
+      // every two measure add new stave
       if(measureCount % 2 == 1) {
         pianoNoteStr += '\n';
         guitarNoteStr += '\n';
@@ -112,7 +120,7 @@ else {
     }
   }
 
-  /*----------  fix dumb parser  ----------*/
+  /*----------  fix the dumb parser  ----------*/
   if(measureCount % 2 == 1) {
     pianoVexStr += pianoNoteStr + '\n';
     pianoVexStr += pianoTextStr.substring(0, pianoTextStr.length - 2); // substring to remove the last comma
