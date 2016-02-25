@@ -53,6 +53,9 @@
 </div><!-- ===== end of Nav Bar ===== -->
 
 {% if messages %}
+  {% comment "optional note" %}
+    message is used to show success/error message after login
+  {% endcomment %}
   <ul class="messages">
     {% for message in messages %}
         <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
@@ -83,8 +86,10 @@
         </div>
         <div class="modal-footer">
           <button class="btn btn-flat" id="submit" type="submit" name="login">登入</button>
-          <button class="btn btn-flat">Google+ 登入</button>
-          <button class="btn btn-flat">Facebook 登入</button>
+          <!-- Google+ Login -->
+          <div class="g-signin2" data-onsuccess="onSignIn"></div>
+          <!-- Facebook Login -->
+          <!-- <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div> -->
         </div>
       </form>
       <!--====  End of Form  ====-->
