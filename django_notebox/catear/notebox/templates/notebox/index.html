@@ -4,6 +4,12 @@
 <head>
   <meta charset="UTF-8">
 
+  <!-- Google+ Login -->
+  <meta name="google-signin-scope" content="profile email">
+  <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="{% static 'notebox/js/login.js' %}"></script>
+
   <!-- font awesome icon -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <!--Import materialize.css-->
@@ -234,6 +240,16 @@
   <script type="text/javascript" src="http://code.jquery.com/color/jquery.color-2.1.0.js"></script>
   <!-- Load materialize js -->
   <script type="text/javascript" src="{% static 'notebox/js/materialize.min.js' %}"></script>
+
+  <!-- Facebook API -->
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.5";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
 
   <script type="text/javascript">
 

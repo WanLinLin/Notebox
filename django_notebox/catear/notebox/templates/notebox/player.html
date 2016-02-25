@@ -47,13 +47,9 @@
               <h5 style="display: inline;">{{ title }} - {{ artist }}</h5> 
               <p>
                 <div class="chip mao-chip">{{ level }}</div>
-                <div class="chip mao-chip">C</div>
-                <div class="chip mao-chip">D</div>
-                <div class="chip mao-chip">E</div>
-                <div class="chip mao-chip">F</div>
-                <div class="chip mao-chip">G</div>
-                <div class="chip mao-chip">A</div>
-                <div class="chip mao-chip">B</div>
+                {% for i in note %}
+                  <div class="chip mao-chip">{{ i }}</div>
+                {% endfor %}
               </p>
               <!-- Buttons -->
               <a class="btn modal-trigger mao-simple-btn"  href="#modal1"><i class="fa fa-check"></i> 演奏訣竅</a>
@@ -176,7 +172,7 @@
     <!--====================================
     =            Recommanded Songs         =
     =====================================-->
-    <div class="row">
+ <!--    <div class="row">
       <div class="col m12" style="">
         <div class="card-panel">
           <h4>我們也推薦</h4>
@@ -214,7 +210,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!--====  End of Recommanded Songs  ====-->
 
   </div>

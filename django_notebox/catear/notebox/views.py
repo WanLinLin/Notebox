@@ -188,6 +188,7 @@ def query_song(request):
     result['chord'] = chord
     result['keyword'] = keyword
     result['result'] = query_result
+    result['num_result'] = len(query_result)
 
     return JsonResponse(result)
 
@@ -206,14 +207,13 @@ def player(request, song_id):
     song_info = {
         'title': song.title, 'song_yt_id':song.youtube_id, 'yt_url': song.youtube_url, 
         'desc': song.desc, 'level': song.song_level, 'style': song.song_style,
-        'note': song.note, 'artist': song.artist, 'vex_piano': song.vex_piano}
+        'note': song.note.split(','), 'artist': song.artist, 'vex_piano': song.vex_piano}
 
     if not request.user.is_authenticated():
         context = create_login_signup_form()
     else:
         context = {}
 
-    # TEST
     context.update(song_info)
 
     return render(request, 'notebox/player.html', context)

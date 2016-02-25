@@ -265,7 +265,13 @@
 
           // Update model (now the way we use is inserting the HTML code)
 
-          $scope.query_result_html = $sce.trustAsHtml(data.html_code);
+          if (data.num_result === 0) {
+            $scope.query_result_html = $sce.trustAsHtml("<h4>無法找到匹配的歌曲</h4>");  
+          }
+          else {
+            $scope.query_result_html = $sce.trustAsHtml(data.html_code);  
+          }
+
         }, function errorCallback(response) { // On error
           // Error
         });
