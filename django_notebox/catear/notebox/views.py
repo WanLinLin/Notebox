@@ -140,7 +140,7 @@ def query_song(request):
 
     level = input_keys.get('level', '-1')
     instructment = input_keys.get('instructment', '')
-    chord = input_keys.get('chord', '').split(',')
+    chord = [i for i in input_keys.get('chord', '').split(',') if len(i)>0]
     keyword = input_keys.get('keyword')
 
     # QuerySet
@@ -155,14 +155,20 @@ def query_song(request):
     if instructment == 'guitar': # Instructment
         r1 = r1.exclude(vex_guitar=None)
         r1 = r1.exclude(vex_guitar='')
-    if chord: # Chord
-        for i in chord:
-            r1 = r1.filter(note__icontains=i)
     if keyword:
         r1 = r1.filter(
             Q(title__icontains=keyword)|
             Q(composer__icontains=keyword)|
             Q(artist__icontains=keyword) )
+    if chord: # Chord (Because model bug, we need to search by ourselves)
+        tmp_r1 = []
+        for i in range(len(r1)):
+            chord_list = r1[i].note.split(',')
+            if len(set(chord_list) & set(chord)) > 0:
+                tmp_r1.append(r1[i])
+        for i in chord:
+            r1 = r1.filter(note__icontains=i)
+        r1 = tmp_r1
 
     # Extract QuerySet
 
