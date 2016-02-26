@@ -54,7 +54,7 @@ class UploadForm(forms.Form):
 
     tab_url      = forms.URLField(label='外連譜網址', required=False)
     # 和弦譜
-    note         = forms.CharField(label='*和弦', max_length=100, required=True)
+    note         = forms.CharField(label='*和弦(請用 , 隔開，例如 C,Am,Bm,G)', max_length=100, required=True)
 
     # Vex tab note
     vex_piano    = None
