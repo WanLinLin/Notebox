@@ -5,7 +5,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index),
-    url(r'^overview/', views.overview),
+    url(r'^overview/', views.overview, name='overview'),
     url(r'^query_song/', views.query_song, name='query_song'),
     url(r'^player/(?P<song_id>\d+)', views.player),
     url(r'^account/$', views.account),

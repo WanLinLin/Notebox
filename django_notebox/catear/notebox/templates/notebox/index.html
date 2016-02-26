@@ -97,7 +97,7 @@
 
       {% endfor %}
       <div class="col s12 right-align">
-        <a href="/notebox/overview/" class="white grey-text text-darken-2 btn waves-effect waves-brown">更多最新歌曲</a>
+        <a href="{% url 'overview' %}" class="white grey-text text-darken-2 btn waves-effect waves-brown">更多最新歌曲</a>
       </div>
     </div><!-- end of latest video row -->
 
@@ -118,7 +118,7 @@
         </div>
         {% endfor %}
         <div class="col s12 right-align">
-          <a href="/notebox/overview/" class="white grey-text text-darken-2 btn waves-effect waves-brown">更多人氣歌曲</a>
+          <a href="{% url 'overview' %}" class="white grey-text text-darken-2 btn waves-effect waves-brown">更多人氣歌曲</a>
         </div>
       </div><!-- end of popular video row -->
     </div><!-- ===== end of Vedio Block ===== -->
