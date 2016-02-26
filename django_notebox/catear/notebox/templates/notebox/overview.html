@@ -68,8 +68,9 @@
           <input type="text" id="search-keyword" class="validate"
             ng-model="search_data.keyword" 
             ng-focus="keyword_focused=true" ng-blur="keyword_focused=false"
-            ng-keypress="keyword_focused && $event.which == 13 && do_search();">
-          <label for="search-keyword">關鍵字（曲名、作曲家、歌手）</label>
+            ng-keypress="keyword_focused && $event.which == 13 && do_search();"
+            placeholder="曲名、作曲家、歌手">
+          <label for="search-keyword">關鍵字</label>
           <!-- <p>{{search_data.keyword}}</p> -->
         </div>
 
