@@ -8,7 +8,7 @@ from django.contrib.auth import logout as django_logout
 from django.contrib import messages
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
+from django.db.models import Q, F
 from django.template import loader
 
 from .forms import RegistrationForm, LoginForm, UploadForm
@@ -108,24 +108,10 @@ def index(request):
     return render(request, 'notebox/index.html', context)        
 
 def overview(request):
-    # Get song data
-    songs = Song.objects.all()
-    songs_list = [{'title':i.title, 'desc':i.desc, 'img':i.youtube_img_url, 'song_id':i.id} for i in songs]
-    songs_list = [songs_list[i: i+4] for i in range(0, len(songs_list), 4)]
-
     if not request.user.is_authenticated():
         context = create_login_signup_form()
     else:
         context = {}
-
-    context['latest'] = []
-    context['popular'] = []
-
-    # Latest (test)
-    context['latest'].extend(songs_list)
-
-    # Popular (test)
-    context['popular'].extend([])
 
     return render(request, 'notebox/overview.html', context)
 
@@ -142,11 +128,15 @@ def query_song(request):
     instructment = input_keys.get('instructment', '')
     chord = [i for i in input_keys.get('chord', '').split(',') if len(i)>0]
     keyword = input_keys.get('keyword')
+    odp  = True if input_keys.get('odp') == 'true' else False
 
     # QuerySet
 
     # Full-matched result
-    r1 = Song.objects.all()
+    if odp:
+        r1 = Song.objects.order_by('-hit_counter').all()
+    else:
+        r1 = Song.objects.order_by('-upload_time').all()
     if level:
         r1 = r1.filter(song_level__value=int(level)) # Level
     if instructment == 'piano': # Instructment
@@ -209,11 +199,17 @@ def favorite(request):
 def player(request, song_id):
 
     # Get song data by id
-    song = Song.objects.get(id=song_id)
+
+    song = get_object_or_404(Song, pk=song_id)
     song_info = {
         'title': song.title, 'song_yt_id':song.youtube_id, 'yt_url': song.youtube_url, 
         'desc': song.desc, 'level': song.song_level, 'style': song.song_style,
         'note': song.note.split(','), 'artist': song.artist, 'vex_piano': song.vex_piano}
+
+    # Update hit_counter
+
+    song.hit_counter = song.hit_counter+1
+    song.save()
 
     if not request.user.is_authenticated():
         context = create_login_signup_form()

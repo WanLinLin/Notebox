@@ -18,29 +18,42 @@ class SongLevel(models.Model):
         return self.name
 
 class Song(models.Model):
+
     # Provided by user
+
     title        = models.CharField(max_length=200)
     desc         = models.TextField(default=None, null=True)
     composer     = models.CharField(max_length=128, default=None, null=True)
     artist       = models.CharField(max_length=128, default=None, null=True)
+
     # 和弦
+
     note         = models.TextField(default=None, null=True)
+
     # 範例譜網址
+
     tab_url      = models.URLField(default=None, null=True)
     song_style   = models.ForeignKey(SongStyle, related_name='song_style')
     song_level   = models.ForeignKey(SongLevel, related_name='song_level')
+
     # youtube 網址
+
     youtube_url  = models.URLField(default=None, null=True)
 
     # vex tab note
+
     vex_piano    = models.TextField(default=None, null=True)
     vex_guitar   = models.TextField(default=None, null=True)
 
 
     # Not user editable
+
+    hit_counter = models.IntegerField(default=0)
     upload_user  = models.ForeignKey(User, related_name='song_upload_user')
     time_length = models.IntegerField(default=None, null=True)
+
     # youtube 縮圖 網址
+
     youtube_img_url = models.URLField(default=None)
     youtube_id = models.CharField(max_length=256)
     modify_time = models.DateTimeField(auto_now=True)
