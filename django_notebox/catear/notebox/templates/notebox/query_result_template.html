@@ -2,14 +2,19 @@
 <div class="row">
   {% for music in music_list %}
   <div class="col s12 m3">
-    <div class="card">
+    <a target="_blank" href="/notebox/player/{{ music.song_id }}" class="">
+      <img style="width: 100%;" class="" src="{{ music.img }}"> <br>
+      {{ music.title }}
+    </a>
+    <div style="font-size: 0.8rem;">觀看次數： {{ music.hit_counter }}</div>
+    <!-- <div class="card">
       <div class="card-image waves-effect waves-block waves-light">
-        <img class="activator" src="{{ music.img }}">
-        <a href="/notebox/player/{{ music.song_id }}" class="card-title black-bg-text activator">
+        <img class="responsive-img" src="{{ music.img }}">
+        <a target="_blank" href="/notebox/player/{{ music.song_id }}" class="card-title black-bg-text activator">
         {{ music.title }}
         </a>
       </div>
-    </div>
+    </div> -->
   </div>
   {% endfor %}
 </div>  
