@@ -1,0 +1,16 @@
+.contact-img {
+  max-height: 10rem; }
+
+.slider ul.slides-bg-transparent {
+  background-color: transparent !important; }
+
+.header-content {
+  position: relative;
+  top: 100px;
+  z-index: 5; }
+
+.card .card-image > span {
+  font-size: 1rem;
+  padding: 1rem !important; }
+
+/*# sourceMappingURL=index.css.map */

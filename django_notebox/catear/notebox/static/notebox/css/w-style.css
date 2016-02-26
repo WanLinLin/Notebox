@@ -1,3 +1,4 @@
+/*----------  general  ---------- */
 .text-shadow {
   -webkit-text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
   -moz-text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
@@ -39,6 +40,7 @@
 a.block-link {
   color: inherit !important; }
 
+/*----------  search bar  ---------- */
 .search-input {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -53,16 +55,5 @@ a.block-link {
     -ms-border-radius: 2px;
     -o-border-radius: 2px;
     border-radius: 2px; }
-
-.contact-img {
-  max-height: 10rem; }
-
-.slider ul.slides-bg-transparent {
-  background-color: transparent !important; }
-
-.header-content {
-  position: relative;
-  top: 100px;
-  z-index: 5; }
 
 /*# sourceMappingURL=w-style.css.map */

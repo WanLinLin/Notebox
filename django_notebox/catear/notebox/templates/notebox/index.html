@@ -16,6 +16,7 @@
   <link type="text/css" rel="stylesheet" href="{% static 'notebox/css/materialize.min.css' %}" media="screen,projection"/>
   <!-- my style -->
   <link rel="stylesheet" type="text/css" href="{% static 'notebox/css/w-style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'notebox/css/index.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'notebox/css/general.css' %}">
 
   <!--Let browser know website is optimized for mobile-->
@@ -90,7 +91,7 @@
             <a href="/notebox/player/{{ music.song_id }}">
               <img src="{{ music.img }}" alt="{{ music.title }}">
             </a>
-            <span class="card-title black-bg-text">{{ music.title }}</span>
+            <span class="card-title black-bg-text song-title">{{ music.title }}</span>
           </div>
         </div>
       </div>
